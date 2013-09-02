@@ -1,4 +1,4 @@
 Trvrgur::Application.routes.draw do
   resource :session, :only => [:create, :destroy, :new]
-  resources :users
+  resources :users, :except => [:index]
 end

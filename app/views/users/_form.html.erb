@@ -1,0 +1,39 @@
+<!-- fix this to work for both editing and creating users!!! -->
+<% user.errors.full_messages.each do |error| %>
+  <h3 style="color:red"><%= error %></h3>
+<% end %>
+
+<form action="<%= users_url %>" method="POST">
+
+  <input 
+    type="hidden" 
+    name="authenticity_token"
+    value="<%= form_authenticity_token %>">
+
+  <input
+    type="text" 
+    name="user[email]" 
+    id="user_email"
+    value="<%= user.email %>">
+  <label for="username_email">email</label>
+
+  <br>
+
+  <input
+    type="text" 
+    name="user[username]" 
+    id="user_username"
+    value="<%= user.username %>">
+  <label for="user_username">username</label>
+
+  <br>
+
+  <input type="password" name="user[password]" id="user_password">
+  <label for="user_password">password</label>
+
+  <br>
+  <br>
+
+  <input type="submit" value="sign up">
+
+</form>
