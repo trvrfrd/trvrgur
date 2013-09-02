@@ -34,7 +34,7 @@ GEM
       ejs
       jquery-rails
       rails (>= 3.1)
-    bcrypt-ruby (3.0.1)
+    bcrypt-ruby (3.1.2)
     builder (3.0.4)
     coderay (1.0.9)
     coffee-rails (3.2.2)
@@ -135,7 +135,7 @@ PLATFORMS
 
 DEPENDENCIES
   backbone-on-rails
-  bcrypt-ruby (~> 3.0.0)
+  bcrypt-ruby
   coffee-rails (~> 3.2.1)
   debugger
   ejs
