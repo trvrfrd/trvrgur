@@ -19,7 +19,7 @@ module SessionsHelper
 
   def require_logged_out
 
-    # change redirect url?
+    # REDIRECT SOMEWHERE USEFUL
     redirect_to root_url unless current_user.nil?
   end
 end

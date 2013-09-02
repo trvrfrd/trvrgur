@@ -9,4 +9,4 @@ TODO:
   set up NewRelic  
   good validations for username/email (regex :( )  
   user login/signup/edit forms - partials/recycling  
-  redirect somewhere useful after login  
+  redirect somewhere useful after login and in SessionsHelper
