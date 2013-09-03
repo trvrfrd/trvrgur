@@ -10,9 +10,10 @@ class SessionsController < ApplicationController
       render :new
     else
       login_user!(@user)
+      p "current user: #{current_user} "
       
       # DO SOMETHING USEFUL HERE
-      render :json => @user
+      redirect_to user_url(@user)
     end
   end
 

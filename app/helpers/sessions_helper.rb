@@ -4,7 +4,8 @@ module SessionsHelper
   end
 
   def login_user!(user)
-    @current_user = user
+    user.reset_session_token!
+    user.save!
     session[:session_token] = user.session_token
   end
 
@@ -20,6 +21,6 @@ module SessionsHelper
   def require_logged_out
 
     # REDIRECT SOMEWHERE USEFUL
-    redirect_to root_url unless current_user.nil?
+    redirect_to user_url(current_user) unless current_user.nil?
   end
 end

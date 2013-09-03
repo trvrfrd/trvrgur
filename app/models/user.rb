@@ -5,10 +5,11 @@ class User < ActiveRecord::Base
   attr_reader :password
 
   validates :username, :email, :session_token, :presence => true
+  validates :username, :email, :uniqueness => true  
   validates :password_digest, :presence => { :message => "Password can't be blank"}
   validates :password, :length => { :minimum => 6, :allow_nil => true }
 
-  after_initialize :reset_session_token!
+  after_initialize :ensure_session_token!
 
   def self.check_credentials(identity, password)
     if identity.include?("@")
@@ -22,6 +23,10 @@ class User < ActiveRecord::Base
     user.verify_password(password) ? user : nil
   end
 
+  def ensure_session_token!
+    self.session_token || self.reset_session_token!
+  end
+
   def password=(password)
     @password = password
     self.password_digest = BCrypt::Password.create(password)
@@ -31,7 +36,6 @@ class User < ActiveRecord::Base
     BCrypt::Password.new(self.password_digest) == password
   end
 
-  private
   def reset_session_token!
     self.session_token = SecureRandom::urlsafe_base64(32)
   end

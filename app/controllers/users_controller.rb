@@ -1,10 +1,13 @@
 class UsersController < ApplicationController
+  before_filter :require_logged_out, :except => [:show]
+
   def create
     @user = User.new(params[:user])
     if @user.save
       
-      # DO SOMETHING USEFUL HERE
-      render :json => @user
+      # REDIRECT SOMEWHERE USEFUL HERE
+      login_user!(@user)
+      redirect_to user_url(@user)
     else
       render :new
     end
