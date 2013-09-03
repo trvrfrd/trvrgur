@@ -10,10 +10,7 @@ class SessionsController < ApplicationController
       render :new
     else
       login_user!(@user)
-      p "current user: #{current_user} "
-      
-      # DO SOMETHING USEFUL HERE
-      redirect_to user_url(@user)
+      redirect_to images_url
     end
   end
 

@@ -9,11 +9,9 @@ TODO:
   devise/omni-auth?  
   set up NewRelic  
   good validations for username/email (regex :( )  
-  make redirect useful in UsersController, SessionsController, SessionsHelper  
-    -entry point into Backbone app? (eventually)  
-    -images index (for now)  
+  entry point into Backbone app? (eventually)  
   fix validation error message for user password_digest  
   password change/recovery functionality (devise?)  
-  hash image filenames/urls?  
+  hash image filenames/urls (or change default)?  
   proper routes nesting of images/albums?  
   image size/type validations  

@@ -19,8 +19,6 @@ module SessionsHelper
   end
 
   def require_logged_out
-
-    # REDIRECT SOMEWHERE USEFUL
-    redirect_to user_url(current_user) unless current_user.nil?
+    redirect_to images_url unless current_user.nil?
   end
 end

@@ -5,10 +5,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      
-      # REDIRECT SOMEWHERE USEFUL HERE
       login_user!(@user)
-      redirect_to user_url(@user)
+      redirect_to images_url
     else
       render :new
     end
@@ -38,8 +36,6 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(params[:user])
-      
-      # REDIRECT SOMEWHERE USEFUL HERE
       flash[:notices] ||= []
       flash[:notices] << "account updated successfully"      
       redirect_to user_url(@user)
