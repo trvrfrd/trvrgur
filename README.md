@@ -10,6 +10,10 @@ TODO:
   set up NewRelic  
   good validations for username/email (regex :( )  
   make redirect useful in UsersController, SessionsController, SessionsHelper  
-    -entry point into Backbone app?  
+    -entry point into Backbone app? (eventually)  
+    -images index (for now)  
   fix validation error message for user password_digest  
   password change/recovery functionality (devise?)  
+  hash image filenames/urls?  
+  proper routes nesting of images/albums?  
+  image size/type validations  
