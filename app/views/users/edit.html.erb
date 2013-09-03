@@ -1,3 +1,9 @@
 <h1>update account details</h1>
 
 <%= render "form", :user => @user %>
+
+<br>
+<form action="<%= user_url(@user) %>" method="POST">
+ <input type="hidden" name="_method" value="DELETE">
+ <input type="submit" value="close account (THIS IS A BIG DEAL)">
+</form>
