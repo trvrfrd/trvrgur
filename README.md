@@ -13,3 +13,4 @@ TODO:
     -entry point into Backbone app?  
   fix validation error message for user password_digest  
   password reset functionality (withheld from user#edit)  
+  user#delete  
