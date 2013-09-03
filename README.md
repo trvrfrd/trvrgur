@@ -9,8 +9,7 @@ TODO:
   devise/omni-auth?  
   set up NewRelic  
   good validations for username/email (regex :( )  
-  make user form partial work for both create and update  
   make redirect useful in UsersController, SessionsController, SessionsHelper  
     -entry point into Backbone app?  
   fix validation error message for user password_digest  
-  password reset functionality (withheld from user#edit)  
+  password change/recovery functionality (devise?)  
