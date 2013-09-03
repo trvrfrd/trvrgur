@@ -1,5 +1,5 @@
 <% action = (image.persisted?) ? image_url(image) : images_url %>
-<% message = (image.persisted?) ? "update image" : "add image" %>
+<% message = (image.persisted?) ? "update image" : "upload image" %>
 
 
 <% image.errors.full_messages.each do |error| %>
@@ -27,7 +27,9 @@
 
   <textarea 
     name="image[description]" 
-    id="image_description"><%= image.description %></textarea>
+    id="image_description"
+    rows="4"
+    cols="40"><%= image.description %></textarea>
   <label for="image_description">description</label>
 
   <% unless image.persisted? %>

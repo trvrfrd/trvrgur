@@ -19,8 +19,8 @@
   </ul>
 <% end %>
 
-<% flash[:errors].try(:each) do |error| %>
-  <h3 style="color:red"><%= error %></h3>
+<% flash[:alerts].try(:each) do |alert| %>
+  <h3 style="color:red"><%= alert %></h3>
 <% end %>
 
 <% flash[:notices].try(:each) do |notice| %>
