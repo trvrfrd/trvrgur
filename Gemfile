@@ -8,6 +8,9 @@ gem 'backbone-on-rails'
 gem 'ejs'
 gem 'jquery-rails'
 gem 'bcrypt-ruby'
+gem 'figaro'
+gem 'paperclip'
+gem 'aws-sdk'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
