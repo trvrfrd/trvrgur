@@ -9,7 +9,7 @@ TODO:
   set up NewRelic  
   good validations for username/email (regex :( )  
   make user form partial work for both create and update  
-    -also display errors when unsuccesful!  
-  redirect somewhere useful after login, signup, in SessionsHelper  
+  make redirect useful in UsersController, SessionsController, SessionsHelper  
     -entry point into Backbone app?  
   fix validation error message for user password_digest  
+  password reset functionality (withheld from user#edit)  

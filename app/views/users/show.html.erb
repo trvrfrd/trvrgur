@@ -1,12 +1,13 @@
-<h1>account details for user '<%= @user.username %>'</h1>
 
-<p>username: <%= @user.username %></p>
 
-<p>email address: <%= @user.email %></p>
+<h1>details for user '<%= @user.username %>'</h1>
 
-<p>password: TOP SECRET</p>
+(here there will be like galleries and junk ya know)
 
-(later there will be other stuff?)
 <% if current_user && current_user.id == @user.id %>
+
+  <p>username: <%= @user.username %></p>
+  <p>email address: <%= @user.email %></p>
+  <p>password: TOP SECRET but maybe you can reset it later</p>
   <a href="<%= edit_user_url(@user) %>">update your account details</a>
 <% end %>

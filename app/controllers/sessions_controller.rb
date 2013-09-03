@@ -5,8 +5,8 @@ class SessionsController < ApplicationController
   def create
     @user = User.check_credentials(params[:identity], params[:password])
     if @user.nil?
-      flash[:notices] ||= []
-      flash[:notices] << "Login unsuccesful, please try again."
+      flash[:errors] ||= []
+      flash[:errors] << "login unsuccesful, please try again"
       render :new
     else
       login_user!(@user)

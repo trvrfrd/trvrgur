@@ -1,9 +1,16 @@
 <!-- fix this to work for both editing and creating users!!! -->
+<% action = (user.persisted?) ? user_url(user) : users_url %>
+<% message = (user.persisted?) ? "update" : "sign up" %>
+
+
 <% user.errors.full_messages.each do |error| %>
   <h3 style="color:red"><%= error %></h3>
 <% end %>
 
-<form action="<%= users_url %>" method="POST">
+<form action="<%= action %>" method="POST">
+  <% if user.persisted? %>
+    <input type="hidden" name="_method" value="PUT">
+  <% end %>
 
   <input 
     type="hidden" 
@@ -26,14 +33,15 @@
     value="<%= user.username %>">
   <label for="user_username">username</label>
 
+  <% unless user.persisted? %>
+    <br>
+    <input type="password" name="user[password]" id="user_password">
+    <label for="user_password">password</label>
+  <% end %>
+
+  <br>
   <br>
 
-  <input type="password" name="user[password]" id="user_password">
-  <label for="user_password">password</label>
-
-  <br>
-  <br>
-
-  <input type="submit" value="sign up">
+  <input type="submit" value="<%= message %>">
 
 </form>
