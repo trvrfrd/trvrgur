@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :require_logged_out, :only => [:create, :new]
-  before_filter :require_logged_in, :only => [:edit, :update]
+  before_filter :require_logged_in, :only => [:edit, :update, :destroy]
 
   def create
     @user = User.new(params[:user])

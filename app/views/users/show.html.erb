@@ -1,8 +1,11 @@
-
-
 <h1>details for user '<%= @user.username %>'</h1>
 
-(here there will be like galleries and junk ya know)
+<h2>uploaded images</h2>
+<% @user.images.each do |image| %>
+  <a href="<%= image_url(image) %>">
+    <img src="<%= image.file.url(:small) %>">
+  </a>
+<% end %>
 
 <% if current_user && current_user.id == @user.id %>
 

@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
 
   after_initialize :ensure_session_token!
 
+  has_many :images
+
   def self.check_credentials(identity, password)
     if identity.include?("@")
       user = User.find_by_email(identity)

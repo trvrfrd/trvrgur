@@ -25,11 +25,9 @@
 
   <br>
 
-  <input
-    type="text" 
+  <textarea 
     name="image[description]" 
-    id="image_description"
-    value="<%= image.description %>">
+    id="image_description"><%= image.description %></textarea>
   <label for="image_description">description</label>
 
   <% unless image.persisted? %>
