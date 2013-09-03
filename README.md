@@ -13,3 +13,4 @@ TODO:
     -entry point into Backbone app?  
   fix validation error message for user password_digest  
   password change/recovery functionality (devise?)  
+  image upload, baby!!! - it all hinges on this!!! WOW!!! 
