@@ -65,7 +65,7 @@ module Trvrgur
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    # DON'T do the thing tha breaks Heroku
+    # DON'T do the thing that breaks Heroku
     config.assets.initialize_on_precompile = false
   end
 end
