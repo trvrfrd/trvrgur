@@ -9,10 +9,9 @@ TODO:
   devise/omni-auth?  
   set up NewRelic  
   good validations for username/email (regex :( )  
-  make redirect useful in UsersController, SessionsController, SessionsHelper  
-    -entry point into Backbone app?  
+  entry point into Backbone app? (eventually)  
   fix validation error message for user password_digest  
   password change/recovery functionality (devise?)  
-  image upload, baby!!! - it all hinges on this!!! WOW!!!  
-  rewrite forms/views to use Rails helper  
-    - or don't bother because they will mostly be replaced by Backbone?   
+  hash image filenames/urls (or change default)?  
+  proper routes nesting of images/albums?  
+  image size/type validations  

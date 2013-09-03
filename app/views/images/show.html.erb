@@ -1,0 +1,7 @@
+<h1><%= @image.title %></h1>
+<img src="<%= @image.file.url %>" alt="<%= @image.description %>">
+<p><%= @image.description %></p>
+
+<% if @image.user_id == current_user.id %>
+  <a href="<%= edit_image_url(@image) %>">edit this image</a>
+<% end %>

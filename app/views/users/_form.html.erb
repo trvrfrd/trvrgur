@@ -1,4 +1,3 @@
-<!-- fix this to work for both editing and creating users!!! -->
 <% action = (user.persisted?) ? user_url(user) : users_url %>
 <% message = (user.persisted?) ? "update" : "sign up" %>
 
@@ -22,7 +21,7 @@
     name="user[email]" 
     id="user_email"
     value="<%= user.email %>">
-  <label for="username_email">email</label>
+  <label for="user_email">email</label>
 
   <br>
 
