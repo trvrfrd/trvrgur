@@ -42,7 +42,7 @@ class ImagesController < ApplicationController
     if @image.update_attributes(params[:image])
       flash[:notices] ||= []
       flash[:notices] << "image updated successfully"   
-      redirect_to user_url(current_user)
+      redirect_to image_url(@image)
     else
       render :edit
     end    
