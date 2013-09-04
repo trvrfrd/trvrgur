@@ -19,4 +19,3 @@ TODO:
   :small image style => bigger?  
   top nav bar thing => sign in / sign up / sign out  
   inform user that titles/descriptions are optional  
-  use flash for errors in image / album forms (new / _form)  
