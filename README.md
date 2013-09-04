@@ -17,3 +17,4 @@ TODO:
   proper routes nesting of images/albums?  
   image size/type validations  
   :small image style => bigger?  
+  top nav bar thing => sign in / sign up / sign out  
