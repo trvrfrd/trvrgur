@@ -16,6 +16,5 @@ TODO:
   hash image filenames/urls (or change default)?  
   proper nested routing of images/albums?  
   image size/type validations  
-  top nav bar thing => sign in / sign up / sign out  
-  inform user that titles/descriptions are optional  
+  top nav bar thing => sign in / sign up / sign out / create album / random  
   add / remove images on album edit page => different partial?  
