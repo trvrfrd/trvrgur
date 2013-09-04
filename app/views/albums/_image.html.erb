@@ -1,0 +1,21 @@
+<input type="file" name="images[<%= i %>][file]" id="image_file">
+<br>
+
+<input
+  type="text" 
+  name="images[<%= i %>][title]" 
+  id="image_title"
+  value="<%= image.title %>">
+<label for="image_title">image title</label>
+
+<br>
+
+<textarea 
+  name="images[<%= i %>][description]" 
+  id="image_description"
+  rows="4"
+  cols="40"><%= image.description %></textarea>
+<label for="image_description">image description</label>
+
+<br>
+<br>

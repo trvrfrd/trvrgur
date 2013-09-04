@@ -1,0 +1,46 @@
+<% action = (album.persisted?) ? album_url(album) : albums_url %>
+<% message = (album.persisted?) ? "update album" : "upload album" %>
+
+<form action="<%= action %>" method="POST" enctype="multipart/form-data">
+  <% if album.persisted? %>
+    <input type="hidden" name="_method" value="PUT">
+  <% end %>
+
+  <input 
+    type="hidden" 
+    name="authenticity_token"
+    value="<%= form_authenticity_token %>">
+
+  <input
+    type="text" 
+    name="album[title]" 
+    id="album_title"
+    value="<%= album.title %>">
+  <label for="album_title">album title</label>
+
+  <br>
+
+  <textarea 
+    name="album[description]" 
+    id="album_description"
+    rows="4"
+    cols="40"><%= album.description %></textarea>
+  <label for="album_description">album description</label>
+
+  <br>
+  <br>
+
+  <% 5.times do |i| %>
+    <%= render "image", :image => Image.new, :i => i %> 
+  <% end %>
+
+  <!-- <br> -->
+  <!-- link to add another image jQuery style??? or wait for Bbone -->
+  <!-- keep track of/increment i -->
+
+  <br>
+  <br>
+
+  <input type="submit" value="<%= message %>">
+
+</form>
