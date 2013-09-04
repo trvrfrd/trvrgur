@@ -16,6 +16,11 @@
     name="authenticity_token"
     value="<%= form_authenticity_token %>">
 
+  <% unless image.persisted? %>
+    <input type="file" name="image[file]" id="image_file">
+    <br>
+  <% end %>
+
   <input
     type="text" 
     name="image[title]" 
@@ -31,11 +36,6 @@
     rows="4"
     cols="40"><%= image.description %></textarea>
   <label for="image_description">description</label>
-
-  <% unless image.persisted? %>
-    <br>
-    <input type="file" name="image[file]" id="image_file">
-  <% end %>
 
   <br>
   <br>
