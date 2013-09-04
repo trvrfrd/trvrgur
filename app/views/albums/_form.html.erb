@@ -1,5 +1,5 @@
 <% action = (album.persisted?) ? album_url(album) : albums_url %>
-<% message = (album.persisted?) ? "update album" : "upload album" %>
+<% message = (album.persisted?) ? "update album" : "create album" %>
 
 <form action="<%= action %>" method="POST" enctype="multipart/form-data">
   <% if album.persisted? %>
@@ -30,13 +30,12 @@
   <br>
   <br>
 
-  <% 5.times do |i| %>
-    <%= render "image", :image => Image.new, :i => i %> 
+  <% album.images.each_with_index do |image, i| %>
+    <%= render "image", :image => image, :i => i %> 
   <% end %>
 
   <!-- <br> -->
   <!-- link to add another image jQuery style??? or wait for Bbone -->
-  <!-- keep track of/increment i -->
 
   <br>
   <br>
