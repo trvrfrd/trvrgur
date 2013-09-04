@@ -17,7 +17,6 @@ class AlbumsController < ApplicationController
         end
 
         @album.image_ids += @images.map(&:id)
-
         @album.save
 
         raise "invalid" unless @album.valid? && @images.all?(&:valid?)
@@ -39,7 +38,8 @@ class AlbumsController < ApplicationController
   end
 
   def edit
-    
+    @album = Album.find(params[:id])
+    render :edit    
   end
 
   def index
@@ -59,6 +59,28 @@ class AlbumsController < ApplicationController
   end
 
   def update
-    
+    @album = Album.find(params[:id])
+    begin
+      ActiveRecord::Base.transaction do
+
+        @album.update_attributes(params[:album])
+
+        @album.images.each do |image|
+          image.update_attributes(params[:images][image.id.to_s])
+        end
+
+        raise "invalid" unless @album.valid? && @album.images.all?(&:valid?)
+      end
+    rescue
+      flash[:alerts] ||= []
+      flash[:alerts] += @album.errors.full_messages
+      flash[:alerts] += @album.images.map { |i| i.errors.full_messages }
+      render :new
+    else
+      flash[:notices] ||= []
+      flash[:notices] << "album updated successfully" 
+      redirect_to album_url(@album)
+    end
+
   end
 end

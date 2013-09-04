@@ -1,9 +1,9 @@
-<input type="file" name="images[<%= i %>][file]" id="image_file">
+<input type="file" name="images[<%= image.id || i %>][file]" id="image_file">
 <br>
 
 <input
   type="text" 
-  name="images[<%= i %>][title]" 
+  name="images[<%= image.id || i %>][title]" 
   id="image_title"
   value="<%= image.title %>">
 <label for="image_title">image title</label>
@@ -11,7 +11,7 @@
 <br>
 
 <textarea 
-  name="images[<%= i %>][description]" 
+  name="images[<%= image.id || i %>][description]" 
   id="image_description"
   rows="4"
   cols="40"><%= image.description %></textarea>
