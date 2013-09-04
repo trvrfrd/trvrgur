@@ -16,3 +16,4 @@ TODO:
   hash image filenames/urls (or change default)?  
   proper routes nesting of images/albums?  
   image size/type validations  
+  :small image style => bigger?  
