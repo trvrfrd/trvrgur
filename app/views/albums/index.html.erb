@@ -1,0 +1,9 @@
+<h1>all albums</h1>
+
+<div style="width:600px">
+  <% @albums.each do |album| %>
+    <a href="<%= album_url(album) %>">
+      <img src="<%= album.images.first.file.url(:small) %>">
+    </a>
+  <% end %>
+</div>
