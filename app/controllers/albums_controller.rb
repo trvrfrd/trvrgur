@@ -28,6 +28,8 @@ class AlbumsController < ApplicationController
       flash[:alerts] += @images.map { |i| i.errors.full_messages }
       render :new
     else
+      flash[:notices] ||= []
+      flash[:notices] << "album created successfully" 
       redirect_to album_url(@album)
     end
   end
@@ -41,7 +43,8 @@ class AlbumsController < ApplicationController
   end
 
   def index
-    
+    @albums = Album.all
+    render :index
   end
 
   def new
@@ -51,7 +54,8 @@ class AlbumsController < ApplicationController
   end
 
   def show
-    
+    @album = Album.find(params[:id])
+    render :show
   end
 
   def update

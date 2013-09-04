@@ -5,8 +5,12 @@ class ImagesController < ApplicationController
     @image = Image.new(params[:image])
     @image.user_id = current_user ? current_user.id : nil
     if @image.save
+      flash[:notices] ||= []
+      flash[:notices] << "image uploaded successfully"  
       redirect_to image_url(@image)
     else
+      flash[:alerts] ||= []
+      flash[:alerts] += @image.errors.full_messages
       render :new
     end
   end
@@ -14,6 +18,8 @@ class ImagesController < ApplicationController
   def destroy
     @image = Image.find(params[:id])
     @image.destroy
+    flash[:notices] ||= []
+    flash[:notices] << "image deleted successfully"  
     redirect_to user_url(current_user)
   end
 
@@ -44,6 +50,8 @@ class ImagesController < ApplicationController
       flash[:notices] << "image updated successfully"   
       redirect_to image_url(@image)
     else
+      flash[:alerts] ||= []
+      flash[:alerts] += @image.errors.full_messages
       render :edit
     end    
   end
