@@ -71,10 +71,18 @@ class AlbumsController < ApplicationController
         @album.update_attributes(params[:album])
 
         @album.images.each do |image|
-          image.update_attributes(params[:images][image.id.to_s])
+          image_params = params[:images][image.id.to_s]
+          if image_params[:_destroy]
+            image.destroy
+          else
+            image.update_attributes(image_params)
+          end
         end
 
-        raise "invalid" unless @album.valid? && @album.images.all?(&:valid?)
+        raise "invalid" unless @album.valid? && 
+          @album.images.all? do |i|
+            i.valid? || i.destroyed?
+          end
       end
     rescue
       flash[:alerts] ||= []
