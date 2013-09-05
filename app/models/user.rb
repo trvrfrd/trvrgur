@@ -12,7 +12,9 @@ class User < ActiveRecord::Base
   after_initialize :ensure_session_token!
 
   has_many :images, :dependent => :destroy
-  has_many :albums, :dependent => :destroy  
+  has_many :albums, :dependent => :destroy
+  has_many :comments, :dependent => :destroy
+
 
   def self.check_credentials(identity, password)
     if identity.include?("@")
