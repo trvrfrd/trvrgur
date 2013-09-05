@@ -1,9 +1,9 @@
 trvrgur
 =======
 ###an imgur clone###
-_lovingly_ built by _mine own **hands**_ from the _fertile ground_ on _upward_  
-in _**Rails**_  
-aided by a _multitude_ of _libraries most **useful**_  
+lovingly built by mine own hands from the fertile ground on upward  
+in Rails (and eventually Backbone)  
+aided by a multitude of libraries most useful  
 
 TODO:  
   set up NewRelic  
@@ -11,7 +11,7 @@ TODO:
     -email confirmation?
     -password change/recovery functionality?  
   good validations for username/email (regex :( )  
-  entry point into Backbone app? (eventually)  
+  entry point into Backbone app?  
   fix validation error message for user password_digest  
   hash image filenames/urls (or change default)?  
   proper nested routing of images/albums?  
