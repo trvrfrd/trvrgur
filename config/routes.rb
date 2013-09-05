@@ -4,5 +4,5 @@ Trvrgur::Application.routes.draw do
   resources :images
   resources :albums
 
-  root :to => "images#index"
+  root :to => "albums#index"
 end
