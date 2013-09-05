@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.14'
 gem 'pg'
+gem 'pry-rails'
+gem 'debugger'
 
 gem 'rabl'
 gem 'backbone-on-rails'
@@ -19,8 +21,6 @@ group :assets do
 end
 
 group :development do
-  gem 'pry-rails'
-  gem 'debugger'
   gem 'quiet_assets'
   # gem 'better_errors'
   # gem 'binding_of_caller'
