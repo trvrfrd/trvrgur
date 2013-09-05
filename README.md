@@ -14,7 +14,7 @@ TODO:
   entry point into Backbone app?  
   fix validation error message for user password_digest  
   hash image filenames/urls (or change default)?  
-  proper nested routing of images/albums?  
+  proper nested routing of images/albums/comments?  
   image size/type validations  
   top nav bar thing => sign in / sign up / sign out / create album / random  
   add new images on album edit page?  
