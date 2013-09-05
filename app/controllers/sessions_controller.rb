@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       render :new
     else
       login_user!(@user)
-      redirect_to images_url
+      redirect_to albums_url
     end
   end
 
