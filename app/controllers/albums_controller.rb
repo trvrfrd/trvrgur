@@ -1,4 +1,5 @@
 class AlbumsController < ApplicationController
+  before_filter :require_logged_in, :only => [:destroy, :edit, :update]
   def create
     begin
       ActiveRecord::Base.transaction do
@@ -34,7 +35,11 @@ class AlbumsController < ApplicationController
   end
 
   def destroy
-    
+    @album = Album.find(params[:id])
+    @album.destroy
+    flash[:notices] ||= []
+    flash[:notices] << "album deleted successfully"
+    redirect_to user_url(current_user)
   end
 
   def edit
