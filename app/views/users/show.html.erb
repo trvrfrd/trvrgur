@@ -1,11 +1,11 @@
 <h1>details for user '<%= @user.username %>'</h1>
 
-<h2>uploaded images</h2>
+<h2>uploaded albums</h2>
 
-<div style="width:600px">
-  <% @user.images.each do |image| %>
-    <a href="<%= image_url(image) %>">
-      <img src="<%= image.file.url(:small) %>">
+<div style="max-width:600px">
+  <% @user.albums.each do |album| %>
+    <a href="<%= album_url(album) %>">
+      <img src="<%= album.images.first.file.url(:small) %>">
     </a>
   <% end %>
 </div>

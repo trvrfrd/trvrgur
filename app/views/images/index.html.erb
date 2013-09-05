@@ -1,6 +1,6 @@
 <h1>all images</h1>
 
-<div style="width:600px">
+<div style="max-width:600px">
   <% @images.each do |image| %>
     <a href="<%= image_url(image) %>">
       <img src="<%= image.file.url(:small) %>">

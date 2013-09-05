@@ -17,5 +17,5 @@ TODO:
   proper nested routing of images/albums?  
   image size/type validations  
   top nav bar thing => sign in / sign up / sign out / create album / random  
-  add / remove images on album edit page => different partial?  
-  display uploaded albums on user show page  
+  add / remove images on album edit page => different partial? backbone?  
+  accepts_nested_attributes_for? nesting of objects coming in from backbone?  
