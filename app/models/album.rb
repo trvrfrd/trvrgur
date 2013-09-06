@@ -8,6 +8,12 @@ class Album < ActiveRecord::Base
              
   has_many :images, :dependent => :destroy
   has_many :comments, :dependent => :destroy
+  has_many :votes,
+           :class_name => "UserAlbumVote",
+           :foreign_key => :album_id
+           
+  has_many :voting_users, :through => :votes, :source => :user
+
 
   def comments_by_parent_id
     comments = self.comments.all

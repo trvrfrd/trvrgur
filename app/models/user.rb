@@ -26,6 +26,12 @@ class User < ActiveRecord::Base
            :foreign_key => :author_id,
            :dependent => :destroy
 
+  has_many :votes,
+           :class_name => "UserAlbumVote",
+           :foreign_key => :user_id
+
+  has_many :voted_albums, :through => :votes, :source => :album
+
   def self.check_credentials(identity, password)
     if identity.include?("@")
       user = User.find_by_email(identity)
