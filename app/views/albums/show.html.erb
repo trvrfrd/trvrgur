@@ -18,7 +18,10 @@
   <br>
 <% end %>
 
-<%= render "comments/form", :comment => Comment.new, :album_id => @album.id %>
+<%= render "comments/form", 
+    :comment => Comment.new, 
+    :album_id => @album.id,
+    :parent_comment_id => nil %>
 <br>
 
 <h2>comments:</h2>  

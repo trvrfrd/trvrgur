@@ -28,7 +28,8 @@ class CommentsController < ApplicationController
   end
 
   def show
-    
+    @comment = Comment.find(params[:id])
+    render :show
   end
 
   def update
