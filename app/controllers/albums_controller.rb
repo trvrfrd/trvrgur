@@ -13,7 +13,7 @@ class AlbumsController < ApplicationController
         end.compact
         
         @images.each do |image|
-          image.creator_id = current_user ? current_user.id : nil
+          image.uploader_id = current_user ? current_user.id : nil
           image.save
         end
 
