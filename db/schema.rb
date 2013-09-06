@@ -11,25 +11,29 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130906003021) do
+ActiveRecord::Schema.define(:version => 20130906205715) do
 
   create_table "albums", :force => true do |t|
     t.integer  "creator_id"
     t.string   "title"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
     t.text     "description"
+    t.integer  "upvotes",     :default => 0
+    t.integer  "downvotes",   :default => 0
   end
 
   add_index "albums", ["creator_id"], :name => "index_albums_on_user_id"
 
   create_table "comments", :force => true do |t|
     t.integer  "parent_comment_id"
-    t.integer  "album_id",          :null => false
-    t.text     "body",              :null => false
-    t.integer  "author_id",         :null => false
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.integer  "album_id",                         :null => false
+    t.text     "body",                             :null => false
+    t.integer  "author_id",                        :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.integer  "upvotes",           :default => 0
+    t.integer  "downvotes",         :default => 0
   end
 
   add_index "comments", ["album_id"], :name => "index_comments_on_album_id"
