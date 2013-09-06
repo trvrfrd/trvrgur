@@ -26,11 +26,17 @@ class User < ActiveRecord::Base
            :foreign_key => :author_id,
            :dependent => :destroy
 
-  has_many :votes,
-           :class_name => "UserAlbumVote",
+  has_many :album_upvotes,
+           :class_name => "UserAlbumUpvote",
            :foreign_key => :user_id
 
-  has_many :voted_albums, :through => :votes, :source => :album
+  has_many :upvoted_albums, :through => :album_upvotes, :source => :album
+
+  has_many :album_downvotes,
+           :class_name => "UserAlbumDownvote",
+           :foreign_key => :user_id
+
+  has_many :downvoted_albums, :through => :album_downvotes, :source => :album
 
   def self.check_credentials(identity, password)
     if identity.include?("@")
