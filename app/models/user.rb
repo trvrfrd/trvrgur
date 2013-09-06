@@ -38,6 +38,14 @@ class User < ActiveRecord::Base
     user.verify_password(password) ? user : nil
   end
 
+  def album_reputation
+    self.albums.all.map(&:points).inject(&:+)
+  end
+
+  def comment_reputation
+    self.comments.all.map(&:points).inject(&:+)
+  end
+
   def ensure_session_token!
     self.session_token || self.reset_session_token!
   end
@@ -45,6 +53,10 @@ class User < ActiveRecord::Base
   def password=(password)
     @password = password
     self.password_digest = BCrypt::Password.create(password)
+  end
+
+  def total_reputation
+    self.album_reputation + self.comment_reputation
   end
 
   def verify_password(password)

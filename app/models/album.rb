@@ -19,4 +19,8 @@ class Album < ActiveRecord::Base
     
     result
   end
+
+  def points
+    self.upvotes - self.downvotes
+  end
 end
