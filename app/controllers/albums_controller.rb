@@ -5,7 +5,7 @@ class AlbumsController < ApplicationController
       ActiveRecord::Base.transaction do
 
         @album = Album.new(params[:album])
-        @album.user_id = current_user ? current_user.id : nil
+        @album.creator_id = current_user ? current_user.id : nil
 
         @images = params[:images].map do |_,  image_params|
           next if image_params[:file].nil?
@@ -13,7 +13,7 @@ class AlbumsController < ApplicationController
         end.compact
         
         @images.each do |image|
-          image.user_id = current_user ? current_user.id : nil
+          image.creator_id = current_user ? current_user.id : nil
           image.save
         end
 

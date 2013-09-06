@@ -3,7 +3,7 @@ class ImagesController < ApplicationController
 
   def create
     @image = Image.new(params[:image])
-    @image.user_id = current_user ? current_user.id : nil
+    @image.uploader_id = current_user ? current_user.id : nil
     if @image.save
       flash[:notices] ||= []
       flash[:notices] << "image uploaded successfully"  

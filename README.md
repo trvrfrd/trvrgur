@@ -22,6 +22,3 @@ TODO:
   top nav bar thing => sign in / sign up / sign out / create album / random  
   add new images on album edit page?  
   accepts_nested_attributes_for? nesting of objects coming in from backbone?  
-  alter tables:  
-    -change type of image/album descriptions from string to text  
-    -better association/foreign key names (e.g. uploader instead of user)?  

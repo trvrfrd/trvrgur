@@ -29,7 +29,8 @@
         </a> at <%= comment.created_at %>
 
       <% if current_user && 
-           (current_user.id == author.id || current_user.id == @album.user_id) %>
+           (current_user.id == author.id || 
+            current_user.id == @album.creator_id) %>
         <%= button_to "delete", comment_url(comment), :method => :delete %>
       <% end %>
       <br>
@@ -40,6 +41,6 @@
   <% end %>
 </ul>
 
-<% if current_user && @album.user_id == current_user.id %>
+<% if current_user && @album.creator_id == current_user.id %>
   <a href="<%= edit_album_url(@album) %>">edit this album</a>
 <% end %>
