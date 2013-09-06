@@ -22,3 +22,4 @@ TODO:
   top nav bar thing => sign in / sign up / sign out / create album / random  
   add new images on album edit page?  
   accepts_nested_attributes_for? nesting of objects coming in from backbone?  
+  actually finish comments (edit/update)  

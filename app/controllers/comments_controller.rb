@@ -23,6 +23,15 @@ class CommentsController < ApplicationController
     redirect_to album_url(@comment.album)
   end
 
+  def downvote
+    @comment = Comment.find(params[:id])
+    @comment.downvotes += 1
+    @comment.save
+    flash[:notices] ||= []
+    flash[:notices] << "comment downvoted"
+    redirect_to :back
+  end
+
   def edit
     
   end
@@ -34,5 +43,14 @@ class CommentsController < ApplicationController
 
   def update
     
+  end
+
+  def upvote
+    @comment = Comment.find(params[:id])
+    @comment.upvotes += 1
+    @comment.save
+    flash[:notices] ||= []
+    flash[:notices] << "comment upvoted"
+    redirect_to :back
   end
 end

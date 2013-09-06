@@ -1,5 +1,5 @@
 class AlbumsController < ApplicationController
-  before_filter :require_logged_in, :only => [:destroy, :edit, :update]
+  before_filter :require_logged_in, :except => [:create, :index, :new, :show]
   def create
     begin
       ActiveRecord::Base.transaction do
@@ -39,7 +39,16 @@ class AlbumsController < ApplicationController
     @album.destroy
     flash[:notices] ||= []
     flash[:notices] << "album deleted successfully"
-    redirect_to user_url(current_user)
+    redirect_to :back
+  end
+
+  def downvote
+    @album = Album.find(params[:id])
+    @album.downvotes += 1
+    @album.save
+    flash[:notices] ||= []
+    flash[:notices] << "album downvoted"
+    redirect_to album_url(@album)
   end
 
   def edit
@@ -95,5 +104,14 @@ class AlbumsController < ApplicationController
       redirect_to album_url(@album)
     end
 
+  end
+
+  def upvote
+    @album = Album.find(params[:id])
+    @album.upvotes += 1
+    @album.save
+    flash[:notices] ||= []
+    flash[:notices] << "album upvoted"
+    redirect_to :back  
   end
 end
