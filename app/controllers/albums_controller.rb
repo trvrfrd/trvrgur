@@ -59,7 +59,7 @@ class AlbumsController < ApplicationController
   end
 
   def show
-    @album = Album.find(params[:id])
+    @album = Album.includes(:comments => :author).find(params[:id])
     render :show
   end
 
