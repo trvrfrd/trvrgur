@@ -10,6 +10,8 @@ class SessionsController < ApplicationController
       render :new
     else
       login_user!(@user)
+      flash[:notices] ||= []
+      flash[:notices] << "welcome back, #{@user.username}!"
       redirect_to albums_url
     end
   end
