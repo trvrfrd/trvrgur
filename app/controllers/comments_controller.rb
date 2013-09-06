@@ -9,8 +9,8 @@ class CommentsController < ApplicationController
       flash[:notices] << "comment posted successfully"  
       redirect_to album_url(@comment.album)
     else
-      flash[:alerts] ||= []
-      flash[:alerts] += @comment.errors.full_messages
+      flash.now[:alerts] ||= []
+      flash.now[:alerts] += @comment.errors.full_messages
       render :new
     end   
   end
