@@ -13,7 +13,7 @@ class AlbumsController < ApplicationController
         end.compact
         
         @images.each do |image|
-          image.creator_id = current_user ? current_user.id : nil
+          image.uploader_id = current_user ? current_user.id : nil
           image.save
         end
 
@@ -59,7 +59,7 @@ class AlbumsController < ApplicationController
   end
 
   def show
-    @album = Album.find(params[:id])
+    @album = Album.includes(:comments => :author).find(params[:id])
     render :show
   end
 

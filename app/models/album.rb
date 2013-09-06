@@ -8,4 +8,15 @@ class Album < ActiveRecord::Base
              
   has_many :images, :dependent => :destroy
   has_many :comments, :dependent => :destroy
+
+  def comments_by_parent_id
+    comments = self.comments.all
+    result = Hash.new { |hash, key| hash[key] = [] }
+
+    comments.each do |c|
+      result[c.parent_comment_id] << c
+    end
+    
+    result
+  end
 end

@@ -10,7 +10,7 @@ TODO:
   devise/omni-auth?  
     -email confirmation?
     -password change/recovery functionality?  
-  refactor to user form helpers?  
+  refactor to use form helpers?  
     -also just refactor to not be bad code  
   good validations for username/email (regex :( )  
   entry point into Backbone app?  

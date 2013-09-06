@@ -13,34 +13,19 @@
 <% end %>
 
 <hr>
-
-<%= render "comments/form", :comment => Comment.new, :album_id => @album.id %>
-<br>
-
-<!-- nesting and juuuunk -->
-<h2>comments:</h2>  
-<ul>
-  <% @album.comments.includes(:author).each do |comment| %>
-    <li>
-      <% author = comment.author %>
-      posted by 
-        <a href="<%= user_url(author) %>">
-          <%= author.username %>
-        </a> at <%= comment.created_at %>
-
-      <% if current_user && 
-           (current_user.id == author.id || 
-            current_user.id == @album.creator_id) %>
-        <%= button_to "delete", comment_url(comment), :method => :delete %>
-      <% end %>
-      <br>
-
-      <%= comment.body %>
-    </li>
-    <br>
-  <% end %>
-</ul>
-
 <% if current_user && @album.creator_id == current_user.id %>
   <a href="<%= edit_album_url(@album) %>">edit this album</a>
+  <br>
 <% end %>
+
+<%= render "comments/form", 
+    :comment => Comment.new, 
+    :album_id => @album.id,
+    :parent_comment_id => nil %>
+<br>
+
+<h2>comments:</h2>  
+<%= render "comments", 
+    :album => @album, 
+    :comments => @album.comments_by_parent_id[nil] %>
+
