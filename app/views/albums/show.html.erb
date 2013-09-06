@@ -1,5 +1,8 @@
 <h1><%= @album.title %></h1>
 <p><%= @album.description %></p>
+<p>created by: 
+  <a href="<%= user_url(@album.creator) %>"><%= @album.creator.username %></a>
+</p>
 <hr>
 
 <% @album.images.each do |image| %>
@@ -11,6 +14,10 @@
   
   <p><%= image.description %></p>
 <% end %>
+
+points: <%= @album.points %>
+<a href="<%= upvote_album_url(@album) %>">|⇧|</a>
+<a href="<%= downvote_album_url(@album) %>">|⇩|</a>
 
 <hr>
 <% if current_user && @album.creator_id == current_user.id %>

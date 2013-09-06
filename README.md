@@ -23,3 +23,4 @@ TODO:
   add new images on album edit page?  
   accepts_nested_attributes_for? nesting of objects coming in from backbone?  
   actually finish comments (edit/update)  
+  join table(s) for user votes + allow to undo/redo votes  

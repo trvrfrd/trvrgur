@@ -3,6 +3,9 @@
 <p>
   posted by <a href="<%= user_url(author) %>"><%= author.username %></a> 
   at <%= @comment.created_at %>
+  <a href="<%= upvote_comment_url(@comment) %>">|⇧|</a>
+  <a href="<%= downvote_comment_url(@comment) %>">|⇩|</a>
+  <%= @comment.points %>
 </p>
 
 <p><%= @comment.body %></p>

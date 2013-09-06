@@ -6,10 +6,11 @@
         <a href="<%= user_url(author) %>">
           <%= author.username %>
         </a> 
-      at 
-        <a href="<%= comment_url(comment) %>">
-          <%= comment.created_at %>
-        </a>
+      at <%= comment.created_at %>
+        <a href="<%= comment_url(comment) %>">|reply|</a>
+        <a href="<%= upvote_comment_url(comment) %>">|⇧|</a>
+        <a href="<%= downvote_comment_url(comment) %>">|⇩|</a>
+        <%= comment.points %>
       <% if current_user && 
            (current_user.id == author.id || 
             current_user.id == @album.creator_id) %>
