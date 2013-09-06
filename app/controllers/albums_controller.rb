@@ -23,9 +23,9 @@ class AlbumsController < ApplicationController
         raise "invalid" unless @album.valid? && @images.all?(&:valid?)
       end
     rescue
-      flash[:alerts] ||= []
-      flash[:alerts] += @album.errors.full_messages
-      flash[:alerts] += @images.map { |i| i.errors.full_messages }
+      flash.now[:alerts] ||= []
+      flash.now[:alerts] += @album.errors.full_messages
+      flash.now[:alerts] += @images.map { |i| i.errors.full_messages }
       render :new
     else
       flash[:notices] ||= []
@@ -85,9 +85,9 @@ class AlbumsController < ApplicationController
           end
       end
     rescue
-      flash[:alerts] ||= []
-      flash[:alerts] += @album.errors.full_messages
-      flash[:alerts] += @album.images.map { |i| i.errors.full_messages }
+      flash.now[:alerts] ||= []
+      flash.now[:alerts] += @album.errors.full_messages
+      flash.now[:alerts] += @album.images.map { |i| i.errors.full_messages }
       render :new
     else
       flash[:notices] ||= []

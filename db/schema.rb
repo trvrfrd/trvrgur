@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130904164225) do
+ActiveRecord::Schema.define(:version => 20130905204400) do
 
   create_table "albums", :force => true do |t|
     t.integer  "user_id"
@@ -22,6 +22,19 @@ ActiveRecord::Schema.define(:version => 20130904164225) do
   end
 
   add_index "albums", ["user_id"], :name => "index_albums_on_user_id"
+
+  create_table "comments", :force => true do |t|
+    t.integer  "parent_comment_id"
+    t.integer  "album_id",          :null => false
+    t.text     "body",              :null => false
+    t.integer  "author_id",         :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "comments", ["album_id"], :name => "index_comments_on_album_id"
+  add_index "comments", ["author_id"], :name => "index_comments_on_author_id"
+  add_index "comments", ["parent_comment_id"], :name => "index_comments_on_parent_comment_id"
 
   create_table "images", :force => true do |t|
     t.string   "title"

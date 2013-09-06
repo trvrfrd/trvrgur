@@ -1,0 +1,35 @@
+<% action = (comment.persisted?) ? comment_url(comment) : comments_url %>
+<% message = (comment.persisted?) ? "update comment" : "submit comment" %>
+
+<form action="<%= action %>" method="POST">
+  <% if comment.persisted? %>
+    <input type="hidden" name="_method" value="PUT">
+  <% end %>
+
+  <input 
+    type="hidden" 
+    name="authenticity_token"
+    value="<%= form_authenticity_token %>">
+  
+  <input 
+    type="hidden" 
+    name="comment[album_id]"
+    value="<%= album_id %>">
+
+  <label for="comment_body">
+    <%= (comment.persisted?) ? "edit comment" : "add a comment" %>
+  </label>
+  <br>
+  <textarea 
+    name="comment[body]" 
+    id="comment_body"
+    rows="4"
+    placeholder="comment..."
+    cols="40"><%= comment.body %></textarea>
+
+  <br>
+  <br>
+
+  <input type="submit" value="<%= message %>">
+
+</form>

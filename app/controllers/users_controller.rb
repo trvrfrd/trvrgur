@@ -6,6 +6,8 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     if @user.save
       login_user!(@user)
+      flash[:notices] ||= []
+      flash[:notices] << "welcome, #{@user.username}!"
       redirect_to albums_url
     else
       render :new

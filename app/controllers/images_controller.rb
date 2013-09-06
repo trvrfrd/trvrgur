@@ -9,8 +9,8 @@ class ImagesController < ApplicationController
       flash[:notices] << "image uploaded successfully"  
       redirect_to image_url(@image)
     else
-      flash[:alerts] ||= []
-      flash[:alerts] += @image.errors.full_messages
+      flash.now[:alerts] ||= []
+      flash.now[:alerts] += @image.errors.full_messages
       render :new
     end
   end
@@ -50,8 +50,8 @@ class ImagesController < ApplicationController
       flash[:notices] << "image updated successfully"   
       redirect_to image_url(@image)
     else
-      flash[:alerts] ||= []
-      flash[:alerts] += @image.errors.full_messages
+      flash.now[:alerts] ||= []
+      flash.now[:alerts] += @image.errors.full_messages
       render :edit
     end    
   end
