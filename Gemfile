@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.14'
 gem 'pg'
 gem 'pry-rails'
-
 gem 'rabl'
 gem 'backbone-on-rails'
 gem 'ejs'
