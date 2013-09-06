@@ -1,0 +1,28 @@
+<% comments.each do |comment| %>
+  <ul>
+    <li>
+      <% author = comment.author %>
+      posted by 
+        <a href="<%= user_url(author) %>">
+          <%= author.username %>
+        </a> 
+      at 
+        <a href="<%= comment_url(comment) %>">
+          <%= comment.created_at %>
+        </a>
+      <% if current_user && 
+           (current_user.id == author.id || 
+            current_user.id == @album.creator_id) %>
+        <%= button_to "delete", comment_url(comment), :method => :delete %>
+      <% end %>
+      <br>
+
+      <%= comment.body %>
+    </li>
+    <br>
+
+    <%= render "comments", 
+        :album => @album, 
+        :comments => @album.comments_by_parent_id[comment.id] %>
+  <% end %>
+</ul>
