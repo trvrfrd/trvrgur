@@ -7,6 +7,9 @@ class Image < ActiveRecord::Base
 
   validates :file, :attachment_presence => true
 
-  belongs_to :user
   belongs_to :album
+
+  belongs_to :uploader,
+             :class_name => "User",
+             :foreign_key => :uploader_id
 end

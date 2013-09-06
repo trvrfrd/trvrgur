@@ -11,17 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130905204400) do
+ActiveRecord::Schema.define(:version => 20130906003021) do
 
   create_table "albums", :force => true do |t|
-    t.integer  "user_id"
+    t.integer  "creator_id"
     t.string   "title"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
-    t.string   "description"
+    t.text     "description"
   end
 
-  add_index "albums", ["user_id"], :name => "index_albums_on_user_id"
+  add_index "albums", ["creator_id"], :name => "index_albums_on_user_id"
 
   create_table "comments", :force => true do |t|
     t.integer  "parent_comment_id"
@@ -38,8 +38,8 @@ ActiveRecord::Schema.define(:version => 20130905204400) do
 
   create_table "images", :force => true do |t|
     t.string   "title"
-    t.string   "description"
-    t.integer  "user_id"
+    t.text     "description"
+    t.integer  "uploader_id"
     t.string   "file_file_name"
     t.string   "file_content_type"
     t.integer  "file_file_size"
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(:version => 20130905204400) do
   end
 
   add_index "images", ["album_id"], :name => "index_images_on_album_id"
-  add_index "images", ["user_id"], :name => "index_images_on_user_id"
+  add_index "images", ["uploader_id"], :name => "index_images_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "username",        :null => false
