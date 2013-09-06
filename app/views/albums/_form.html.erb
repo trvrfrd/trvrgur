@@ -17,7 +17,6 @@
     id="album_title"
     value="<%= album.title %>">
   <label for="album_title">album title (optional)</label>
-
   <br>
 
   <textarea 
@@ -25,21 +24,19 @@
     id="album_description"
     rows="4"
     cols="40"><%= album.description %></textarea>
-  <label for="album_description">album description(optional)</label>
+  <label for="album_description">album description (optional)</label>
+  <br>
 
-  <br>
-  <br>
+  <h2>(include at least one image)</h2>
   
   <% album.images.each_with_index do |image, i| %>
-    <%= render "image", :image => image, :i => i %> 
+    <%= render "image_form", :image => image, :i => i %> 
   <% end %>
 
   <!-- <br> -->
   <!-- link to add another image jQuery style??? or wait for Bbone -->
 
   <br>
-  <br>
-
   <input type="submit" value="<%= message %>">
 
 </form>

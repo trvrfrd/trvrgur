@@ -1,5 +1,6 @@
 class Comment < ActiveRecord::Base
   attr_accessible :album_id, :author_id, :body, :parent_comment_id
+  validates :album_id, :author_id, :body, :presence => true
 
   belongs_to :album
 
