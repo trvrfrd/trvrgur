@@ -12,31 +12,22 @@ class User < ActiveRecord::Base
   after_initialize :ensure_session_token!
 
   has_many :images,
-           :class_name => "Image",
            :foreign_key => :uploader_id,
            :dependent => :destroy
 
   has_many :albums,
-           :class_name => "Album",
            :foreign_key => :creator_id,
            :dependent => :destroy
 
   has_many :comments,
-           :class_name => "Comment",
            :foreign_key => :author_id,
            :dependent => :destroy
 
-  has_many :album_upvotes,
-           :class_name => "UserAlbumUpvote",
-           :foreign_key => :user_id
+  has_many :user_album_upvotes, :dependent => :destroy
+  has_many :upvoted_albums, :through => :user_album_upvotes, :source => :album
 
-  has_many :upvoted_albums, :through => :album_upvotes, :source => :album
-
-  has_many :album_downvotes,
-           :class_name => "UserAlbumDownvote",
-           :foreign_key => :user_id
-
-  has_many :downvoted_albums, :through => :album_downvotes, :source => :album
+  has_many :user_album_downvotes, :dependent => :destroy
+  has_many :downvoted_albums, :through => :user_album_downvotes, :source => :album
 
   def self.check_credentials(identity, password)
     if identity.include?("@")

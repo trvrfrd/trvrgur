@@ -25,3 +25,4 @@ TODO:
   actually finish comments (edit/update)  
   join table(s) for user votes + allow to undo/redo votes  
   prevent duplicate replies when clicking really fast?  
+  allow user only one vote (but they can retract it) (currently one of each)  

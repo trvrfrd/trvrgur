@@ -9,17 +9,11 @@ class Album < ActiveRecord::Base
   has_many :images, :dependent => :destroy
   has_many :comments, :dependent => :destroy
 
-  has_many :upvotes,
-           :class_name => "UserAlbumUpvote",
-           :foreign_key => :album_id
-           
-  has_many :upvoting_users, :through => :upvotes, :source => :user
+  has_many :user_album_upvotes, :dependent => :destroy
+  has_many :upvoters, :through => :user_album_upvotes, :source => :user
 
-  has_many :downvotes,
-           :class_name => "UserAlbumDownvote",
-           :foreign_key => :album_id
-           
-  has_many :downvoting_users, :through => :downvotes, :source => :user
+  has_many :user_album_downvotes, :dependent => :destroy
+  has_many :downvoters, :through => :user_album_downvotes, :source => :user
 
 
   def comments_by_parent_id
