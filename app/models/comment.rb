@@ -17,6 +17,6 @@ class Comment < ActiveRecord::Base
            :foreign_key => :parent_comment_id
 
   def points
-    self.upvotes - self.downvotes
+    self.upvote_count - self.downvote_count
   end
 end

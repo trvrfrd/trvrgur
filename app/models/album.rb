@@ -34,6 +34,6 @@ class Album < ActiveRecord::Base
   end
 
   def points
-    self.upvotes - self.downvotes
+    self.upvote_count - self.downvote_count
   end
 end

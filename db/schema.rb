@@ -11,16 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130906234754) do
+ActiveRecord::Schema.define(:version => 20130907000432) do
 
   create_table "albums", :force => true do |t|
     t.integer  "creator_id"
     t.string   "title"
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.text     "description"
-    t.integer  "upvotes",     :default => 0
-    t.integer  "downvotes",   :default => 0
+    t.integer  "upvote_count",   :default => 0
+    t.integer  "downvote_count", :default => 0
   end
 
   add_index "albums", ["creator_id"], :name => "index_albums_on_user_id"
@@ -32,8 +32,8 @@ ActiveRecord::Schema.define(:version => 20130906234754) do
     t.integer  "author_id",                        :null => false
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
-    t.integer  "upvotes",           :default => 0
-    t.integer  "downvotes",         :default => 0
+    t.integer  "upvote_count",      :default => 0
+    t.integer  "downvote_count",    :default => 0
   end
 
   add_index "comments", ["album_id"], :name => "index_comments_on_album_id"

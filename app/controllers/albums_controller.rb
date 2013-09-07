@@ -44,11 +44,15 @@ class AlbumsController < ApplicationController
 
   def downvote
     @album = Album.find(params[:id])
-    if @album.upvoting_user_ids.includes?(current_user.id)
-
+    if @album.downvoting_user_ids.include?(current_user.id)
+      @album.downvoting_user_ids -= [current_user.id]
+      @album.downvote_count -= 1
+      @album.save
+      flash[:notices] ||= []
+      flash[:notices] << "downvoted retracted"
     else
-      UserAlbumVote.create(:user_id => )
-      @album.downvotes += 1
+      @album.downvoting_user_ids += [current_user.id]
+      @album.downvote_count += 1
       @album.save
       flash[:notices] ||= []
       flash[:notices] << "album downvoted"
@@ -113,10 +117,19 @@ class AlbumsController < ApplicationController
 
   def upvote
     @album = Album.find(params[:id])
-    @album.upvotes += 1
-    @album.save
-    flash[:notices] ||= []
-    flash[:notices] << "album upvoted"
-    redirect_to :back  
+    if @album.upvoting_user_ids.include?(current_user.id)
+      @album.upvoting_user_ids -= [current_user.id]
+      @album.upvote_count -= 1
+      @album.save
+      flash[:notices] ||= []
+      flash[:notices] << "upvote retracted"
+    else
+      @album.upvoting_user_ids += [current_user.id]
+      @album.upvote_count += 1
+      @album.save
+      flash[:notices] ||= []
+      flash[:notices] << "album upvoted"
+    end  
+    redirect_to album_url(@album)
   end
 end
