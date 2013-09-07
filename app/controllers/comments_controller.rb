@@ -25,10 +25,19 @@ class CommentsController < ApplicationController
 
   def downvote
     @comment = Comment.find(params[:id])
-    @comment.downvotes += 1
-    @comment.save
-    flash[:notices] ||= []
-    flash[:notices] << "comment downvoted"
+    if @comment.downvoter_ids.include?(current_user.id)
+      @comment.downvoter_ids -= [current_user.id]
+      @comment.downvote_count -= 1
+      @comment.save
+      flash[:notices] ||= []
+      flash[:notices] << "downvote retracted"
+    else
+      @comment.downvoter_ids += [current_user.id]
+      @comment.downvote_count += 1
+      @comment.save
+      flash[:notices] ||= []
+      flash[:notices] << "comment downvoted"
+    end
     redirect_to :back
   end
 
@@ -47,10 +56,19 @@ class CommentsController < ApplicationController
 
   def upvote
     @comment = Comment.find(params[:id])
-    @comment.upvotes += 1
-    @comment.save
-    flash[:notices] ||= []
-    flash[:notices] << "comment upvoted"
+    if @comment.upvoter_ids.include?(current_user.id)
+      @comment.upvoter_ids -= [current_user.id]
+      @comment.upvote_count -= 1
+      @comment.save
+      flash[:notices] ||= []
+      flash[:notices] << "upvote retracted"
+    else
+      @comment.upvoter_ids += [current_user.id]
+      @comment.upvote_count += 1
+      @comment.save
+      flash[:notices] ||= []
+      flash[:notices] << "comment upvoted"
+    end  
     redirect_to :back
   end
 end
