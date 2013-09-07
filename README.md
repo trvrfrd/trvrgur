@@ -27,3 +27,4 @@ TODO:
   prevent duplicate replies when clicking really fast?  
   allow user only one vote (but they can retract it) (currently one of each) 
   make sure database performance/number of queries is not awful   
+  sort comments by upvotes?  
