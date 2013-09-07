@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130907000432) do
+ActiveRecord::Schema.define(:version => 20130907002359) do
 
   create_table "albums", :force => true do |t|
     t.integer  "creator_id"
@@ -75,6 +75,26 @@ ActiveRecord::Schema.define(:version => 20130907000432) do
 
   add_index "user_album_upvotes", ["album_id", "user_id"], :name => "index_user_album_upvotes_on_album_id_and_user_id", :unique => true
   add_index "user_album_upvotes", ["user_id", "album_id"], :name => "index_user_album_upvotes_on_user_id_and_album_id", :unique => true
+
+  create_table "user_comment_downvotes", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "comment_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "user_comment_downvotes", ["comment_id", "user_id"], :name => "index_user_comment_downvotes_on_comment_id_and_user_id", :unique => true
+  add_index "user_comment_downvotes", ["user_id", "comment_id"], :name => "index_user_comment_downvotes_on_user_id_and_comment_id", :unique => true
+
+  create_table "user_comment_upvotes", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "comment_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "user_comment_upvotes", ["comment_id", "user_id"], :name => "index_user_comment_upvotes_on_comment_id_and_user_id", :unique => true
+  add_index "user_comment_upvotes", ["user_id", "comment_id"], :name => "index_user_comment_upvotes_on_user_id_and_comment_id", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "username",        :null => false

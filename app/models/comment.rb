@@ -16,6 +16,12 @@ class Comment < ActiveRecord::Base
            :class_name => "Comment",
            :foreign_key => :parent_comment_id
 
+  has_many :user_comment_upvotes, :dependent => :destroy
+  has_many :upvoters, :through => :user_comment_upvotes, :source => :user
+
+  has_many :user_comment_downvotes, :dependent => :destroy
+  has_many :downvoters, :through => :user_comment_downvotes, :source => :user
+  
   def points
     self.upvote_count - self.downvote_count
   end

@@ -24,10 +24,24 @@ class User < ActiveRecord::Base
            :dependent => :destroy
 
   has_many :user_album_upvotes, :dependent => :destroy
-  has_many :upvoted_albums, :through => :user_album_upvotes, :source => :album
+  has_many :upvoted_albums,
+           :through => :user_album_upvotes, 
+           :source => :album
 
   has_many :user_album_downvotes, :dependent => :destroy
-  has_many :downvoted_albums, :through => :user_album_downvotes, :source => :album
+  has_many :downvoted_albums, 
+           :through => :user_album_downvotes, 
+           :source => :album
+
+  has_many :user_comment_upvotes, :dependent => :destroy
+  has_many :upvoted_comments,
+           :through => :user_comment_upvotes,
+           :source => :comments
+
+  has_many :user_comment_downvotes, :dependent => :destroy
+  has_many :downvoted_commments,
+           :through => :user_comment_downvotes, 
+           :source => :comments
 
   def self.check_credentials(identity, password)
     if identity.include?("@")

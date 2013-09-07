@@ -49,14 +49,14 @@ class AlbumsController < ApplicationController
       @album.downvote_count -= 1
       @album.save
       flash[:notices] ||= []
-      flash[:notices] << "downvoted retracted"
+      flash[:notices] << "downvote retracted"
     else
       @album.downvoter_ids += [current_user.id]
       @album.downvote_count += 1
       @album.save
       flash[:notices] ||= []
       flash[:notices] << "album downvoted"
-    end  
+    end
     redirect_to album_url(@album)
   end
 
