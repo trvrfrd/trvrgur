@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130907002359) do
+ActiveRecord::Schema.define(:version => 20130909171359) do
 
   create_table "albums", :force => true do |t|
     t.integer  "creator_id"
@@ -65,6 +65,16 @@ ActiveRecord::Schema.define(:version => 20130907002359) do
 
   add_index "user_album_downvotes", ["album_id", "user_id"], :name => "index_user_album_downvotes_on_album_id_and_user_id", :unique => true
   add_index "user_album_downvotes", ["user_id", "album_id"], :name => "index_user_album_downvotes_on_user_id_and_album_id", :unique => true
+
+  create_table "user_album_favorites", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "album_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "user_album_favorites", ["album_id", "user_id"], :name => "index_user_album_favorites_on_album_id_and_user_id", :unique => true
+  add_index "user_album_favorites", ["user_id", "album_id"], :name => "index_user_album_favorites_on_user_id_and_album_id", :unique => true
 
   create_table "user_album_upvotes", :force => true do |t|
     t.integer  "user_id"
