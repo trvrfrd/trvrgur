@@ -28,3 +28,4 @@ TODO:
   make sure database performance/number of queries is not awful  
   sort comments by upvotes?  
   helper methods for favorites, e.g. is_favorited?  
+  upload multiple photos in one input (shift/ctrl-click)  
