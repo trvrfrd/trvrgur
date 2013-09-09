@@ -1,0 +1,22 @@
+<script type="application/json" id="bootstrapped_user">
+  <%= current_user.to_json.html_safe %>
+</script>
+
+<script type="application/json" id="bootstrapped_albums">
+  <%= @albums.to_json.html_safe %>
+</script>
+
+<script type="application/json" id="bootstrapped_comments">
+  <%= @comments.to_json.html_safe %>
+</script>
+
+<script type="application/javascript">
+  var current_user = JSON.parse($("#bootstrapped_user").html());
+  var albums = JSON.parse($("#bootstrapped_albums").html());
+  var comments = JSON.parse($("#bootstrapped_comments").html());
+
+
+  $(function () {
+    Trvrgur.initialize($("#main"), current_user, albums, comments);
+  });
+</script>

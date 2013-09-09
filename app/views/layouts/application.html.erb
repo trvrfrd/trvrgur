@@ -18,8 +18,9 @@
   <% flash[:notices].try(:each) do |notice| %>
     <h3 style="color:green"><%= notice %></h3>
   <% end %>
-  
-  <%= yield %>
+  <div id="main">
+    <%= yield %>
+  </div>
 </div>
 
 </body>
