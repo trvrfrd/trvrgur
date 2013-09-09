@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
       login_user!(@user)
       flash[:notices] ||= []
       flash[:notices] << "welcome back, #{@user.username}!"
-      redirect_to albums_url
+      redirect_to root_url
     end
   end
 

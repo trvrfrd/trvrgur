@@ -8,7 +8,7 @@ class UsersController < ApplicationController
       login_user!(@user)
       flash[:notices] ||= []
       flash[:notices] << "welcome, #{@user.username}!"
-      redirect_to albums_url
+      redirect_to root_url
     else
       render :new
     end
