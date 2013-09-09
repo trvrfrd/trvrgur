@@ -8,26 +8,19 @@
 </head>
 <body>
 
-<% unless current_user.nil? %>
-  <ul>
-    <li>
-      logged in as: <a href="<%= user_url(current_user) %>">
-        <%= current_user.username %>
-      </a>
-    </li>
-    <li><%= button_to "sign out", session_url, :method => :delete %></li>
-  </ul>
-<% end %>
+<%= render "layouts/header" %>
 
-<% flash[:alerts].try(:each) do |alert| %>
-  <h3 style="color:red"><%= alert %></h3>
-<% end %>
+<div class="container">
+  <% flash[:alerts].try(:each) do |alert| %>
+    <h3 style="color:red"><%= alert %></h3>
+  <% end %>
 
-<% flash[:notices].try(:each) do |notice| %>
-  <h3 style="color:green"><%= notice %></h3>
-<% end %>
-
-<%= yield %>
+  <% flash[:notices].try(:each) do |notice| %>
+    <h3 style="color:green"><%= notice %></h3>
+  <% end %>
+  
+  <%= yield %>
+</div>
 
 </body>
 </html>

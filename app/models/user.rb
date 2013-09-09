@@ -59,10 +59,12 @@ class User < ActiveRecord::Base
   end
 
   def album_reputation
+    return 0 if self.albums.empty?
     self.albums.all.map(&:points).inject(&:+)
   end
 
   def comment_reputation
+    return 0 if self.comments.empty?
     self.comments.all.map(&:points).inject(&:+)
   end
 

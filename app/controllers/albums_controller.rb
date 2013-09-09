@@ -39,7 +39,7 @@ class AlbumsController < ApplicationController
     @album.destroy
     flash[:notices] ||= []
     flash[:notices] << "album deleted successfully"
-    redirect_to :back
+    redirect_to albums_url
   end
 
   def downvote
@@ -70,10 +70,10 @@ class AlbumsController < ApplicationController
     flash[:notices] ||= []
     if @album.favoriting_user_ids.include?(current_user.id)
       @album.favoriting_user_ids -= [current_user.id]
-      flash[:notices] << "album added to favorites"     
+      flash[:notices] << "album removed from favorites"     
     else
       @album.favoriting_user_ids += [current_user.id]
-      flash[:notices] << "album removed from favorites"         
+      flash[:notices] << "album added to favorites"         
     end
     @album.save 
     redirect_to album_url(@album)    
