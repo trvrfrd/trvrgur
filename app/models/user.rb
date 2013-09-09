@@ -43,6 +43,9 @@ class User < ActiveRecord::Base
            :through => :user_comment_downvotes, 
            :source => :comments
 
+  has_many :user_album_favorites, :dependent => :destroy
+  has_many :favorite_albums, :through => :user_album_favorites, :source => :user
+
   def self.check_credentials(identity, password)
     if identity.include?("@")
       user = User.find_by_email(identity)

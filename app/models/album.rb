@@ -15,6 +15,9 @@ class Album < ActiveRecord::Base
   has_many :user_album_downvotes, :dependent => :destroy
   has_many :downvoters, :through => :user_album_downvotes, :source => :user
 
+  has_many :user_album_favorites, :dependent => :destroy
+  has_many :favoriting_users, :through => :user_album_favorites, :source => :user
+
 
   def comments_by_parent_id
     comments = self.comments.all

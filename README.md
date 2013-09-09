@@ -27,4 +27,4 @@ TODO:
   allow user only one vote (but they can retract it) (currently one of each)  
   make sure database performance/number of queries is not awful  
   sort comments by upvotes?  
-  favorite albums  
+  helper methods for favorites, e.g. is_favorited?  

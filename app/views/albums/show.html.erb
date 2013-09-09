@@ -18,6 +18,8 @@
 points: <%= @album.points %>
 <a href="<%= upvote_album_url(@album) %>">|⇧|</a>
 <a href="<%= downvote_album_url(@album) %>">|⇩|</a>
+<a href="<%= favorite_album_url(@album) %>">|favorite|</a>
+
 
 <hr>
 <% if current_user && @album.creator_id == current_user.id %>

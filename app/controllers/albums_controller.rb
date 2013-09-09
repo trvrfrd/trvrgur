@@ -65,6 +65,20 @@ class AlbumsController < ApplicationController
     render :edit    
   end
 
+  def favorite
+    @album = Album.find(params[:id])
+    flash[:notices] ||= []
+    if @album.favoriting_user_ids.include?(current_user.id)
+      @album.favoriting_user_ids -= [current_user.id]
+      flash[:notices] << "album added to favorites"     
+    else
+      @album.favoriting_user_ids += [current_user.id]
+      flash[:notices] << "album removed from favorites"         
+    end
+    @album.save 
+    redirect_to album_url(@album)    
+  end
+
   def index
     @albums = Album.all
     render :index
