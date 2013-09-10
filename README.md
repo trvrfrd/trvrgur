@@ -13,7 +13,7 @@ general:
     - email confirmation?  
     - password change/recovery functionality?  
   - refactor to views use form helpers?  
-    - actually just eliminate most erb views probably (mostly bbone views)  
+    - actually just eliminate most erb views probably (use mostly bbone views)  
     - also just refactor to not be bad code  
   - good validations for username/email (regex :( )  
   - image size/type validations  
@@ -28,15 +28,17 @@ general:
   - make sure database performance/number of queries is not awful  
   - deep linking???? persist state of BB app if visiting Rails pages?  
   - implement swapping router  
-  - delete unused routers/views/templates  
+  - delete unused bbone routers/views/templates  
   
 top nav bar thing:  
   - create album / display random album  
 
 gallery page:  
   - upvote arrow/downvote arrow on hover?  
-  - sort by top rated/newest    
-
+  - sort by top rated/newest  
+  - pagination w/ kaminari  
+  - implement top comments panel  
+  
 album show page:  
   - handle comments/favoriting  
     - how to send/nest favorites? helper method/boolean?  

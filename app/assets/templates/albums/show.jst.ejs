@@ -1,0 +1,26 @@
+<div class="col-lg-6">
+  <h1><%= album.escape('title') %></h1>
+  <p><%= album.escape('description') %></p>
+  created by: 
+    <a href="<%= '#/users/' + album.get('creator_id') %>">
+      <%= album.get('creator').username %>
+    </a> | 
+  points: <%= album.escape('points') %>
+  <!-- upvote/downvote/favorite block -->
+  <hr>
+
+  <% album.get('images').each(function (image) { %>
+    <h3><%= image.escape('title') %></h3>
+    
+    <!-- link to show page/large modal view thing here  -->
+    <div class="center">
+      <img class="img-thumbnail" src="<%= image.escape('url_medium') %>">
+    </div>
+    <p><%= image.escape('description') %></p>
+  <% }); %>
+
+
+  <hr>
+<!-- edit album link goes here -->
+<!-- comments go here WOW -->
+</div>

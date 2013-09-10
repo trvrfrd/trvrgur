@@ -6,6 +6,7 @@ Trvrgur::Application.routes.draw do
     get "upvote", :on => :member
     get "downvote", :on => :member
     get "favorite", :on => :member
+    resources :comments, :only => [:index]
   end
   resources :comments, :except => [:index, :new] do
     get "upvote", :on => :member
