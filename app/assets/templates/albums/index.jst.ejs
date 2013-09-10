@@ -1,39 +1,26 @@
 <div class="row">
-  <div class="span9"><h1 class="center">top albums</h1></div>
-  <div class="span3"><h1 class="center">top comments</h1></div>
+  <div class="col-lg-9 center"><h1>top albums</h1></div> 
 </div>
 
-<div class="row">
-  <div class="span9 panel">
-    <% albums.each(function (album) { %>
-      <a href="<%= '#/albums/' + album.id %>"
-        class="album-link"
-        data-title="<%= album.escape('title') || 'Untitled' %>"
-        data-content="creator: <%= album.get('creator').username %> 
-          | points: <%= album.escape('points') %>">
-        <img src="<%= album.get('images').first().escape('url_small') %>">
-      </a>
-    <% }); %>
-  </div>
-  <div class="span3 panel">
-    <% Trvrgur.top_comments.each(function (comment) { %>
-      <% var albumId = parseInt(comment.get("album_id")) %>
-      <% var thumbUrl = Trvrgur.albums
-                                .get(albumId)
-                                .get('images')
-                                .first()
-                                .escape('url_small') %>
-      <div class="pull-left">
-        <a href="<%= '#/albums/' + albumId %>" class="image-link">
-          <img src="<%= thumbUrl %>">
-        </a>
-      </div>
-      <div>
-        <p>..<%= comment.escape('body') %></p>
-      </div>
-      <div class="clearfix"></div>
-    <% }); %>
-  </div>
+<div class="col-lg-9">
+<% albums.each(function (album, index) { %>
+  <% if (index % 6 == 0) { %>
+  <% } %>
+    <a 
+      href="<%= '#/albums/' + album.id %>"
+      class="album-link"
+      data-title="<%= album.escape('title') || 'Untitled' %>"
+      data-content="creator: <%= album.get('creator').username %> 
+        | points: <%= album.escape('points') %>">
+      <img 
+        class="img-thumbnail" 
+        src="<%= album.get('images').first().escape('url_small') %>">
+    </a>  
+  <% if (index > 0 && index % 6 == 0) { %>
+    </div>
+    <div class="col-lg-9">    
+  <% } %>
+<% }); %>
 </div>
 
 <script type="text/javascript">
