@@ -1,18 +1,16 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
-  <div class="navbar-inner">
-    <div class="container">
-      <%= link_to "trvrgur", root_url, :id => "logo" %>
-      <nav>
-        <ul class="nav pull-right">
-          <% if current_user.nil? %>
-            <li><%= link_to "sign in", new_session_url %></li>
-            <li><%= link_to "sign up", new_user_url %></li>
-          <% else %>
-            <li><%= link_to current_user.username, user_url(current_user) %></li>
-            <li><%= link_to "sign out", session_url, :method => :delete %></li>
-          <% end %>
-        </ul>
-      </nav>
-    </div>
+<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+  <div class="navbar-header">
+    <%= link_to "trvrgur", root_url, :id => "logo", :class => "navbar-brand" %>
   </div>
-</header>
+  <div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <% if current_user.nil? %>
+        <li><%= link_to "sign in", new_session_url %></li>
+        <li><%= link_to "sign up", new_user_url %></li>
+      <% else %>
+        <li><%= link_to current_user.username, user_url(current_user) %></li>
+        <li><%= link_to "sign out", session_url, :method => :delete %></li>
+      <% end %>
+    </ul>
+  </div>
+</nav>
