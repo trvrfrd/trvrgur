@@ -11,7 +11,6 @@ general:
   - devise/omni-auth?  
     - email confirmation?  
     - password change/recovery functionality?  
-  
   - refactor to views use form helpers?  
     - actually just eliminate most erb views probably (mostly bbone views)  
     - also just refactor to not be bad code  
@@ -29,7 +28,7 @@ general:
   - deep linking???? persist state of BB app if visiting Rails pages?  
   
 top nav bar thing:  
-  - create album / display random album
+  - create album / display random album  
 
 gallery page:  
   - show album title/points(/upvote arrow/downvote arrow/views(?)) on hover  
