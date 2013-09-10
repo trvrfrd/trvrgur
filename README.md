@@ -34,9 +34,8 @@ top nav bar thing:
   - create album / display random album  
 
 gallery page:  
-  - show album title/points(/upvote arrow/downvote arrow/views(?)) on hover  
-  - sort by top rated/newest  
-  - top comments sidebar thing  
+  - upvote arrow/downvote arrow on hover?  
+  - sort by top rated/newest    
 
 album show page:  
   - handle comments/favoriting  

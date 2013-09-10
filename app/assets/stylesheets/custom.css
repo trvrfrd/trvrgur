@@ -20,11 +20,6 @@ body {
   text-align: center;
 }
 
-.album-link {
-  display: inline-block;
-}
-
-
 /* header */
 
 #logo {
@@ -41,4 +36,15 @@ body {
 #logo:hover {
   color: #fff;
   text-decoration: none;
+}
+
+/* AlbumsIndex */
+
+.album-link {
+  display: inline-block;
+}
+
+.panel {
+  word-break: break-all;
+  word-wrap: break-word;
 }

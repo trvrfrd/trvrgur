@@ -21,6 +21,10 @@ class Comment < ActiveRecord::Base
 
   has_many :user_comment_downvotes, :dependent => :destroy
   has_many :downvoters, :through => :user_comment_downvotes, :source => :user
+
+  def self.top_comments
+    self.all.sort { |a, b| b.points <=> a.points }
+  end
   
   def points
     self.upvote_count - self.downvote_count

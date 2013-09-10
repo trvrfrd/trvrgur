@@ -3,15 +3,15 @@
 </script>
 
 <script type="application/json" id="bootstrapped_comments">
-  <%= @comments.to_json.html_safe %>
+  <%= @top_comments.to_json.html_safe %>
 </script>
 
 <script type="application/javascript">
   var current_user = JSON.parse($("#bootstrapped_user").html());
-  var comments = JSON.parse($("#bootstrapped_comments").html());
+  var top_comments = JSON.parse($("#bootstrapped_comments").html());
 
 
   $(function () {
-    Trvrgur.initialize($("#content"), current_user, comments);
+    Trvrgur.initialize($("#content"), current_user, top_comments);
   });
 </script>

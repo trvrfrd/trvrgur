@@ -3,10 +3,10 @@ window.Trvrgur = {
   Collections: {},
   Views: {},
   Routers: {},
-  initialize: function($el, user, comments) {
+  initialize: function($el, user, top_comments) {
     Trvrgur.$el = $el;
     Trvrgur.current_user = user;
-    Trvrgur.comments = new Trvrgur.Collections.Comments(comments);
+    Trvrgur.top_comments = new Trvrgur.Collections.Comments(top_comments);
     Trvrgur.albums = new Trvrgur.Collections.Albums();
     Trvrgur.albums.fetch({
       success: function (response) {

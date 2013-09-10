@@ -16,8 +16,22 @@
     <% }); %>
   </div>
   <div class="span3 panel">
-    <% Trvrgur.comments.each(function (comment) { %>
-      <p><%= comment.escape('body') %></p>
+    <% Trvrgur.top_comments.each(function (comment) { %>
+      <% var albumId = parseInt(comment.get("album_id")) %>
+      <% var thumbUrl = Trvrgur.albums
+                                .get(albumId)
+                                .get('images')
+                                .first()
+                                .escape('url_small') %>
+      <div class="pull-left">
+        <a href="<%= '#/albums/' + albumId %>" class="image-link">
+          <img src="<%= thumbUrl %>">
+        </a>
+      </div>
+      <div>
+        <p>..<%= comment.escape('body') %></p>
+      </div>
+      <div class="clearfix"></div>
     <% }); %>
   </div>
 </div>
