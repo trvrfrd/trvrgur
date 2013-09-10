@@ -7,6 +7,7 @@ aided by a multitude of libraries most useful, including:
 
 TODO:  
 general:  
+  - fix formatting on this turd-ass readme file  
   - set up NewRelic  
   - devise/omni-auth?  
     - email confirmation?  
