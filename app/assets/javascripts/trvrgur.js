@@ -3,11 +3,17 @@ window.Trvrgur = {
   Collections: {},
   Views: {},
   Routers: {},
-  initialize: function($el, user, albums, comments) {
+  initialize: function($el, user, comments) {
     Trvrgur.$el = $el;
     Trvrgur.current_user = user;
-    Trvrgur.albums = new Trvrgur.Collections.Albums(albums);
     Trvrgur.comments = new Trvrgur.Collections.Comments(comments);
-    console.log(Trvrgur);
+    Trvrgur.albums = new Trvrgur.Collections.Albums();
+    Trvrgur.albums.fetch({
+      success: function (response) {
+        console.log("successful fetch!");
+        console.log(Trvrgur.albums);
+        // start router and stuff
+      }
+    });
   }
 };

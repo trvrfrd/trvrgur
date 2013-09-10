@@ -61,7 +61,7 @@ class AlbumsController < ApplicationController
   end
 
   def edit
-    @album = Album.find(params[:id])
+    @album = Album.includes(:images, :creator).find(params[:id])
     render :edit    
   end
 
@@ -80,7 +80,7 @@ class AlbumsController < ApplicationController
   end
 
   def index
-    @albums = Album.all
+    @albums = Album.includes(:images, :creator).all
     render :index
   end
 
@@ -91,7 +91,7 @@ class AlbumsController < ApplicationController
   end
 
   def show
-    @album = Album.includes(:comments => :author).find(params[:id])
+    @album = Album.find(params[:id])
     render :show
   end
 
