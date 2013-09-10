@@ -10,9 +10,8 @@ window.Trvrgur = {
     Trvrgur.albums = new Trvrgur.Collections.Albums();
     Trvrgur.albums.fetch({
       success: function (response) {
-        console.log("successful fetch!");
-        console.log(Trvrgur.albums);
-        // start router and stuff
+        Trvrgur.router = new Trvrgur.Routers.Albums($("#content"));
+        Backbone.history.start();
       }
     });
   }

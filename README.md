@@ -7,7 +7,7 @@ aided by a multitude of libraries most useful, including:
 
 TODO:  
 general:  
-  - fix formatting on this turd-ass readme file  
+  - make album title mandatory?  
   - set up NewRelic  
   - devise/omni-auth?  
     - email confirmation?  
@@ -27,6 +27,8 @@ general:
   - allow user only one vote (but they can retract it) (currently one of each)  
   - make sure database performance/number of queries is not awful  
   - deep linking???? persist state of BB app if visiting Rails pages?  
+  - implement swapping router  
+  - delete unused routers/views/templates  
   
 top nav bar thing:  
   - create album / display random album  

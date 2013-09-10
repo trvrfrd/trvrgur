@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="span9"><h1 class="center">top albums</h1></div>
+  <div class="span3"><h1 class="center">top comments</h1></div>
+</div>
+
+<div class="row">
+  <div class="span9 panel">
+    <% albums.each(function (album) { %>
+      <a href="<%= '#/albums/' + album.id %>"
+        class="album-link"
+        data-title="<%= album.escape('title') || 'Untitled' %>"
+        data-content="creator: <%= album.get('creator').username %> 
+          | points: <%= album.escape('points') %>">
+        <img src="<%= album.get('images').first().escape('url_small') %>">
+      </a>
+    <% }); %>
+  </div>
+  <div class="span3 panel">
+    <% Trvrgur.comments.each(function (comment) { %>
+      <p><%= comment.escape('body') %></p>
+    <% }); %>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(function() {
+    $(".album-link").popover({
+      trigger: "hover",
+      placement: "bottom",
+      html: "true"
+    });
+  });
+</script>
