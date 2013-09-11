@@ -1,15 +1,14 @@
 <div class="col-lg-6">
   <h1><%= album.escape('title') %></h1>
-  <p><%= album.escape('description') %></p>
-  created by: 
+  <h4><%= album.escape('description') %></h4>
+  <p>created by: 
     <a href="<%= '#/users/' + album.get('creator_id') %>">
       <%= album.get('creator').username %>
     </a> | 
-  points: <%= album.escape('points') %>
-  <a href="#">|⇧|</a>
-  <a href="#">|⇩|</a>
-  <a href="#">|favorite|</a>
-  <!-- upvote/downvote/favorite block -->
+  points: <%= album.escape('points') %></p>
+  <button type="button" class="btn btn-default btn-sm">upvote</button>
+  <button type="button" class="btn btn-default btn-sm">downvote</button>
+  <button type="button" class="btn btn-default btn-sm">favorite</button>
   <hr>
 
   <% album.get('images').each(function (image) { %>
