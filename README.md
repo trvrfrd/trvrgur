@@ -37,7 +37,6 @@ gallery page:
   - upvote arrow/downvote arrow on hover?  
   - sort by top rated/newest  
   - pagination w/ kaminari  
-  - implement top comments panel  
   
 album show page:  
   - handle comments/favoriting  

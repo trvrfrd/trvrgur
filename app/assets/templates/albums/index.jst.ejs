@@ -8,16 +8,16 @@
                                  .get('images')
                                    .first()
                                      .escape('url_small') %>
-      <row>
-        <div class="col-md-1">
+      <div class="row">
+        <div class="col-md-3">
           <a href="<%= '#/albums/' + albumId %>" class="image-link">
             <img class="img-thumbnail" src="<%= thumbUrl %>">
           </a>
         </div>
-        <div class="col-md-2">
-          <%= comment.escape('body') %>
+        <div class="col-md-9">
+          <p><%= comment.escape('body') %></p>
         </div>
-      </row>
+      </div>
   <% }); %>
 </div>
 

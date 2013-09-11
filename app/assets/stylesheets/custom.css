@@ -43,8 +43,3 @@ body {
 .album-link {
   display: inline-block;
 }
-
-.panel {
-  word-break: break-all;
-  word-wrap: break-word;
-}
