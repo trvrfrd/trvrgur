@@ -43,21 +43,16 @@ class AlbumsController < ApplicationController
   end
 
   def downvote
-    @album = Album.find(params[:id])
+    @album = Album.includes(:downvoters).find(params[:id])
     if @album.downvoter_ids.include?(current_user.id)
       @album.downvoter_ids -= [current_user.id]
       @album.downvote_count -= 1
-      @album.save
-      flash[:notices] ||= []
-      flash[:notices] << "downvote retracted"
     else
       @album.downvoter_ids += [current_user.id]
       @album.downvote_count += 1
-      @album.save
-      flash[:notices] ||= []
-      flash[:notices] << "album downvoted"
     end
-    redirect_to album_url(@album)
+    @album.save
+    render :json => @album, :status => :ok
   end
 
   def edit
@@ -66,21 +61,22 @@ class AlbumsController < ApplicationController
   end
 
   def favorite
-    @album = Album.find(params[:id])
-    flash[:notices] ||= []
+    @album = Album.includes(:favoriting_users).find(params[:id])
     if @album.favoriting_user_ids.include?(current_user.id)
-      @album.favoriting_user_ids -= [current_user.id]
-      flash[:notices] << "album removed from favorites"     
+      @album.favoriting_user_ids -= [current_user.id]    
     else
-      @album.favoriting_user_ids += [current_user.id]
-      flash[:notices] << "album added to favorites"         
+      @album.favoriting_user_ids += [current_user.id]   
     end
     @album.save 
-    redirect_to album_url(@album)    
+    render :json => @album, :status => :ok
   end
 
   def index
-    @albums = Album.includes(:images, :creator).all
+    @albums = Album.includes(:images, 
+                              :creator, 
+                              :upvoters, 
+                              :downvoters, 
+                              :favoriting_users).all
     render :index
   end
 
@@ -130,20 +126,15 @@ class AlbumsController < ApplicationController
   end
 
   def upvote
-    @album = Album.find(params[:id])
+    @album = Album.includes(:upvoters).find(params[:id])
     if @album.upvoter_ids.include?(current_user.id)
       @album.upvoter_ids -= [current_user.id]
       @album.upvote_count -= 1
-      @album.save
-      flash[:notices] ||= []
-      flash[:notices] << "upvote retracted"
     else
       @album.upvoter_ids += [current_user.id]
       @album.upvote_count += 1
-      @album.save
-      flash[:notices] ||= []
-      flash[:notices] << "album upvoted"
-    end  
-    redirect_to album_url(@album)
+    end
+    @album.save
+    render :json => @album, :status => :ok
   end
 end

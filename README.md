@@ -40,8 +40,7 @@ gallery page:
   
 album show page:  
   - handle comments/favoriting  
-    - how to send/nest favorites? helper method/boolean?  
-    - async comment fetch? nest comment route under album?  
+    - async comment fetch?  
     - comments_by_parent_id - client-side?  
     - sort comments by upvotes/newest?  
     - collapsible threads  

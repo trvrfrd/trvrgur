@@ -30,7 +30,19 @@ class Album < ActiveRecord::Base
     result
   end
 
+  def favorited_by?(user)
+    user && self.favoriting_user_ids.include?(user.id)
+  end
+
+  def downvoted_by?(user)
+    user && self.downvoter_ids.include?(user.id)
+  end
+
   def points
     self.upvote_count - self.downvote_count
+  end
+
+  def upvoted_by?(user)
+    user && self.upvoter_ids.include?(user.id)
   end
 end
