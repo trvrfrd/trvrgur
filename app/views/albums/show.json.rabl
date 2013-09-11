@@ -17,7 +17,11 @@ child :images do
 end
 
 child :comments do
+<<<<<<< HEAD
   attributes :id, :album_id, :parent_comment_id, :body, :created_at
+=======
+  attributes :id, :album_id, :parent_comment_id, :body, :created_at, :points
+>>>>>>> albumshow-bb
   child :author => :author do 
     attributes :id, :username 
   end
