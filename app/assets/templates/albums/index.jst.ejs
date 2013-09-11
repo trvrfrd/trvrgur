@@ -1,11 +1,29 @@
-<div class="row">
-  <div class="col-lg-9 center"><h1>top albums</h1></div> 
+<div class="col-md-3 col-md-push-9">
+  <header class="center"><h1>top comments</h1></header>
+
+  <% Trvrgur.top_comments.each(function (comment) { %>
+    <% var albumId = parseInt(comment.get("album_id")) %>
+    <% var thumbUrl = Trvrgur.albums
+                               .get(albumId)
+                                 .get('images')
+                                   .first()
+                                     .escape('url_small') %>
+      <row>
+        <div class="col-md-1">
+          <a href="<%= '#/albums/' + albumId %>" class="image-link">
+            <img class="img-thumbnail" src="<%= thumbUrl %>">
+          </a>
+        </div>
+        <div class="col-md-2">
+          <%= comment.escape('body') %>
+        </div>
+      </row>
+  <% }); %>
 </div>
 
-<div class="col-lg-9">
-<% albums.each(function (album, index) { %>
-  <% if (index % 6 == 0) { %>
-  <% } %>
+<div class="col-md-9 col-md-pull-3">
+  <header class="center"><h1>top albums</h1></header>
+  <% albums.each(function (album, index) { %>
     <a 
       href="<%= '#/albums/' + album.id %>"
       class="album-link"
@@ -15,13 +33,10 @@
       <img 
         class="img-thumbnail" 
         src="<%= album.get('images').first().escape('url_small') %>">
-    </a>  
-  <% if (index > 0 && index % 6 == 0) { %>
-    </div>
-    <div class="col-lg-9">    
-  <% } %>
-<% }); %>
+    </a>
+  <% }); %>
 </div>
+
 
 <script type="text/javascript">
   $(function() {
