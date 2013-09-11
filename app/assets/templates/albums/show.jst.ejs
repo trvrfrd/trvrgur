@@ -38,5 +38,10 @@
   <hr>
 <!-- edit album link goes here -->
 
-<!-- Album.comments = new comments collection - set up index.json.rabl -->
+  <h2>comments:</h2>
+<% console.log(album.getCommentsByParentId()[null]) %>
+  <%= JST['albums/_comments']({
+      album: album, 
+      comments: album.getCommentsByParentId()[null]
+    }) %>
 </div>
