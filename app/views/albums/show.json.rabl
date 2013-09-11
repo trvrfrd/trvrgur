@@ -17,7 +17,7 @@ child :images do
 end
 
 child :comments do
-  attributes :id, :album_id, :parent_comment_id, :body
+  attributes :id, :album_id, :parent_comment_id, :body, :created_at
   child :author => :author do 
     attributes :id, :username 
   end

@@ -1,0 +1,18 @@
+<% comments && comments.forEach(function (comment) { %>
+  <ul>
+    <li>
+      <% var author = comment.get("author") %>
+      posted by 
+      <a href="<%= '#/users/' + author.id %>">
+        <%= author.username %>
+      </a> 
+      at <%= comment.escape('created_at') %>
+      <p><%= comment.escape('body') %></p>
+    </li>
+
+    <%= JST['albums/_comments']({
+        album: album,
+        comments: album.getCommentsByParentId()[comment.get("id")]
+      }) %>
+  </ul>
+<% }); %>

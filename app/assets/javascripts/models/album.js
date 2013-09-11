@@ -5,8 +5,13 @@ Trvrgur.Models.Album = Backbone.Model.extend({
     return data;
   },
 
-  commentsByParentId: function () {
+  getCommentsByParentId: function () {
     var result = {};
+    this.get('comments').each(function (comment) {
+      var id = comment.get("parent_comment_id");
+      result[id] || (result[id] = []);
+      result[id].push(comment);
+    });
     return result;
   }
 });

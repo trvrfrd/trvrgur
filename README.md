@@ -12,7 +12,7 @@ general:
   - devise/omni-auth?  
     - email confirmation?  
     - password change/recovery functionality?  
-  - refactor to views use form helpers?  
+  - refactor views to use form helpers?  
     - actually just eliminate most erb views probably (use mostly bbone views)  
     - also just refactor to not be bad code  
   - good validations for username/email (regex :( )  
@@ -39,12 +39,13 @@ gallery page:
   - pagination w/ kaminari  
   
 album show page:  
-  - handle comments/favoriting  
-    - async comment fetch?  
-    - comments_by_parent_id - client-side?  
+  - handle comments  
+    - upvote/downvote/reply (modal form?? async refresh?????)  
     - sort comments by upvotes/newest?  
     - collapsible threads  
-  - click image to show fullscreen thing whatever  
+    - delete button for own comments  
+  - click image to show fullscreen thing whatever 
+  - edit album link  
   
 album create/edit pages:  
   - adding/removing images  
