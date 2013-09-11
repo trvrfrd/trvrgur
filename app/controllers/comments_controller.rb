@@ -45,6 +45,12 @@ class CommentsController < ApplicationController
     
   end
 
+  def index
+    @comments = Comment.includes(:author)
+                        .where("album_id = ?", params[:album_id])
+    render :index
+  end
+
   def show
     @comment = Comment.find(params[:id])
     render :show

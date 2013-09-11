@@ -2,7 +2,7 @@
 <% var downBtnClass = (album.get('downvoted')) ? 'btn-success' : 'btn-default' %>
 <% var favBtnClass = (album.get('favorited')) ? 'btn-success' : 'btn-default' %>
 
-<div class="col-lg-6">
+<div class="col-lg-8">
 
   <h1><%= album.escape('title') %></h1>
   <h4><%= album.escape('description') %></h4>
@@ -37,5 +37,6 @@
 
   <hr>
 <!-- edit album link goes here -->
-<!-- comments go here WOW -->
+
+<!-- Album.comments = new comments collection - set up index.json.rabl -->
 </div>

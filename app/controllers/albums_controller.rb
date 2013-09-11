@@ -73,10 +73,11 @@ class AlbumsController < ApplicationController
 
   def index
     @albums = Album.includes(:images, 
-                              :creator, 
+                              :creator,
                               :upvoters, 
                               :downvoters, 
-                              :favoriting_users).all
+                              :favoriting_users,
+                              :comments => :author).all
     render :index
   end
 

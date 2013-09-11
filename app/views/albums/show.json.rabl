@@ -15,3 +15,10 @@ child :images do
   node(:url_medium) { |image| image.file.url(:medium) }
   node(:url_small) { |image| image.file.url(:small) }
 end
+
+child :comments do
+  attributes :id, :album_id, :parent_comment_id, :body
+  child :author => :author do 
+    attributes :id, :username 
+  end
+end
