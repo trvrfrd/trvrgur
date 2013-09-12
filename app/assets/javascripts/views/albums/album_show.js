@@ -2,6 +2,7 @@ Trvrgur.Views.AlbumShow = Backbone.View.extend({
 
   initialize: function() {
     var that = this;
+    that.listenTo(that.model, "change", that.render.bind(that));
   },
 
   template: JST['albums/show'],
@@ -22,11 +23,17 @@ Trvrgur.Views.AlbumShow = Backbone.View.extend({
   handleClick: function (event) {
     var that = this;
     var $target = $(event.currentTarget);
+    var attr = $target.text() + 'd';
     $.ajax({
       url: $target.attr("data-url"),
       type: ($target.attr("data-method") || "GET"),
-      success: function () {
-        that.model.fetch({ success: that.render.bind(that) });
+      success: function (response) {
+        if (response.images) {
+          that.model.set(that.model.parse(response));
+        } else {
+          that.model.get("comments").add(response, {merge: true});
+          that.render.bind(that)();
+        }
       }
     });
   },

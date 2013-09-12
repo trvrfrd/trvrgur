@@ -43,7 +43,7 @@ class AlbumsController < ApplicationController
   end
 
   def downvote
-    @album = Album.includes(:downvoters).find(params[:id])
+    @album = Album.fetch.find(params[:id])
     if @album.downvoter_ids.include?(current_user.id)
       @album.downvoter_ids -= [current_user.id]
       @album.downvote_count -= 1
@@ -61,24 +61,18 @@ class AlbumsController < ApplicationController
   end
 
   def favorite
-    @album = Album.includes(:favoriting_users).find(params[:id])
+    @album = Album.fetch.find(params[:id])
     if @album.favoriting_user_ids.include?(current_user.id)
       @album.favoriting_user_ids -= [current_user.id]    
     else
       @album.favoriting_user_ids += [current_user.id]   
     end
     @album.save 
-    render :json => @album, :status => :ok
+    render :show
   end
 
   def index
-    @albums = Album.includes(:images, 
-                              :creator,
-                              :upvoters, 
-                              :downvoters, 
-                              :favoriting_users,
-                              :comments => [:author, :downvoters, :upvoters]
-                              ).all
+    @albums = Album.fetch.all
     render :index
   end
 
@@ -89,13 +83,7 @@ class AlbumsController < ApplicationController
   end
 
   def show
-    @album = Album.includes(:images, 
-                            :creator,
-                            :upvoters, 
-                            :downvoters, 
-                            :favoriting_users,
-                            :comments => [:author, :downvoters, :upvoters]
-                            ).find(params[:id])
+    @album = Album.fetch.find(params[:id])
     render :show
   end
 
@@ -134,7 +122,7 @@ class AlbumsController < ApplicationController
   end
 
   def upvote
-    @album = Album.includes(:upvoters).find(params[:id])
+    @album = Album.fetch.find(params[:id])
     if @album.upvoter_ids.include?(current_user.id)
       @album.upvoter_ids -= [current_user.id]
       @album.upvote_count -= 1

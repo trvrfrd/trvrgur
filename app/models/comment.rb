@@ -22,8 +22,12 @@ class Comment < ActiveRecord::Base
   has_many :user_comment_downvotes, :dependent => :destroy
   has_many :downvoters, :through => :user_comment_downvotes, :source => :user
 
+  def self.fetch
+    self.includes(:author, :upvoters, :downvoters)
+  end
+
   def self.top_comments
-    self.all.sort { |a, b| b.points <=> a.points }
+    self.fetch.sort { |a, b| b.points <=> a.points }
   end
 
   def downvoted_by?(user)

@@ -26,6 +26,7 @@ general:
   - prevent duplicate replies when clicking really fast?  
   - allow user only one vote (but they can retract it) (currently one of each)  
   - make sure database performance/number of queries is not awful  
+    - esp. during upvoting/downvoting of comments/albums  
   - deep linking???? persist state of BB app if visiting Rails pages?  
   - implement swapping router  
   - delete unused bbone routers/views/templates  

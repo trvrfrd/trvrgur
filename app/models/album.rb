@@ -18,6 +18,14 @@ class Album < ActiveRecord::Base
   has_many :user_album_favorites, :dependent => :destroy
   has_many :favoriting_users, :through => :user_album_favorites, :source => :user
 
+  def self.fetch
+    self.includes(:images, 
+                  :creator,
+                  :upvoters, 
+                  :downvoters, 
+                  :favoriting_users,
+                  :comments => [:author, :downvoters, :upvoters])
+  end
 
   def comments_by_parent_id
     comments = self.comments.all

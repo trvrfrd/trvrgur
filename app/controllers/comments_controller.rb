@@ -22,7 +22,7 @@ class CommentsController < ApplicationController
   end
 
   def downvote
-    @comment = Comment.find(params[:id])
+    @comment = Comment.fetch.find(params[:id])
     if @comment.downvoter_ids.include?(current_user.id)
       @comment.downvoter_ids -= [current_user.id]
       @comment.downvote_count -= 1
@@ -31,7 +31,7 @@ class CommentsController < ApplicationController
       @comment.downvote_count += 1
     end
     @comment.save
-    redirect_to :back
+    render :show
   end
 
   def edit
@@ -39,13 +39,12 @@ class CommentsController < ApplicationController
   end
 
   def index
-    @comments = Comment.includes(:author)
-                        .where("album_id = ?", params[:album_id])
+    @comments = Comment.fetch.where("album_id = ?", params[:album_id])
     render :index
   end
 
   def show
-    @comment = Comment.find(params[:id])
+    @comment = Comment.fetch.find(params[:id])
     render :show
   end
 
@@ -54,7 +53,7 @@ class CommentsController < ApplicationController
   end
 
   def upvote
-    @comment = Comment.find(params[:id])
+    @comment = Comment.fetch.find(params[:id])
     if @comment.upvoter_ids.include?(current_user.id)
       @comment.upvoter_ids -= [current_user.id]
       @comment.upvote_count -= 1
@@ -63,6 +62,6 @@ class CommentsController < ApplicationController
       @comment.upvote_count += 1
     end  
     @comment.save
-    redirect_to :back
+    render :show
   end
 end
