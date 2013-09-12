@@ -25,8 +25,16 @@ class Comment < ActiveRecord::Base
   def self.top_comments
     self.all.sort { |a, b| b.points <=> a.points }
   end
+
+  def downvoted_by?(user)
+    user && self.downvoter_ids.include?(user.id)
+  end
   
   def points
     self.upvote_count - self.downvote_count
+  end
+
+  def upvoted_by?(user)
+    user && self.upvoter_ids.include?(user.id)
   end
 end

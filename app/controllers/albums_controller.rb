@@ -77,7 +77,7 @@ class AlbumsController < ApplicationController
                               :upvoters, 
                               :downvoters, 
                               :favoriting_users,
-                              :comments => :author).all
+                              comments: [:author, :downvoters, :upvoters]).all
     render :index
   end
 
