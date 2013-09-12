@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(params[:comment])
     @comment.author_id = current_user.id
     if @comment.save
-      render :json => @comment, :status => :ok
+      render :show
     else
       flash[:alerts] ||= []
       flash[:alerts] += @comment.errors.full_messages
@@ -26,16 +26,11 @@ class CommentsController < ApplicationController
     if @comment.downvoter_ids.include?(current_user.id)
       @comment.downvoter_ids -= [current_user.id]
       @comment.downvote_count -= 1
-      @comment.save
-      flash[:notices] ||= []
-      flash[:notices] << "downvote retracted"
     else
       @comment.downvoter_ids += [current_user.id]
       @comment.downvote_count += 1
-      @comment.save
-      flash[:notices] ||= []
-      flash[:notices] << "comment downvoted"
     end
+    @comment.save
     redirect_to :back
   end
 
@@ -63,16 +58,11 @@ class CommentsController < ApplicationController
     if @comment.upvoter_ids.include?(current_user.id)
       @comment.upvoter_ids -= [current_user.id]
       @comment.upvote_count -= 1
-      @comment.save
-      flash[:notices] ||= []
-      flash[:notices] << "upvote retracted"
     else
       @comment.upvoter_ids += [current_user.id]
       @comment.upvote_count += 1
-      @comment.save
-      flash[:notices] ||= []
-      flash[:notices] << "comment upvoted"
     end  
+    @comment.save
     redirect_to :back
   end
 end

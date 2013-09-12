@@ -52,7 +52,7 @@ class AlbumsController < ApplicationController
       @album.downvote_count += 1
     end
     @album.save
-    render :json => @album, :status => :ok
+    render :show
   end
 
   def edit
@@ -143,6 +143,6 @@ class AlbumsController < ApplicationController
       @album.upvote_count += 1
     end
     @album.save
-    render :json => @album, :status => :ok
+    render :show
   end
 end
