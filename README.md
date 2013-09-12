@@ -40,7 +40,9 @@ gallery page:
   
 album show page:  
   - handle comments  
-    - upvote/downvote/reply (modal form?? async refresh?????)  
+    - use model save + change listener instead of callbacks to re-render? 
+    - form for new comment   
+    - reply (modal form?? async refresh?????)  
     - sort comments by upvotes/newest?  
     - collapsible threads  
     - delete button for own comments  
