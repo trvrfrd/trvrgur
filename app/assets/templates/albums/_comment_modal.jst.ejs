@@ -1,0 +1,24 @@
+<div class="modal fade" id="<%= commentModalId %>" data-backdrop="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">add a comment</h4>
+      </div>
+      <form class="form-group">
+        <input 
+          type="hidden" 
+          name="comment[parent_comment_id]" 
+          value="<%= (typeof(comment) === 'undefined') ? null : comment.id %>">
+        <div class="modal-body">
+          <label for="comment-body">put the text in here okay:</label>
+          <textarea name="comment[body]" class="form-control" id="comment-body" rows="10"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">cancel</button>
+          <button type="submit" class="btn btn-primary submit" data-dismiss="modal">submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

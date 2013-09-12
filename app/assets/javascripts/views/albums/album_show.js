@@ -47,8 +47,7 @@ Trvrgur.Views.AlbumShow = Backbone.View.extend({
     comment.set("album_id", that.model.id);
     comment.save({}, {
       success: function (model) {
-        that.model.get("comments").add(model);
-        that.render.bind(that)();
+        that.model.fetch({ success: that.render.bind(that) });
       }
     });
   }

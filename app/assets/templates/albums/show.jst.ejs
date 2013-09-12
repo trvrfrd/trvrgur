@@ -1,6 +1,8 @@
 <% var upBtnClass = (album.get('upvoted')) ? 'btn-success' : 'btn-default' %>
 <% var downBtnClass = (album.get('downvoted')) ? 'btn-success' : 'btn-default' %>
 <% var favBtnClass = (album.get('favorited')) ? 'btn-success' : 'btn-default' %>
+<% var commentModalId = 'comment-modal-' + (typeof(comment) === undefined) ? 'null' : comment.id %>
+<%= JST["albums/_comment_modal"]({ comment: undefined, commentModalId: commentModalId }) %>
 
 <div class="col-lg-8">
 
@@ -42,8 +44,9 @@
 <!-- edit album link goes here -->
   <button 
     type="button" 
+    class="btn btn-default"
     data-toggle="modal" 
-    data-target="#comment-modal">add a comment</button>
+    data-target="#<%= commentModalId %>">add a comment</button>
   
   <h2>comments:</h2>
   <% if (album.get('comments').length > 0) { %>
@@ -56,31 +59,4 @@
   <% } else { %>
     <%= "<h4>no comments yet :(</h4><br>" %> 
   <% } %>
-</div>
-
-
-<div class="modal fade" id="comment-modal" data-backdrop="false">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">add a comment</h4>
-      </div>
-        <form class="form-group">
-          <input 
-            type="hidden" 
-            name="comment[parent_comment_id]" 
-            value="<%= (typeof(comment) === 'undefined') ? null : comment.id %>">
-          <div class="modal-body">
-            <label for="comment-body">put the text in here okay:</label>
-            <textarea name="comment[body]" class="form-control" id="comment-body" rows="10"></textarea>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">cancel</button>
-            <button type="submit" class="btn btn-primary submit" data-dismiss="modal">submit</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
 </div>
