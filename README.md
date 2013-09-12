@@ -18,7 +18,7 @@ general:
   - good validations for username/email (regex :( )  
   - image size/type validations  
   - fix validation error message for user password_digest  
-    - using flash errors w/bbone?  
+    - IN FACT, redo errors entirely; using flash errors w/bbone?  
   - hash image filenames/urls (or change default)?  
   - proper nested routing of images/albums/comments?/general routing design  
     - prune unnecessary routes/endpoints  
