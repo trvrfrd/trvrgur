@@ -5,9 +5,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(params[:comment])
     @comment.author_id = current_user.id
     if @comment.save
-      flash[:notices] ||= []
-      flash[:notices] << "comment posted successfully"  
-      redirect_to album_url(@comment.album)
+      render :json => @comment, :status => :ok
     else
       flash[:alerts] ||= []
       flash[:alerts] += @comment.errors.full_messages

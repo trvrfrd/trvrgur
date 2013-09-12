@@ -15,6 +15,7 @@
 //= require bootstrap
 //= require underscore
 //= require backbone
+//= require jquery.serializeJSON
 //= require trvrgur
 //= require_tree ../templates
 //= require_tree ./models
