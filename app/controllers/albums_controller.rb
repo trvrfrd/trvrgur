@@ -77,7 +77,8 @@ class AlbumsController < ApplicationController
                               :upvoters, 
                               :downvoters, 
                               :favoriting_users,
-                              comments: [:author, :downvoters, :upvoters]).all
+                              :comments => [:author, :downvoters, :upvoters]
+                              ).all
     render :index
   end
 
@@ -88,7 +89,13 @@ class AlbumsController < ApplicationController
   end
 
   def show
-    @album = Album.find(params[:id])
+    @album = Album.includes(:images, 
+                            :creator,
+                            :upvoters, 
+                            :downvoters, 
+                            :favoriting_users,
+                            :comments => [:author, :downvoters, :upvoters]
+                            ).find(params[:id])
     render :show
   end
 
