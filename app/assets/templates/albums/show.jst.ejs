@@ -15,13 +15,16 @@
   
   <button 
     type="button" 
-    class="upvote btn <%= upBtnClass %>">upvote</button>
+    class="upvote btn <%= upBtnClass %>"
+    data-url="<%= 'albums/' + album.id + '/upvote' %>">upvote</button>
   <button 
     type="button" 
-    class="downvote btn <%= downBtnClass %>">downvote</button>
+    class="downvote btn <%= downBtnClass %>"
+    data-url="<%= 'albums/' + album.id + '/downvote' %>">downvote</button>
   <button 
     type="button" 
-    class="favorite btn <%= favBtnClass %>">favorite</button>
+    class="favorite btn <%= favBtnClass %>"
+    data-url="<%= 'albums/' + album.id + '/favorite' %>">favorite</button>
   <hr>
 
   <% album.get('images').each(function (image) { %>
@@ -39,7 +42,6 @@
 <!-- edit album link goes here -->
 
   <h2>comments:</h2>
-<% console.log(album.getCommentsByParentId()[null]) %>
   <%= JST['albums/_comments']({
       album: album, 
       comments: album.getCommentsByParentId()[null]

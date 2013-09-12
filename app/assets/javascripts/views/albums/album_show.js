@@ -3,9 +3,9 @@ Trvrgur.Views.AlbumShow = Backbone.View.extend({
   template: JST['albums/show'],
 
   events: {
-    "click .upvote"  : "upvote",
-    "click .downvote": "downvote",
-    "click .favorite": "favorite"
+    "click .upvote"  : "handleClick",
+    "click .downvote": "handleClick",
+    "click .favorite": "handleClick"
   },
 
   render: function () {
@@ -13,34 +13,14 @@ Trvrgur.Views.AlbumShow = Backbone.View.extend({
     return this;
   },
 
-  downvote: function (event) {
+  handleClick: function (event) {
     var that = this;
     $.ajax({
-      url: this.model.url() + '/downvote',
-      success: function () {
-        that.model.fetch({ success: that.render.bind(that) });
-      }
-    });
-  },
-
-  favorite: function (event) {
-    var that = this;
-    $.ajax({
-      url: this.model.url() + '/favorite',
-      success: function () {
-        that.model.fetch({ success: that.render.bind(that) });
-      }
-    });
-  },
-
-  upvote: function (event) {
-    var that = this;
-    $.ajax({
-      url: this.model.url() + '/upvote',
+      url: $(event.currentTarget).attr("data-url"),
       success: function () {
         that.model.fetch({ success: that.render.bind(that) });
       }
     });
   }
-
+  
 });
