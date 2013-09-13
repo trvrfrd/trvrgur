@@ -4,6 +4,16 @@
   </div>
   <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav navbar-right">
+      <li>
+        <a class="inverse" href="#/albums/random">
+          <span class="glyphicon glyphicon-random"></span>
+        </a>          
+      </li>
+      <li>
+        <a class="inverse" href="#/albums/new">
+          <span class="glyphicon glyphicon-cloud-upload"></span>
+        </a>          
+      </li>
       <% if current_user.nil? %>
         <li><%= link_to "sign in", new_session_url %></li>
         <li><%= link_to "sign up", new_user_url %></li>

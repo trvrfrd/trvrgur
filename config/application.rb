@@ -67,5 +67,8 @@ module Trvrgur
 
     # DON'T do the thing that breaks Heroku
     config.assets.initialize_on_precompile = false
+
+    # Add vendor/fonts path to asset pipeline
+    config.assets.paths << Rails.root.join("vendor","assets", "fonts")
   end
 end

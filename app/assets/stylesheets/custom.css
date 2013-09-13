@@ -20,6 +20,14 @@ body {
   text-align: center;
 }
 
+.inverse {
+  color: #aaa;
+}
+
+.inverse:hover {
+  color: #fff;
+}
+
 /* header */
 
 #logo {
