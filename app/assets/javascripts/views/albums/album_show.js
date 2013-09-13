@@ -23,6 +23,7 @@ Trvrgur.Views.AlbumShow = Backbone.View.extend({
   handleClick: function (event) {
     var that = this;
     var $target = $(event.currentTarget);
+    $target.toggleClass("btn-default btn-success");
     $.ajax({
       url: $target.attr("data-url"),
       type: ($target.attr("data-method") || "GET"),
