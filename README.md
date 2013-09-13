@@ -41,11 +41,10 @@ gallery page:
   
 album show page:  
   - handle comments  
-    - use model save + change listener instead of callbacks to re-render? 
     - sort comments by upvotes/newest?  
     - collapsible threads  
     - delete button for own comments  
-  - click image to show fullscreen thing whatever 
+  - click image to show fullscreen thing whatever (find a not shitty lightbox)  
   - edit album link  
   
 album create/edit pages:  
