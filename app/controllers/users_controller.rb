@@ -6,8 +6,6 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     if @user.save
       login_user!(@user)
-      flash[:notices] ||= []
-      flash[:notices] << "welcome, #{@user.username}!"
       redirect_to root_url
     else
       render :new
@@ -37,9 +35,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update_attributes(params[:user])
-      flash[:notices] ||= []
-      flash[:notices] << "account updated successfully"      
+    if @user.update_attributes(params[:user])  
       redirect_to user_url(@user)
     else
       render :edit
