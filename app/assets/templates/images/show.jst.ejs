@@ -1,0 +1,7 @@
+<div class="center">
+  <h1><%= image.escape('title') %></h1>
+  <a href="#/albums/<%= image.escape('album_id') %>">
+    <img class="img-thumbnail center" src="<%= image.escape('url') %>">
+  </a>
+  <h3><%= image.escape('description') %></h3>
+</div>

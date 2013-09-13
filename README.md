@@ -44,7 +44,6 @@ album show page:
     - sort comments by upvotes/newest?  
     - collapsible threads  
     - delete button for own comments  
-  - click image to show fullscreen thing whatever (find a not shitty lightbox)  
   - edit album link  
   
 album create/edit pages:  
