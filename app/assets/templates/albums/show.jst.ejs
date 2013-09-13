@@ -4,6 +4,7 @@
 <% var commentModalId = 'comment-modal-' + (typeof(comment) === undefined) ? 'null' : comment.id %>
 <%= JST["albums/_comment_modal"]({ comment: undefined, commentModalId: commentModalId }) %>
 
+<div class="row">
 <div class="col-lg-8">
 
   <h1><%= album.escape('title') %></h1>
@@ -41,7 +42,11 @@
 
 
   <hr>
+  </div>
+</div>
 <!-- edit album link goes here -->
+<div class="row">
+<div class="col-lg-12">
   <button 
     type="button" 
     class="btn btn-default"
@@ -59,4 +64,5 @@
   <% } else { %>
     <%= "<h4>no comments yet :(</h4><br>" %> 
   <% } %>
+</div>
 </div>

@@ -36,14 +36,12 @@ top nav bar thing:
 
 gallery page:  
   - upvote arrow/downvote arrow on hover?  
-  - sort by top rated/newest  
+  - sort by top rated/newest/most discussed  
   - pagination w/ kaminari  
   
 album show page:  
   - handle comments  
     - use model save + change listener instead of callbacks to re-render? 
-    - form for new comment   
-    - reply (modal form?? async refresh?????)  
     - sort comments by upvotes/newest?  
     - collapsible threads  
     - delete button for own comments  
