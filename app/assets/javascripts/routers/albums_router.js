@@ -6,6 +6,7 @@ Trvrgur.Routers.Albums = Backbone.Router.extend({
   routes: {
     ""                           : "albumsIndex",
     "albums"                     : "albumsIndex",
+    "albums/random"              : "randomAlbum",
     "albums/:id"                 : "albumShow",
     "albums/:album_id/images/:id": "imageShow"
   },
@@ -27,5 +28,12 @@ Trvrgur.Routers.Albums = Backbone.Router.extend({
     var image = Trvrgur.albums.get(album_id).get('images').get(id);
     var imageShow = new Trvrgur.Views.ImageShow({ model: image });
     this.$el.html(imageShow.render().$el);
+  },
+
+  randomAlbum: function () {
+    var ids = Trvrgur.albums.map(function (album) { return album.id });
+    var index = Math.floor(Math.random() * Trvrgur.albums.length);
+    var albumId = ids[index];
+    this.navigate("albums/" + ids[index], { trigger: true });
   }
 });
