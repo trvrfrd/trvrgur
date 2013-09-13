@@ -15,11 +15,30 @@
         </a>          
       </li>
       <% if current_user.nil? %>
-        <li><%= link_to "sign in", new_session_url %></li>
-        <li><%= link_to "sign up", new_user_url %></li>
+
+        <li>
+          <a href="<%= new_session_url %>">
+            sign in    <span class="glyphicon glyphicon-log-in"></span>
+          </a>
+        </li>
+        <li>
+          <a href="<%= new_user_url %>">
+            sign up    <span class="glyphicon glyphicon-plus-sign"></span>
+          </a>
+        </li>
+
       <% else %>
-        <li><%= link_to current_user.username, user_url(current_user) %></li>
-        <li><%= link_to "sign out", session_url, :method => :delete %></li>
+
+        <li>
+          <a href="#/users/<%= current_user.id %>">
+            <%= current_user.username %>    <span class="glyphicon glyphicon-user"></span>
+          </a>
+        </li>
+        <li>
+          <% signout_string = "sign out    <span class='glyphicon glyphicon-log-out'></span>".html_safe %>
+          <%= link_to signout_string, session_url, :method => :delete %>
+        </li>
+
       <% end %>
     </ul>
   </div>

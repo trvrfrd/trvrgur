@@ -17,16 +17,22 @@
       <button 
         type="button" 
         class="upvote btn btn-sm <%= upBtnClass %>"
-        data-url="<%= 'comments/' + comment.id + '/upvote' %>">upvote</button>
+        data-url="<%= 'comments/' + comment.id + '/upvote' %>">
+        <span class="glyphicon glyphicon-circle-arrow-up"></span>
+      </button>
       <button 
         type="button" 
         class="downvote btn btn-sm <%= downBtnClass %>"
-        data-url="<%= 'comments/' + comment.id + '/downvote' %>">downvote</button>
+        data-url="<%= 'comments/' + comment.id + '/downvote' %>">
+        <span class="glyphicon glyphicon-circle-arrow-down"></span>
+      </button>
       <button 
         type="button" 
         class="btn btn-sm btn-default" 
         data-toggle="modal" 
-        data-target="#<%= commentModalId %>">reply</button>
+        data-target="#<%= commentModalId %>">
+        <span class="glyphicon glyphicon-comment"></span>
+      </button>
 
       <p><%= comment.escape('body') %></p>
     </li>
