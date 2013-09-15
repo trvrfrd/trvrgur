@@ -28,8 +28,6 @@ class AlbumsController < ApplicationController
       flash.now[:alerts] += @images.map { |i| i.errors.full_messages }
       render :new
     else
-      flash[:notices] ||= []
-      flash[:notices] << "album created successfully" 
       redirect_to root_url
     end
   end
