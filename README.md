@@ -7,6 +7,7 @@ aided by a multitude of libraries most useful, including:
 
 TODO:  
 general:  
+  - URL slugs??? 
   - make album title mandatory?  
   - set up NewRelic  
   - devise/omni-auth?  
@@ -47,6 +48,8 @@ album show page:
   - edit album link  
   
 album create/edit pages:  
+  - add form-control classes or whatever Bootstrap stuff  
+  - make forms and stuff work for both creating and editing  
   - adding/removing images  
   - sort order column + jQueryUI sortable  
   - upload multiple photos in one input (shift/ctrl-click)  
