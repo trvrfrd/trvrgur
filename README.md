@@ -9,7 +9,6 @@ TODO:
 general:  
   - URL slugs??? 
   - make album title mandatory?  
-  - set up NewRelic  
   - devise/omni-auth?  
     - email confirmation?  
     - password change/recovery functionality?  
