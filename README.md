@@ -39,6 +39,7 @@ gallery page:
   - upvote arrow/downvote arrow on hover?  
   - sort by top rated/newest/most discussed  
   - pagination w/ kaminari  
+  - cache big initial query w/ Redis  
   
 album show page:  
   - handle comments  

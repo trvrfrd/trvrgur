@@ -30,7 +30,7 @@ class AlbumsController < ApplicationController
     else
       flash[:notices] ||= []
       flash[:notices] << "album created successfully" 
-      redirect_to album_url(@album)
+      redirect_to root_url
     end
   end
 

@@ -1,7 +1,7 @@
 <% action = (album.persisted?) ? album_url(album) : albums_url %>
 <% message = (album.persisted?) ? "update album" : "create album" %>
 
-<form action="<%= action %>" method="POST" enctype="multipart/form-data">
+<form class="form-control" action="<%= action %>" method="POST" enctype="multipart/form-data">
   <% if album.persisted? %>
     <input type="hidden" name="_method" value="PUT">
   <% end %>
@@ -28,15 +28,28 @@
   <br>
 
   <h2>(include at least one image)</h2>
-  
-  <% album.images.each_with_index do |image, i| %>
-    <%= render "image_form", :image => image, :i => i %> 
+  <br>
+  <% if album.persisted? %>
+    <% album.images.each_with_index do |image, i| %>
+      <%= render "image_form", :image => image, :i => i %> 
+    <% end %>
+  <% else %>
+    <%= render "image_form", :image => Image.new, :i => rand %>
   <% end %>
 
-  <!-- <br> -->
-  <!-- link to add another image jQuery style??? or wait for Bbone -->
+  <br>
+  
+  <button class="btn btn-default" id="append-image-form">add another image</button>
 
   <br>
-  <input type="submit" value="<%= message %>">
+  <br>
+  <input class="btn btn-primary" type="submit" value="<%= message %>">
 
 </form>
+
+<script type="text/javascript">
+  $('form').on('click', '#append-image-form', function (event) {
+    event.preventDefault();
+    $(this).before(JST['images/_form']({ i:Math.random() }));
+  });
+</script>
