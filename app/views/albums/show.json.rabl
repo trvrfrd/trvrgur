@@ -1,5 +1,5 @@
 object @album
-attributes :id, :title, :description, :user_id, :created_at, :points, :upvoted?, :downvoted?, :favorited?
+attributes :id, :title, :description, :creator_id, :created_at, :points, :upvoted?, :downvoted?, :favorited?
 node(:upvoted) { |album| album.upvoted_by?(current_user) }
 node(:downvoted) { |album| album.downvoted_by?(current_user) }
 node(:favorited) { |album| album.favorited_by?(current_user) }

@@ -1,5 +1,5 @@
 class Album < ActiveRecord::Base
-  attr_accessible :description, :title, :user_id
+  attr_accessible :description, :title, :creator_id
   validates :images, :presence => true
 
   belongs_to :creator,
