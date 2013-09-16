@@ -41,7 +41,6 @@ album show page:
   - edit album link  
   
 album create/edit pages:  
-  - adding images when editing?  
   - sort order column + jQueryUI sortable  
   - upload multiple photos in one input (shift/ctrl-click)  
     - vs. or in addition to appending multiple file input fields  

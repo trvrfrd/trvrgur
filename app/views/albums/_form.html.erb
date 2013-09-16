@@ -40,11 +40,16 @@
 
   <br>
   
-  <% if !album.persisted? %>
-    <button class="btn btn-default" id="append-image-form">add another image</button>
-  <% end %>
+  <button class="btn btn-default" id="append-image-form">add another image</button>
   
   <br>
   <br>
   <input class="btn btn-primary" type="submit" value="<%= message %>">
 </form>
+
+<script type="text/javascript">
+  $('form').on('click', '#append-image-form', function (event) {
+    event.preventDefault();
+    $(this).before(JST['images/_form']({ i:Math.random() }));
+  });
+</script>

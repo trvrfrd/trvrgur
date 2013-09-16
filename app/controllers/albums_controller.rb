@@ -90,8 +90,8 @@ class AlbumsController < ApplicationController
 
         @album.update_attributes(params[:album])
 
-        @album.images.each do |image|
-          image_params = params[:images][image.id.to_s]
+        params[:images].each do |id, image_params|
+          image = @album.images.find_by_id(id) || @album.images.build(image_params)
           if image_params[:_destroy]
             image.destroy
           else

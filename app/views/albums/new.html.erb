@@ -1,10 +1,3 @@
 <h1>create an album</h1>
 
 <%= render "form", :album => @album %>
-
-<script type="text/javascript">
-  $('form').on('click', '#append-image-form', function (event) {
-    event.preventDefault();
-    $(this).before(JST['images/_form']({ i:Math.random() }));
-  });
-</script>
