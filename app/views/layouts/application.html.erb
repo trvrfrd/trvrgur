@@ -10,13 +10,16 @@
 
 <%= render "layouts/header" %>
 
-<% flash[:alerts].try(:each) do |alert| %>
-  <h3 style="color:red"><%= alert %></h3>
-<% end %>
+<div class="center">
+  <% flash[:alerts].try(:each) do |alert| %>
+    <h4 style="color:red"><%= alert %></h4>
+  <% end %>
 
-<% flash[:notices].try(:each) do |notice| %>
-  <h3 style="color:green"><%= notice %></h3>
-<% end %>
+  <% flash[:notices].try(:each) do |notice| %>
+    <h4 style="color:green"><%= notice %></h4>
+  <% end %>
+</div>
+
 <div id="content">
   <%= yield %>
 </div>
