@@ -19,7 +19,11 @@
         <% } else { %>
           anonymous | 
         <% } %>
-      points: <%= album.escape('points') %></p>
+      points: <%= album.escape('points') %>
+      <%  if (album.get('creator_id') == Trvrgur.current_user.id) { %>
+         | <a href="<%= '/albums/' + album.id + '/edit' %>">edit this album</a>
+      <% } %>
+      </p>
       
       <button 
         type="button" 
@@ -39,6 +43,7 @@
         data-url="<%= 'albums/' + album.id + '/favorite' %>">
         <span class="glyphicon glyphicon-heart"></span>
       </button>
+
       <hr>
 
       <% album.get('images').each(function (image) { %>
