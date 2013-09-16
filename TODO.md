@@ -24,9 +24,6 @@ general:
   - implement swapping router  
   - delete unused bbone routers/views/templates  
   
-top nav bar thing:  
-  - create album / display random album  
-
 gallery page:  
   - upvote arrow/downvote arrow on hover?  
   - sort by top rated/newest/most discussed  
