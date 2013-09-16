@@ -35,9 +35,7 @@ class AlbumsController < ApplicationController
   def destroy
     @album = Album.find(params[:id])
     @album.destroy
-    flash[:notices] ||= []
-    flash[:notices] << "album deleted successfully"
-    redirect_to albums_url
+    redirect_to root_url
   end
 
   def downvote
@@ -112,9 +110,7 @@ class AlbumsController < ApplicationController
       flash.now[:alerts] += @album.images.map { |i| i.errors.full_messages }
       render :new
     else
-      flash[:notices] ||= []
-      flash[:notices] << "album updated successfully" 
-      redirect_to album_url(@album)
+      redirect_to root_url
     end
 
   end

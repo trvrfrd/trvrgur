@@ -1,7 +1,7 @@
 <% action = (album.persisted?) ? album_url(album) : albums_url %>
 <% message = (album.persisted?) ? "update album" : "create album" %>
 
-<form class="form-control" action="<%= action %>" method="POST" enctype="multipart/form-data">
+<form action="<%= action %>" method="POST" enctype="multipart/form-data">
   <% if album.persisted? %>
     <input type="hidden" name="_method" value="PUT">
   <% end %>
@@ -26,30 +26,25 @@
     cols="40"><%= album.description %></textarea>
   <label for="album_description">album description (optional)</label>
   <br>
-
-  <h2>(include at least one image)</h2>
   <br>
+
   <% if album.persisted? %>
     <% album.images.each_with_index do |image, i| %>
       <%= render "image_form", :image => image, :i => i %> 
     <% end %>
   <% else %>
+    <h3>(include at least one image)</h3>
+    <br>
     <%= render "image_form", :image => Image.new, :i => rand %>
   <% end %>
 
   <br>
   
-  <button class="btn btn-default" id="append-image-form">add another image</button>
-
+  <% if !album.persisted? %>
+    <button class="btn btn-default" id="append-image-form">add another image</button>
+  <% end %>
+  
   <br>
   <br>
   <input class="btn btn-primary" type="submit" value="<%= message %>">
-
 </form>
-
-<script type="text/javascript">
-  $('form').on('click', '#append-image-form', function (event) {
-    event.preventDefault();
-    $(this).before(JST['images/_form']({ i:Math.random() }));
-  });
-</script>
