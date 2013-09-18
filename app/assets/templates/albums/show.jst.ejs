@@ -20,7 +20,7 @@
           anonymous | 
         <% } %>
       points: <%= album.escape('points') %>
-      <%  if (album.get('creator_id') == Trvrgur.current_user.id) { %>
+      <%  if (Trvrgur.current_user && (album.get('creator_id') == Trvrgur.current_user.id)) { %>
          | <a href="<%= '/albums/' + album.id + '/edit' %>">edit this album</a>
       <% } %>
       </p>
