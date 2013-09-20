@@ -23,9 +23,10 @@ general:
   - implement swapping router
   - delete unused bbone routers/views/templates
   
-gallery page:
+albums index page:
   - upvote arrow/downvote arrow on hover?
   - sort by top rated/newest/most discussed
+    - is this the controller's responsibility? GET to nested resource?
   - pagination w/ kaminari
   - cache big initial query w/ Redis
   
