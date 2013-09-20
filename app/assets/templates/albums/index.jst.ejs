@@ -28,9 +28,8 @@
       <a 
         href="<%= '#/albums/' + album.id %>"
         class="album-link"
-        data-title="<%= album.escape('title') || 'Untitled' %>"
-        data-content="creator: <%= (album.get('creator')) ? album.get('creator').username : 'anonymous' %> 
-          | points: <%= album.escape('points') %>">
+        data-title="<%= album.escape('title') || 'untitled' %>"
+        data-content="creator: <%= (album.get('creator')) ? album.get('creator').username : 'anonymous' %><br>points: <%= album.escape('points') %>">
         <img 
           class="img-thumbnail" 
           src="<%= album.get('images').first().escape('url_small') %>">
