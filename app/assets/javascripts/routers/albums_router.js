@@ -34,6 +34,6 @@ Trvrgur.Routers.Albums = Backbone.Router.extend({
     var ids = Trvrgur.albums.map(function (album) { return album.id });
     var index = Math.floor(Math.random() * Trvrgur.albums.length);
     var albumId = ids[index];
-    this.navigate("albums/" + ids[index], { trigger: true });
+    this.navigate("#/albums/" + ids[index], { trigger: true });
   }
 });
