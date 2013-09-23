@@ -1,16 +1,16 @@
 <nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
   <div class="navbar-header">
-    <%= link_to "trvrgur", "/#", :id => "logo", :class => "navbar-brand" %>
+    <%= link_to "trvrgur", "/#", :id => "logo", :title => "home", :class => "navbar-brand" %>
   </div>
   <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav navbar-right">
       <li>
-        <a class="inverse" href="/#/albums/random">
+        <a class="inverse" title="random album" href="/#/albums/random">
           <span class="glyphicon glyphicon-random"></span>
         </a>          
       </li>
       <li>
-        <a class="inverse" href="<%= new_album_url %>">
+        <a class="inverse" title="upload album" href="<%= new_album_url %>">
           <span class="glyphicon glyphicon-cloud-upload"></span>
         </a>          
       </li>
