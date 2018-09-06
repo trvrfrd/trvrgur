@@ -4,3 +4,10 @@ development:
   username: trevor
   pool: 5
   timeout: 5000
+
+test:
+  adapter: postgresql
+  database: trvrgur_test
+  username: trevor
+  pool: 5
+  timeout: 5000
