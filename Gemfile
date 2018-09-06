@@ -27,6 +27,6 @@ group :development do
 end
 
 group :development, :test do
-  gem 'test-unit'
+  gem 'rspec-rails', '~> 3.1'
 end
 

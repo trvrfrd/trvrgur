@@ -56,6 +56,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.10.0)
+    diff-lcs (1.3)
     eco (1.0.0)
       coffee-script
       eco-source
@@ -90,7 +91,6 @@ GEM
       mimemagic (= 0.3.0)
     pg (0.18.4)
     polyglot (0.3.5)
-    power_assert (0.2.6)
     pry (0.10.4)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -126,6 +126,23 @@ GEM
     rake (11.2.2)
     rdoc (3.12.2)
       json (~> 1.4)
+    rspec-core (3.7.1)
+      rspec-support (~> 3.7.0)
+    rspec-expectations (3.7.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.7.0)
+    rspec-mocks (3.7.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.7.0)
+    rspec-rails (3.7.2)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec-core (~> 3.7.0)
+      rspec-expectations (~> 3.7.0)
+      rspec-mocks (~> 3.7.0)
+      rspec-support (~> 3.7.0)
+    rspec-support (3.7.1)
     sass (3.4.22)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -137,8 +154,6 @@ GEM
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    test-unit (3.2.7)
-      power_assert
     thor (0.19.1)
     tilt (1.4.1)
     treetop (1.4.15)
@@ -166,8 +181,8 @@ DEPENDENCIES
   quiet_assets
   rabl
   rails (= 3.2.14)
+  rspec-rails (~> 3.1)
   sass-rails
-  test-unit
   uglifier
 
 RUBY VERSION
