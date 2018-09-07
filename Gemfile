@@ -1,8 +1,9 @@
 source 'https://rubygems.org'
-ruby '2.1.2'
+ruby '2.2.9'
 
-gem 'rails', '3.2.14'
-gem 'pg'
+gem 'rails', '~> 3.2.22'
+gem 'pg', '~> 0.11'
+gem 'activerecord-postgresql-adapter'
 gem 'pry-rails'
 gem 'rabl'
 gem 'backbone-on-rails'
@@ -21,6 +22,9 @@ group :assets do
 end
 
 group :development do
+  # prevent rails console from blowing up?
+  gem 'test-unit', '~> 3.0'
+
   gem 'quiet_assets'
   # gem 'better_errors'
   # gem 'binding_of_caller'
@@ -30,3 +34,6 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.1'
 end
 
+group :test do
+  gem 'capybara'
+end
