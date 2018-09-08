@@ -23,7 +23,7 @@ end
 
 group :development do
   # prevent rails console from blowing up?
-  gem 'test-unit', '~> 3.0'
+  gem 'test-unit'
 
   gem 'quiet_assets'
   # gem 'better_errors'
@@ -31,7 +31,7 @@ group :development do
 end
 
 group :development, :test do
-  gem 'rspec-rails', '~> 3.1'
+  gem 'rspec-rails'
 end
 
 group :test do
