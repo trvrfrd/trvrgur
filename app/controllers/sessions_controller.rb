@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     if @user.nil?
       flash[:alerts] ||= []
       flash[:alerts] << "incorrect username or password, please try again"
-      render :new
+      redirect_to new_session_url
     else
       login_user!(@user)
       redirect_to root_url
