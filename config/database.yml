@@ -8,6 +8,5 @@ development:
 test:
   adapter: postgresql
   database: trvrgur_test
-  username: trevor
   pool: 5
   timeout: 5000
