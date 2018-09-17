@@ -4,8 +4,8 @@
 
 <br>
 <form action="<%= user_url(@user) %>" method="POST">
-  <input 
-    type="hidden" 
+  <input
+    type="hidden"
     name="authenticity_token"
     value="<%= form_authenticity_token %>">
  <input type="hidden" name="_method" value="DELETE">

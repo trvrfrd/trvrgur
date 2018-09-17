@@ -11,7 +11,7 @@ class AlbumsController < ApplicationController
           next if image_params[:file].nil?
           Image.new(image_params)
         end.compact
-        
+
         @images.each do |image|
           image.uploader_id = current_user ? current_user.id : nil
           image.save
@@ -53,17 +53,17 @@ class AlbumsController < ApplicationController
 
   def edit
     @album = Album.includes(:images, :creator).find(params[:id])
-    render :edit    
+    render :edit
   end
 
   def favorite
     @album = Album.fetch.find(params[:id])
     if @album.favoriting_user_ids.include?(current_user.id)
-      @album.favoriting_user_ids -= [current_user.id]    
+      @album.favoriting_user_ids -= [current_user.id]
     else
-      @album.favoriting_user_ids += [current_user.id]   
+      @album.favoriting_user_ids += [current_user.id]
     end
-    @album.save 
+    @album.save
     render :show
   end
 
@@ -99,7 +99,7 @@ class AlbumsController < ApplicationController
           end
         end
 
-        raise "invalid" unless @album.valid? && 
+        raise "invalid" unless @album.valid? &&
           @album.images.all? do |i|
             i.valid? || i.destroyed?
           end

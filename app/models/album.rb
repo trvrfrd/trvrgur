@@ -5,7 +5,7 @@ class Album < ActiveRecord::Base
   belongs_to :creator,
              :class_name => "User",
              :foreign_key => :creator_id
-             
+
   has_many :images, :dependent => :destroy
   has_many :comments, :dependent => :destroy
 
@@ -19,10 +19,10 @@ class Album < ActiveRecord::Base
   has_many :favoriting_users, :through => :user_album_favorites, :source => :user
 
   def self.fetch
-    self.includes(:images, 
+    self.includes(:images,
                   :creator,
-                  :upvoters, 
-                  :downvoters, 
+                  :upvoters,
+                  :downvoters,
                   :favoriting_users,
                   :comments => [:author, :downvoters, :upvoters])
   end
@@ -34,7 +34,7 @@ class Album < ActiveRecord::Base
     comments.each do |c|
       result[c.parent_comment_id] << c
     end
-    
+
     result
   end
 

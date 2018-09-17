@@ -2,22 +2,22 @@
 
 <form action="<%= users_url %>" method="POST">
 
-  <input 
-    type="hidden" 
+  <input
+    type="hidden"
     name="authenticity_token"
     value="<%= form_authenticity_token %>">
 
   <input
-    type="hidden" 
-    name="user[email]" 
+    type="hidden"
+    name="user[email]"
     value='<%= "guest#{id}@guest.com" %>'>
 
   <input type="hidden" name="user[username]" value='<%= "guest#{id}" %>'>
 
-  <input 
-    type="hidden" 
-    name="user[password]" 
-    value="<%= 
+  <input
+    type="hidden"
+    name="user[password]"
+    value="<%=
     SecureRandom::urlsafe_base64(16)%>">
 
   <div class="center">

@@ -2,11 +2,11 @@
 
 <% if image.persisted? %>
   <img src="<%= image.file.url(:small) %>">
-  <input type="checkbox" 
-    name="images[<%= id %>][_destroy]" 
+  <input type="checkbox"
+    name="images[<%= id %>][_destroy]"
     id ="image_destroy"
     value="true">
-  <label for="image_destroy">delete image?</label> 
+  <label for="image_destroy">delete image?</label>
   <br>
 <% else %>
   <input type="file" name="images[<%= id %>][file]" id="image_file">
@@ -14,16 +14,16 @@
 <% end %>
 
 <input
-  type="text" 
-  name="images[<%= id %>][title]" 
+  type="text"
+  name="images[<%= id %>][title]"
   id="image_title"
   value="<%= image.title %>">
 <label for="image_title">image title (optional)</label>
 
 <br>
 
-<textarea 
-  name="images[<%= id %>][description]" 
+<textarea
+  name="images[<%= id %>][description]"
   id="image_description"
   rows="4"
   cols="40"><%= image.description %></textarea>

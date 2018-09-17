@@ -6,21 +6,21 @@
     <input type="hidden" name="_method" value="PUT">
   <% end %>
 
-  <input 
-    type="hidden" 
+  <input
+    type="hidden"
     name="authenticity_token"
     value="<%= form_authenticity_token %>">
 
   <input
-    type="text" 
-    name="album[title]" 
+    type="text"
+    name="album[title]"
     id="album_title"
     value="<%= album.title %>">
   <label for="album_title">album title (optional)</label>
   <br>
 
-  <textarea 
-    name="album[description]" 
+  <textarea
+    name="album[description]"
     id="album_description"
     rows="4"
     cols="40"><%= album.description %></textarea>
@@ -30,7 +30,7 @@
 
   <% if album.persisted? %>
     <% album.images.each_with_index do |image, i| %>
-      <%= render "image_form", :image => image, :i => i %> 
+      <%= render "image_form", :image => image, :i => i %>
     <% end %>
   <% else %>
     <h3>(include at least one image)</h3>
@@ -39,9 +39,9 @@
   <% end %>
 
   <br>
-  
+
   <button class="btn btn-default" id="append-image-form">add another image</button>
-  
+
   <br>
   <br>
   <input class="btn btn-primary" type="submit" value="<%= message %>">

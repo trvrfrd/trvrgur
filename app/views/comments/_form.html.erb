@@ -6,18 +6,18 @@
     <input type="hidden" name="_method" value="PUT">
   <% end %>
 
-  <input 
-    type="hidden" 
+  <input
+    type="hidden"
     name="authenticity_token"
     value="<%= form_authenticity_token %>">
-  
-  <input 
-    type="hidden" 
+
+  <input
+    type="hidden"
     name="comment[album_id]"
     value="<%= album_id %>">
 
-  <input 
-    type="hidden" 
+  <input
+    type="hidden"
     name="comment[parent_comment_id]"
     value="<%= parent_comment_id %>">
 
@@ -25,8 +25,8 @@
     <%= (comment.persisted?) ? "edit comment" : "add a comment" %>
   </label>
   <br>
-  <textarea 
-    name="comment[body]" 
+  <textarea
+    name="comment[body]"
     id="comment_body"
     rows="4"
     placeholder="comment..."

@@ -13,15 +13,15 @@
     <input type="hidden" name="_method" value="PUT">
   <% end %>
 
-  <input 
-    type="hidden" 
+  <input
+    type="hidden"
     name="authenticity_token"
     value="<%= form_authenticity_token %>">
 
   <input
-    type="text" 
+    type="text"
     class="form-control"
-    name="user[email]" 
+    name="user[email]"
     id="user_email"
     value="<%= user.email %>">
   <label for="user_email">email</label>
@@ -29,9 +29,9 @@
   <br>
 
   <input
-    type="text" 
+    type="text"
     class="form-control"
-    name="user[username]" 
+    name="user[username]"
     id="user_username"
     value="<%= user.username %>">
   <label for="user_username">username</label>

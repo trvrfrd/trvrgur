@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   attr_reader :password
 
   validates :username, :email, :session_token, :presence => true
-  validates :username, :email, :uniqueness => true  
+  validates :username, :email, :uniqueness => true
   validates :password_digest, :presence => { :message => "Password can't be blank"}
   validates :password, :length => { :minimum => 6, :allow_nil => true }
 
@@ -25,12 +25,12 @@ class User < ActiveRecord::Base
 
   has_many :user_album_upvotes, :dependent => :destroy
   has_many :upvoted_albums,
-           :through => :user_album_upvotes, 
+           :through => :user_album_upvotes,
            :source => :album
 
   has_many :user_album_downvotes, :dependent => :destroy
-  has_many :downvoted_albums, 
-           :through => :user_album_downvotes, 
+  has_many :downvoted_albums,
+           :through => :user_album_downvotes,
            :source => :album
 
   has_many :user_comment_upvotes, :dependent => :destroy
@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
 
   has_many :user_comment_downvotes, :dependent => :destroy
   has_many :downvoted_commments,
-           :through => :user_comment_downvotes, 
+           :through => :user_comment_downvotes,
            :source => :comments
 
   has_many :user_album_favorites, :dependent => :destroy

@@ -25,13 +25,13 @@
   <div class="col-md-9 col-md-pull-3">
     <header class="center"><h1>top albums</h1></header>
     <% albums.each(function (album, index) { %>
-      <a 
+      <a
         href="<%= '#/albums/' + album.id %>"
         class="album-link"
         data-title="<%= album.escape('title') || 'untitled' %>"
         data-content="creator: <%= (album.get('creator')) ? album.get('creator').username : 'anonymous' %><br>points: <%= album.escape('points') %>">
-        <img 
-          class="img-thumbnail" 
+        <img
+          class="img-thumbnail"
           src="<%= album.get('images').first().escape('url_small') %>">
       </a>
     <% }); %>

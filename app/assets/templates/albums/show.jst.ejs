@@ -11,34 +11,34 @@
       <h1><%= album.escape('title') %></h1>
       <h4><%= album.escape('description') %></h4>
 
-      <p>created by: 
+      <p>created by:
         <% if (album.get('creator')) { %>
           <a href="<%= '#/users/' + album.get('creator_id') %>">
             <%= album.get('creator').username %>
-          </a> | 
+          </a> |
         <% } else { %>
-          anonymous | 
+          anonymous |
         <% } %>
       points: <%= album.escape('points') %>
       <%  if (Trvrgur.current_user && (album.get('creator_id') == Trvrgur.current_user.id)) { %>
          | <a href="<%= '/albums/' + album.id + '/edit' %>">edit this album</a>
       <% } %>
       </p>
-      
-      <button 
-        type="button" 
+
+      <button
+        type="button"
         class="upvote btn <%= upBtnClass %>"
         data-url="<%= 'albums/' + album.id + '/upvote' %>">
         <span class="glyphicon glyphicon-circle-arrow-up"></span>
       </button>
-      <button 
-        type="button" 
+      <button
+        type="button"
         class="downvote btn <%= downBtnClass %>"
         data-url="<%= 'albums/' + album.id + '/downvote' %>">
         <span class="glyphicon glyphicon-circle-arrow-down"></span>
       </button>
-      <button 
-        type="button" 
+      <button
+        type="button"
         class="favorite btn <%= favBtnClass %>"
         data-url="<%= 'albums/' + album.id + '/favorite' %>">
         <span class="glyphicon glyphicon-heart"></span>
@@ -48,7 +48,7 @@
 
       <% album.get('images').each(function (image) { %>
         <h3><%= image.escape('title') %></h3>
-        
+
           <div class="center">
             <a href="#/albums/<%= album.id %>/images/<%= image.id %>">
               <img class="img-thumbnail" src="<%= image.escape('url_medium') %>">
@@ -63,22 +63,22 @@
   </div>
   <div class="row">
     <div class="col-lg-12">
-      <button 
-        type="button" 
+      <button
+        type="button"
         class="btn btn-default"
-        data-toggle="modal" 
+        data-toggle="modal"
         data-target="#<%= commentModalId %>">add a comment</button>
-      
+
       <h2>comments:</h2>
       <% if (album.get('comments').length > 0) { %>
 
         <%= JST['albums/_comments']({
-              album: album, 
+              album: album,
               comments: album.getCommentsByParentId()[null]
             }) %>
 
       <% } else { %>
-        <%= "<h4>no comments yet :(</h4><br>" %> 
+        <%= "<h4>no comments yet :(</h4><br>" %>
       <% } %>
     </div>
   </div>

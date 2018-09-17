@@ -52,5 +52,5 @@ Trvrgur.Views.AlbumShow = Backbone.View.extend({
 
     });
   }
-  
+
 });

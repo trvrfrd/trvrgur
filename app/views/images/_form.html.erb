@@ -6,8 +6,8 @@
     <input type="hidden" name="_method" value="PUT">
   <% end %>
 
-  <input 
-    type="hidden" 
+  <input
+    type="hidden"
     name="authenticity_token"
     value="<%= form_authenticity_token %>">
 
@@ -17,16 +17,16 @@
   <% end %>
 
   <input
-    type="text" 
-    name="image[title]" 
+    type="text"
+    name="image[title]"
     id="image_title"
     value="<%= image.title %>">
   <label for="image_title">title (optional)</label>
 
   <br>
 
-  <textarea 
-    name="image[description]" 
+  <textarea
+    name="image[description]"
     id="image_description"
     rows="4"
     cols="40"><%= image.description %></textarea>

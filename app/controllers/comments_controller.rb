@@ -10,14 +10,14 @@ class CommentsController < ApplicationController
       flash[:alerts] ||= []
       flash[:alerts] += @comment.errors.full_messages
       redirect_to :back
-    end   
+    end
   end
 
   def destroy
     @comment = Comment.find(params[:id])
     @comment.destroy
     flash[:notices] ||= []
-    flash[:notices] << "comment deleted successfully" 
+    flash[:notices] << "comment deleted successfully"
     redirect_to album_url(@comment.album)
   end
 
@@ -35,7 +35,7 @@ class CommentsController < ApplicationController
   end
 
   def edit
-    
+
   end
 
   def index
@@ -49,7 +49,7 @@ class CommentsController < ApplicationController
   end
 
   def update
-    
+
   end
 
   def upvote
@@ -60,7 +60,7 @@ class CommentsController < ApplicationController
     else
       @comment.upvoter_ids += [current_user.id]
       @comment.upvote_count += 1
-    end  
+    end
     @comment.save
     render :show
   end

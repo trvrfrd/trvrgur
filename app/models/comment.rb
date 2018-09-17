@@ -11,7 +11,7 @@ class Comment < ActiveRecord::Base
   belongs_to :parent_comment,
              :class_name => "Comment",
              :foreign_key => :parent_comment_id
-  
+
   has_many :replies,
            :class_name => "Comment",
            :foreign_key => :parent_comment_id
@@ -33,7 +33,7 @@ class Comment < ActiveRecord::Base
   def downvoted_by?(user)
     user && self.downvoter_ids.include?(user.id)
   end
-  
+
   def points
     self.upvote_count - self.downvote_count
   end

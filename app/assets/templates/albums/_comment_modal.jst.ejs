@@ -6,9 +6,9 @@
         <h4 class="modal-title">add a comment</h4>
       </div>
       <form class="form-group">
-        <input 
-          type="hidden" 
-          name="comment[parent_comment_id]" 
+        <input
+          type="hidden"
+          name="comment[parent_comment_id]"
           value="<%= (typeof(comment) === 'undefined') ? null : comment.id %>">
         <div class="modal-body">
           <label for="comment-body">put the text in here okay:</label>

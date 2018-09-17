@@ -7,29 +7,29 @@
   <ul>
     <li>
       <% var author = comment.get("author") %>
-      posted by 
+      posted by
       <a href="<%= '#/users/' + author.id %>">
         <%= author.username %>
-      </a> 
-      at 
-      <%= comment.escape('created_at') %> | 
-      <%= comment.escape('points') %> points | 
-      <button 
-        type="button" 
+      </a>
+      at
+      <%= comment.escape('created_at') %> |
+      <%= comment.escape('points') %> points |
+      <button
+        type="button"
         class="upvote btn btn-sm <%= upBtnClass %>"
         data-url="<%= 'comments/' + comment.id + '/upvote' %>">
         <span class="glyphicon glyphicon-circle-arrow-up"></span>
       </button>
-      <button 
-        type="button" 
+      <button
+        type="button"
         class="downvote btn btn-sm <%= downBtnClass %>"
         data-url="<%= 'comments/' + comment.id + '/downvote' %>">
         <span class="glyphicon glyphicon-circle-arrow-down"></span>
       </button>
-      <button 
-        type="button" 
-        class="btn btn-sm btn-default" 
-        data-toggle="modal" 
+      <button
+        type="button"
+        class="btn btn-sm btn-default"
+        data-toggle="modal"
         data-target="#<%= commentModalId %>">
         <span class="glyphicon glyphicon-comment"></span>
       </button>
