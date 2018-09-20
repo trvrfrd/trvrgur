@@ -55,6 +55,14 @@ describe "sign in" do
     expect(page).not_to have_content user.username
   end
 
+  it "does not sign in a non-existent user" do
+    fill_in "username or email", with: "definitely not a user"
+    fill_in "password", with: "does not matter"
+    click_button "sign in"
+    expect(current_path).to eq new_session_path
+    expect(page).to have_content "incorrect username or password"
+  end
+
   it "signs back out" do
     fill_in "username or email", with: user.username
     fill_in "password", with: "password123"
