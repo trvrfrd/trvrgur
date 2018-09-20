@@ -3,3 +3,9 @@ normal_user:
   username: mr_normal
   password_digest: <%= User.digest_password("password123") %>
   session_token: <%= User.generate_session_token %>
+
+other_normal_user:
+  email: regular_guy@example.com
+  username: im_normal
+  password_digest: <%= User.digest_password("password123") %>
+  session_token: <%= User.generate_session_token %>

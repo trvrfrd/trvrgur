@@ -12,12 +12,14 @@ class UsersController < ApplicationController
     end
   end
 
+  # TODO: this should redirect somewhere if not destroying current user!!!
   def destroy
     @user = User.find(params[:id])
     @user.destroy
     redirect_to new_user_url
   end
 
+  # TODO: this should redirect somewhere if not editing current user!!!
   def edit
     @user = User.find(params[:id])
     render :edit
@@ -33,6 +35,7 @@ class UsersController < ApplicationController
     render :show
   end
 
+  # TODO: this should redirect somewhere if not updating current user!!!
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(params[:user])
