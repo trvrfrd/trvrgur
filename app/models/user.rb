@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
   validates :username, :email, :session_token, :presence => true
   validates :username, :email, :uniqueness => true
-  validates :password_digest, :presence => { :message => "Password can't be blank"}
+  validates :password_digest, :presence => { :message => "Password can't be blank" }
   validates :password, :length => { :minimum => 6, :allow_nil => true }
 
   after_initialize :ensure_session_token!
@@ -58,6 +58,14 @@ class User < ActiveRecord::Base
     user.verify_password(password) ? user : nil
   end
 
+  def self.digest_password(password)
+    BCrypt::Password.create(password)
+  end
+
+  def self.generate_session_token
+    SecureRandom::urlsafe_base64(32)
+  end
+
   def album_reputation
     return 0 if self.albums.empty?
     self.albums.all.map(&:points).inject(&:+)
@@ -68,13 +76,9 @@ class User < ActiveRecord::Base
     self.comments.all.map(&:points).inject(&:+)
   end
 
-  def ensure_session_token!
-    self.session_token || self.reset_session_token!
-  end
-
   def password=(password)
     @password = password
-    self.password_digest = BCrypt::Password.create(password)
+    self.password_digest = User.digest_password(password)
   end
 
   def total_reputation
@@ -85,7 +89,11 @@ class User < ActiveRecord::Base
     BCrypt::Password.new(self.password_digest) == password
   end
 
+  def ensure_session_token!
+    self.session_token || self.reset_session_token!
+  end
+
   def reset_session_token!
-    self.session_token = SecureRandom::urlsafe_base64(32)
+    self.session_token = User.generate_session_token
   end
 end

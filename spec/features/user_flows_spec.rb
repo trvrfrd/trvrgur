@@ -22,11 +22,8 @@ describe "sign up" do
 end
 
 describe "sign in" do
-  let(:user) do
-    # doing this rather than fixtures because of complications around
-    # password_digest and session_token creation, handled easiest at model level
-    User.create!(username: "whatever", email: "fake@example.com", password: "password123")
-  end
+  fixtures(:users)
+  let(:user) { users(:normal_user) }
 
   before(:each) do
     visit root_path
@@ -51,7 +48,7 @@ describe "sign in" do
 
   it "gives an error and does not sign in with incorrect password" do
     fill_in "username or email", with: user.username
-    fill_in "password", with: "secret"
+    fill_in "password", with: "wrong password for sure"
     click_button "sign in"
     expect(current_path).to eq new_session_path
     expect(page).to have_content "incorrect username or password"

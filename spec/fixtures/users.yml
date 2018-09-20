@@ -1,0 +1,5 @@
+normal_user:
+  email: normal_user@example.com
+  username: mr_normal
+  password_digest: <%= User.digest_password("password123") %>
+  session_token: <%= User.generate_session_token %>
