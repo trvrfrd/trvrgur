@@ -12,7 +12,7 @@ gem 'jquery-rails'
 gem 'bcrypt-ruby'
 gem 'figaro'
 gem 'paperclip'
-gem 'aws-sdk'
+gem 'aws-sdk-v1'
 gem 'newrelic_rpm'
 
 group :assets do
