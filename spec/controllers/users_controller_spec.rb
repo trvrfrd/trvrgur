@@ -55,7 +55,7 @@ RSpec.describe UsersController do
     it "renders :edit form for logged in user" do
       log_in_as user
       get :edit, id: user.id
-      expect(response).to have_http_status 200
+      expect(response).to be_successful
       expect(response).to render_template :edit
       expect(assigns(:user).id).to eq user.id
     end
@@ -75,7 +75,7 @@ RSpec.describe UsersController do
   describe "GET #new" do
     it "responds with success and renders template :new with a fresh User" do
       get :new
-      expect(response).to have_http_status 200
+      expect(response).to be_successful
       expect(response).to render_template :new
       expect(assigns(:user)).to be_new_record
     end
@@ -91,7 +91,7 @@ RSpec.describe UsersController do
   describe "GET #show" do
     it "shows user successfully(?)" do
       get :show, id: user.id
-      expect(response).to have_http_status 200
+      expect(response).to be_successful
       expect(response).to render_template :show
       expect(assigns(:user).id).to eq user.id
     end
