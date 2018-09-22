@@ -34,4 +34,15 @@ Trvrgur::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  # Paperclip defaults for AWS S3:
+  # these are obviously fake! we will mock them anyway
+  config.paperclip_defaults = {
+    :storage => :s3,
+    :s3_credentials => {
+      :bucket => "test",
+      :access_key_id => "test",
+      :secret_access_key => "test"
+    }
+  }
 end
