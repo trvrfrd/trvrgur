@@ -36,6 +36,7 @@ Trvrgur::Application.configure do
   config.assets.debug = true
 
   # Paperclip defaults for AWS S3:
+  # (these are loaded by Figaro and stored in config/application.yml)
   config.paperclip_defaults = {
     :storage => :s3,
     :s3_credentials => {
