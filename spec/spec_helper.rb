@@ -1,4 +1,12 @@
 require "webmock/rspec"
+require "capybara/rspec"
+require "capybara-webkit"
+
+Capybara.javascript_driver = :webkit
+
+Capybara::Webkit.configure do |config|
+  config.block_unknown_urls
+end
 
 module ControllerHelpers
   def log_in_as user

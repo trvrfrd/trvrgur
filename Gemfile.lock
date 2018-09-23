@@ -52,6 +52,9 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (>= 2.0, < 4.0)
+    capybara-webkit (1.15.0)
+      capybara (>= 2.3, < 4.0)
+      json
     climate_control (0.2.0)
     cocaine (0.5.8)
       climate_control (>= 0.0.3, < 1.0)
@@ -204,6 +207,7 @@ DEPENDENCIES
   backbone-on-rails
   bcrypt-ruby
   capybara
+  capybara-webkit
   coffee-rails
   ejs
   figaro
