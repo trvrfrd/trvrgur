@@ -1,12 +1,14 @@
-require "webmock/rspec"
 require "capybara/rspec"
 require "capybara-webkit"
+require "webmock/rspec"
 
 Capybara.javascript_driver = :webkit
 
 Capybara::Webkit.configure do |config|
   config.block_unknown_urls
 end
+
+WebMock.disable_net_connect! allow_locahost: true, allow: '127.0.0.1'
 
 module ControllerHelpers
   def log_in_as user
