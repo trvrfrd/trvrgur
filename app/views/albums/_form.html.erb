@@ -35,7 +35,7 @@
   <% else %>
     <h3>(include at least one image)</h3>
     <br>
-    <%= render "image_form", :image => Image.new, :i => rand %>
+    <%= render "image_form", :image => Image.new, :i => 0 %>
   <% end %>
 
   <br>
@@ -48,8 +48,10 @@
 </form>
 
 <script type="text/javascript">
+  var i = 1;
   $('form').on('click', '#append-image-form', function (event) {
     event.preventDefault();
-    $(this).before(JST['images/_form']({ i:Math.random() }));
+    $(this).before(JST['images/_form']({ i:i }));
+    i++;
   });
 </script>
