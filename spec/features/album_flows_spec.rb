@@ -1,6 +1,8 @@
 require "rails_helper"
 
-describe "creating an album" do
+# TODO: actually test the images get on the page somehow
+describe "creating an album", js: true do
+  before(:each) { visit new_album_path }
   let(:file_path) { "#{Rails.root}/spec/fixtures/files/image.png" }
 
   describe "success" do
@@ -9,11 +11,89 @@ describe "creating an album" do
         .to_return(status: 200)
     end
 
-    it "works when not logged in, without title or description" do
-      visit new_album_path
-      attach_file "image_file", file_path
+    describe "when not logged in" do
+      it "creates an album without title or description, with one image" do
+        attach_file "image_file", file_path
+        click_on "create album"
+        expect(page).to have_content "album created successfully"
+        find('a.album-link:last-child').click # lol this is dumb who am i
+        expect(page).to have_content "created by: anonymous"
+      end
+
+      it "creates an album without title or description, with multiples images" do
+        attach_file "image_file", file_path
+        click_on "add another image"
+        attach_file "images[1][file]", file_path # what have i done
+        click_on "add another image"
+        attach_file "images[2][file]", file_path # oh no
+        click_on "create album"
+        expect(page).to have_content "album created successfully"
+        find('a.album-link:last-child').click
+        expect(page).to have_content "created by: anonymous"
+      end
+
+      it "creates an album with title and description, with one image" do
+        fill_in "album_title", with: "my good album"
+        fill_in "album_description", with: "very good and nice"
+        attach_file "image_file", file_path
+        click_on "create album"
+        expect(page).to have_content "album created successfully"
+        find('a.album-link:last-child').click
+        expect(page).to have_content "created by: anonymous"
+        expect(page).to have_content "my good album"
+        expect(page).to have_content "very good and nice"
+      end
+    end
+
+    describe "when logged in" do
+      fixtures(:users)
+      let(:user) { users(:normal_user) }
+      before(:each) do
+        visit new_session_path
+        fill_in "username or email", with: user.username
+        fill_in "password", with: "password123"
+        click_button "sign in"
+        visit new_album_path
+      end
+
+      it "creates an album without title or description, with one image" do
+        attach_file "image_file", file_path
+        click_on "create album"
+        expect(page).to have_content "album created successfully"
+        find('a.album-link:last-child').click
+        expect(page).to have_content "created by: #{user.username}"
+      end
+
+      it "creates an album without title or description, with multiples images" do
+        attach_file "image_file", file_path
+        click_on "add another image"
+        attach_file "images[1][file]", file_path # what have i done
+        click_on "add another image"
+        attach_file "images[2][file]", file_path # oh no
+        click_on "create album"
+        expect(page).to have_content "album created successfully"
+        find('a.album-link:last-child').click
+        expect(page).to have_content "created by: #{user.username}"
+      end
+
+      it "creates an album with title and description, with one image" do
+        fill_in "album_title", with: "my good album"
+        fill_in "album_description", with: "very good and nice"
+        attach_file "image_file", file_path
+        click_on "create album"
+        expect(page).to have_content "album created successfully"
+        find('a.album-link:last-child').click
+        expect(page).to have_content "created by: #{user.username}"
+        expect(page).to have_content "my good album"
+        expect(page).to have_content "very good and nice"
+      end
+    end
+  end
+
+  describe "failure" do
+    it "shows an error when creating an album without an image" do
       click_on "create album"
-      expect(page).to have_content "album created successfully"
+      expect(page).to have_content "Images can't be blank"
     end
   end
 end
