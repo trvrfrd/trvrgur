@@ -1,0 +1,6 @@
+image_1:
+  title: whatever
+  description: words about image
+  album: with_one_image
+  uploader: normal_user
+  file_file_name: "image.png" # prevents blowups in :js feature specs somehow?!
