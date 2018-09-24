@@ -1,7 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Image do
-  let(:file) { File.new("#{Rails.root}/spec/fixtures/files/image.png") }
+  let(:file_path) { "#{Rails.root}/spec/fixtures/files/image.png" }
+  let(:file) { File.new(file_path) }
 
   it "doesn't explode when instantiated without params" do
     expect { Image.new }.not_to raise_exception

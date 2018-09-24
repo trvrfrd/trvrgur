@@ -1,5 +1,6 @@
 class AlbumsController < ApplicationController
   before_filter :require_logged_in, :except => [:create, :index, :new, :show]
+
   def create
     begin
       ActiveRecord::Base.transaction do
@@ -34,6 +35,7 @@ class AlbumsController < ApplicationController
     end
   end
 
+  # TODO: this should redirect somewhere if current user doesn't own album!
   def destroy
     @album = Album.find(params[:id])
     @album.destroy
@@ -53,6 +55,7 @@ class AlbumsController < ApplicationController
     render :show
   end
 
+  # TODO: this should redirect somewhere if current user doesn't own album!
   def edit
     @album = Album.includes(:images, :creator).find(params[:id])
     render :edit
@@ -110,7 +113,7 @@ class AlbumsController < ApplicationController
       flash.now[:alerts] ||= []
       flash.now[:alerts] += @album.errors.full_messages
       flash.now[:alerts] += @album.images.map { |i| i.errors.full_messages }
-      render :new
+      render :edit
     else
       redirect_to root_url
     end

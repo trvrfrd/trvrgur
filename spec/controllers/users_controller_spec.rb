@@ -17,7 +17,7 @@ RSpec.describe UsersController do
       allow_any_instance_of(User).to receive(:save).and_return(false)
       post :create
       expect(response).to render_template :new
-      expect(assigns(:user)).to be_present
+      expect(assigns(:user)).to be_a_new_record
     end
 
     it "redirects to home page when there is already a user logged in" do
