@@ -7,25 +7,18 @@ RSpec.describe AlbumsController do
 
   describe "POST #create" do
     it "redirects to home page when album saved successfully" do
-      # this is some ugly shit for an ugly controller action
-      allow_any_instance_of(Album).to receive(:save).and_return(true)
-      allow_any_instance_of(Album).to receive(:valid?).and_return(true)
-      allow_any_instance_of(Image).to receive(:save).and_return(true)
-      allow_any_instance_of(Image).to receive(:valid?).and_return(true)
+      allow_any_instance_of(CreateAlbum).to receive(:create!).and_return(true)
 
-      post :create, images: {} # action calls .each on this so it's required
+      post :create
       expect(response).to redirect_to root_url
     end
 
     pending "creates associated images"
 
     it "renders :new form when album not saved successfully" do
-      allow_any_instance_of(Album).to receive(:save).and_return(false)
-      allow_any_instance_of(Album).to receive(:valid?).and_return(false)
-      allow_any_instance_of(Image).to receive(:save).and_return(false)
-      allow_any_instance_of(Image).to receive(:valid?).and_return(false)
+      allow_any_instance_of(CreateAlbum).to receive(:create!).and_raise
 
-      post :create, images: {} # action calls .each on this so it's required
+      post :create
       expect(response).to render_template :new
       expect(assigns(:album)).to be_a_new_record
     end

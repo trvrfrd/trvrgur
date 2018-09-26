@@ -2,27 +2,11 @@ class AlbumsController < ApplicationController
   before_filter :require_logged_in, :except => [:create, :index, :new, :show]
 
   def create
+    creator = CreateAlbum.new(album_params)
+    @album = creator.album
+    @images = creator.images
     begin
-      ActiveRecord::Base.transaction do
-
-        @album = Album.new(params[:album])
-        @album.creator_id = current_user ? current_user.id : nil
-
-        @images = params[:images].map do |_,  image_params|
-          next if image_params[:file].nil?
-          Image.new(image_params)
-        end.compact
-
-        @images.each do |image|
-          image.uploader_id = current_user ? current_user.id : nil
-          image.save
-        end
-
-        @album.image_ids += @images.map(&:id)
-        @album.save
-
-        raise "invalid" unless @album.valid? && @images.all?(&:valid?)
-      end
+      ActiveRecord::Base.transaction { creator.create! }
     rescue
       flash.now[:alerts] ||= []
       flash.now[:alerts] += @album.errors.full_messages
@@ -131,5 +115,17 @@ class AlbumsController < ApplicationController
     end
     @album.save
     render :show
+  end
+
+  private
+
+  def album_params
+    image_params = params[:images] ? params[:images].values.keep_if { |i| i[:file].present? } : []
+    {
+      title: params[:album].try(:fetch, :title),
+      description: params[:album].try(:fetch, :description),
+      creator_id: current_user.try(:id),
+      image_params: image_params
+    }
   end
 end

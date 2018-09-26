@@ -1,5 +1,5 @@
 class Image < ActiveRecord::Base
-  attr_accessible :description, :title, :user_id, :album_id, :file
+  attr_accessible :description, :title, :uploader_id, :album_id, :file
 
   has_attached_file :file,
     :styles => {
