@@ -97,3 +97,53 @@ describe "creating an album", js: true do
     end
   end
 end
+
+describe "upvoting and downvoting", js: true do
+  before(:each) do
+    visit root_path
+    find(".album-link:first-of-type").click
+  end
+
+  describe "when logged in" do
+    fixtures(:users)
+    let(:user) { users(:normal_user) }
+
+    before(:each) do
+      visit new_session_path
+      fill_in "username or email", with: user.username
+      fill_in "password", with: "password123"
+      click_button "sign in"
+      visit root_path
+      find(".album-link:first-of-type").click
+    end
+
+    it "increments point count by clicking upvote, cancels by clicking again" do
+      expect(page).to have_content "points: 0"
+      find(".upvote").click
+      expect(page).to have_content "points: 1"
+      find(".upvote").click
+      expect(page).to have_content "points: 0"
+    end
+
+    it "decrements point count by clicking downvote, cancels by clicking again" do
+      expect(page).to have_content "points: 0"
+      find(".downvote").click
+      expect(page).to have_content "points: -1"
+      find(".downvote").click
+      expect(page).to have_content "points: 0"
+    end
+
+    pending "can't upvote and downvote the same album"
+  end
+
+  it "does nothing when logged out" do
+    expect(page).to have_content "points: 0"
+    find(".upvote").click
+    expect(page).not_to have_content "points: 1"
+    find(".downvote").click
+    expect(page).not_to have_content "points: -1"
+  end
+end
+
+describe "commenting" do
+end
