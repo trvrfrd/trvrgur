@@ -119,17 +119,17 @@ describe "upvoting and downvoting", js: true do
 
     it "increments point count by clicking upvote, cancels by clicking again" do
       expect(page).to have_content "points: 0"
-      find(".upvote").click
+      all(".upvote").first.click
       expect(page).to have_content "points: 1"
-      find(".upvote").click
+      all(".upvote").first.click
       expect(page).to have_content "points: 0"
     end
 
     it "decrements point count by clicking downvote, cancels by clicking again" do
       expect(page).to have_content "points: 0"
-      find(".downvote").click
+      all(".downvote").first.click
       expect(page).to have_content "points: -1"
-      find(".downvote").click
+      all(".downvote").first.click
       expect(page).to have_content "points: 0"
     end
 
@@ -138,12 +138,96 @@ describe "upvoting and downvoting", js: true do
 
   it "does nothing when logged out" do
     expect(page).to have_content "points: 0"
-    find(".upvote").click
+    all(".upvote").first.click
     expect(page).not_to have_content "points: 1"
-    find(".downvote").click
+    all(".downvote").first.click
     expect(page).not_to have_content "points: -1"
   end
 end
 
-describe "commenting" do
+describe "commenting", js: true do
+  describe "when logged in" do
+    fixtures(:users)
+    let(:user) { users(:normal_user) }
+
+    before(:each) do
+      visit new_session_path
+      fill_in "username or email", with: user.username
+      fill_in "password", with: "password123"
+      click_button "sign in"
+      visit root_path
+      find(".album-link:first-of-type").click
+    end
+
+    it "adds a comment to album" do
+      click_button "add a comment"
+      fill_in "comment-body", with: "i like ur pix :D"
+      click_button "submit"
+      expect(page).to have_content "posted by #{user.username}"
+      expect(page).to have_content "i like ur pix :D"
+    end
+
+    it "replies to an existing comment" do
+      all(".reply").first.click
+      fill_in "comment-body", with: "i like ur comment :D"
+      click_button "submit"
+      expect(page).to have_content "posted by #{user.username}"
+      expect(page).to have_content "i like ur comment :D"
+    end
+
+    it "upvotes an existing comment" do
+      dom_id = "#" + all(".comment").first[:id]
+      expect(find(dom_id)).to have_content "0 points"
+      find(dom_id).find(".upvote").click
+      expect(find(dom_id)).to have_content "1 points"
+      find(dom_id).find(".upvote").click
+      expect(find(dom_id)).to have_content "0 points"
+    end
+
+    it "downvotes an existing comment" do
+      dom_id = "#" + all(".comment").first[:id]
+      expect(find(dom_id)).to have_content "0 points"
+      find(dom_id).find(".downvote").click
+      expect(find(dom_id)).to have_content "-1 points"
+      find(dom_id).find(".downvote").click
+      expect(find(dom_id)).to have_content "0 points"
+    end
+
+    pending "can't upvote and downvote the same comment"
+  end
+
+  describe "when not logged in" do
+    before(:each) do
+      visit root_path
+      find(".album-link:first-of-type").click
+    end
+
+    it "can't add a comment to album" do
+      click_button "add a comment"
+      fill_in "comment-body", with: "logged out comment"
+      click_button "submit"
+      expect(page).not_to have_content "logged out comment"
+    end
+
+    it "can't reply to an existing comment" do
+      all(".reply").first.click
+      fill_in "comment-body", with: "logged out reply"
+      click_button "submit"
+      expect(page).not_to have_content "logged out reply"
+    end
+
+    it "can't upvote an existing comment" do
+      dom_id = "#" + all(".comment").first[:id]
+      expect(find(dom_id)).to have_content "0 points"
+      find(dom_id).find(".upvote").click
+      expect(find(dom_id)).not_to have_content "1 points"
+    end
+
+    it "can't downvote an existing comment" do
+      dom_id = "#" + all(".comment").first[:id]
+      expect(find(dom_id)).to have_content "0 points"
+      find(dom_id).find(".downvote").click
+      expect(find(dom_id)).not_to have_content "-1 points"
+    end
+  end
 end

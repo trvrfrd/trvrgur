@@ -4,8 +4,8 @@
   <% var commentModalId = 'comment-modal-' + comment.id %>
   <%= JST["albums/_comment_modal"]({ comment: comment, commentModalId: commentModalId }) %>
 
-  <ul>
-    <li>
+  <ul class="comments">
+    <li id=<%= "comment_" + comment.id  %> class="comment">
       <% var author = comment.get("author") %>
       posted by
       <a href="<%= '#/users/' + author.id %>">
@@ -28,7 +28,7 @@
       </button>
       <button
         type="button"
-        class="btn btn-sm btn-default"
+        class="reply btn btn-sm btn-default"
         data-toggle="modal"
         data-target="#<%= commentModalId %>">
         <span class="glyphicon glyphicon-comment"></span>
