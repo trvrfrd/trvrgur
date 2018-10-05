@@ -45,7 +45,28 @@ RSpec.describe AlbumsController do
     pending "doesn't destroy album that doesn't belong to logged-in user"
   end
 
-  pending "#downvote"
+  describe "GET #downvote" do
+    let(:album) { user.albums.first }
+
+    it "redirects to login page when not logged in" do
+      xhr :get, :downvote, id: album.id
+      expect(response).to redirect_to new_session_url
+    end
+
+    # this is testing too much but whatever the implementation is bad
+    it "downvotes album and renders :show" do
+      log_in_as user
+      expect { xhr :get, :downvote, id: album.id }.to change{ album.reload.downvote_count }.by(1)
+      expect(response).to render_template :show
+    end
+
+    it "undoes downvote if it already exists" do
+      log_in_as user
+      xhr :get, :downvote, id: album.id
+      expect { xhr :get, :downvote, id: album.id }.to change{ album.reload.downvote_count }.by(-1)
+      expect(response).to render_template :show
+    end
+  end
 
   describe "GET #edit" do
     let(:album) { user.albums.first }
@@ -70,7 +91,29 @@ RSpec.describe AlbumsController do
     pending "doesn't edit album that doesn't belong to logged-in user"
   end
 
-  pending "#favorite"
+  describe "GET #favorite" do
+    let(:album) { user.albums.first }
+
+    it "redirects to login page when not logged in" do
+      xhr :get, :favorite, id: album.id
+      expect(response).to redirect_to new_session_url
+    end
+
+    it "favorites album and renders :show" do
+      log_in_as user
+      expect_any_instance_of(Album).to receive(:favoriting_user_ids=).with([user.id]) # o lord
+      xhr :get, :favorite, id: album.id
+      expect(response).to render_template :show
+    end
+
+    it "undoes favorite if it already exists" do
+      log_in_as user
+      xhr :get, :favorite, id: album.id
+      expect_any_instance_of(Album).to receive(:favoriting_user_ids=).with([]) # o lord
+      xhr :get, :favorite, id: album.id
+      expect(response).to render_template :show
+    end
+  end
 
   describe "GET #index" do
     it "renders :index" do # this seems not like a high-value test
@@ -154,5 +197,26 @@ RSpec.describe AlbumsController do
     pending "doesn't update album that doesn't belong to logged-in user"
   end
 
-  pending "#upvote"
+  describe "GET #upvote" do
+    let(:album) { user.albums.first }
+
+    it "redirects to login page when not logged in" do
+      xhr :get, :upvote, id: album.id
+      expect(response).to redirect_to new_session_url
+    end
+
+    # this is testing too much but whatever the implementation is bad
+    it "upvotes album and renders :show" do
+      log_in_as user
+      expect { xhr :get, :upvote, id: album.id }.to change{ album.reload.upvote_count }.by(1)
+      expect(response).to render_template :show
+    end
+
+    it "undoes upvote if it already exists" do
+      log_in_as user
+      xhr :get, :upvote, id: album.id
+      expect { xhr :get, :upvote, id: album.id }.to change{ album.reload.upvote_count }.by(-1)
+      expect(response).to render_template :show
+    end
+  end
 end
