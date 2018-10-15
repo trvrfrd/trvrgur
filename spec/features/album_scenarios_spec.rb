@@ -48,6 +48,7 @@ describe "creating an album", js: true do
     describe "when logged in" do
       fixtures(:users)
       let(:user) { users(:normal_user) }
+
       before(:each) do
         visit new_session_path
         fill_in "username or email", with: user.username
