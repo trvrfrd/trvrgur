@@ -47,9 +47,29 @@ RSpec.describe CommentsController do
     pending "doesn't destroy comment that doesn't belong to logged-in user"
   end
 
-  pending "GET #downvote"
+  describe "GET #downvote" do
+    it "redirects to login page when not logged in" do
+      xhr :get, :downvote, id: comment.id
+      expect(response).to redirect_to new_session_url
+    end
 
-  pending "GET #edit"
+    it "downvotes comment and renders :show" do
+      log_in_as user
+
+      expect { xhr :get, :downvote, id: comment.id }.to change{ comment.reload.downvote_count }.by(1)
+      expect(response).to render_template :show
+    end
+
+    it "undoes downvote if it already exists" do
+      log_in_as user
+
+      xhr :get, :downvote, id: comment.id
+      expect { xhr :get, :downvote, id: comment.id }.to change{ comment.reload.downvote_count }.by(-1)
+      expect(response).to render_template :show
+    end
+  end
+
+  pending "GET #edit" # controller method is empty
 
   describe "GET #index" do
     it "redirects to login page when not logged in" do # for some reason?
@@ -72,7 +92,27 @@ RSpec.describe CommentsController do
     end
   end
 
-  pending "PUT #update"
+  pending "PUT #update" # controller method is empty
 
-  pending "GET #upvote"
+  describe "GET #upvote" do
+    it "redirects to login page when not logged in" do
+      xhr :get, :upvote, id: comment.id
+      expect(response).to redirect_to new_session_url
+    end
+
+    it "upvotes comment and renders :show" do
+      log_in_as user
+
+      expect { xhr :get, :upvote, id: comment.id }.to change{ comment.reload.upvote_count }.by(1)
+      expect(response).to render_template :show
+    end
+
+    it "undoes upvote if it already exists" do
+      log_in_as user
+
+      xhr :get, :upvote, id: comment.id
+      expect { xhr :get, :upvote, id: comment.id }.to change{ comment.reload.upvote_count }.by(-1)
+      expect(response).to render_template :show
+    end
+  end
 end
