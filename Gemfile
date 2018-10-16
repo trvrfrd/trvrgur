@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
-ruby '2.2.9'
+ruby '2.3.7'
 
-gem 'rails', '~> 3.2.22'
+gem 'rails', '~> 4.0.13'
 gem 'pg', '~> 0.11'
 gem 'activerecord-postgresql-adapter'
 gem 'pry-rails'
