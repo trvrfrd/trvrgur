@@ -1,5 +1,4 @@
 class Comment < ActiveRecord::Base
-  attr_accessible :album_id, :author_id, :body, :parent_comment_id
   validates :album_id, :author_id, :body, :presence => true
 
   belongs_to :album
@@ -31,14 +30,14 @@ class Comment < ActiveRecord::Base
   end
 
   def downvoted_by?(user)
-    user && self.downvoter_ids.include?(user.id)
+    user && downvoter_ids.include?(user.id)
   end
 
   def points
-    self.upvote_count - self.downvote_count
+    upvote_count - downvote_count
   end
 
   def upvoted_by?(user)
-    user && self.upvoter_ids.include?(user.id)
+    user && upvoter_ids.include?(user.id)
   end
 end

@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
   before_filter :require_logged_in, :except => [:show]
 
   def create
-    @comment = Comment.new(params[:comment])
+    @comment = Comment.new(comment_params)
     @comment.author_id = current_user.id
     if @comment.save
       render :show
@@ -63,5 +63,12 @@ class CommentsController < ApplicationController
     end
     @comment.save
     render :show
+  end
+
+
+  private
+
+  def comment_params
+    params.fetch(:comment, {}).permit(:album_id, :author_id, :body, :parent_comment_id)
   end
 end
