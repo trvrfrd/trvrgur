@@ -1,7 +1,6 @@
 require 'bcrypt'
 
 class User < ActiveRecord::Base
-  attr_accessible :email, :username, :password
   attr_reader :password
 
   validates :username, :email, :session_token, :presence => true
@@ -67,30 +66,30 @@ class User < ActiveRecord::Base
   end
 
   def album_reputation
-    return 0 if self.albums.empty?
-    self.albums.all.map(&:points).inject(&:+)
+    return 0 if albums.empty?
+    albums.all.map(&:points).inject(&:+)
   end
 
   def comment_reputation
-    return 0 if self.comments.empty?
-    self.comments.all.map(&:points).inject(&:+)
+    return 0 if comments.empty?
+    comments.all.map(&:points).inject(&:+)
   end
 
   def password=(password)
-    @password = password
+    self.password = password
     self.password_digest = User.digest_password(password)
   end
 
   def total_reputation
-    self.album_reputation + self.comment_reputation
+    album_reputation + comment_reputation
   end
 
   def verify_password(password)
-    BCrypt::Password.new(self.password_digest) == password
+    BCrypt::Password.new(password_digest) == password
   end
 
   def ensure_session_token!
-    self.session_token || self.reset_session_token!
+    session_token || reset_session_token!
   end
 
   def reset_session_token!

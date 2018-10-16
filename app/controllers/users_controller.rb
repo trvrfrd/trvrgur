@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_filter :require_logged_in, :only => [:edit, :update, :destroy]
 
   def create
-    @user = User.new(params[:user])
+    @user = User.new(user_params)
     if @user.save
       login_user!(@user)
       redirect_to root_url
@@ -38,10 +38,17 @@ class UsersController < ApplicationController
   # TODO: this should redirect somewhere if not updating current user!!!
   def update
     @user = User.find(params[:id])
-    if @user.update_attributes(params[:user])
+    if @user.update_attributes(user_params)
       redirect_to user_url(@user)
     else
       render :edit
     end
+  end
+
+
+  private
+
+  def user_params
+    params.fetch(:user, {}).permit(:email, :username, :password)
   end
 end
