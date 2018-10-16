@@ -76,7 +76,7 @@ class User < ActiveRecord::Base
   end
 
   def password=(password)
-    self.password = password
+    @password = password # we don't want infinite recursion LOL
     self.password_digest = User.digest_password(password)
   end
 
