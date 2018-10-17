@@ -2,7 +2,7 @@ class AlbumsController < ApplicationController
   before_filter :require_logged_in, :except => [:create, :index, :new, :show]
 
   def create
-    creator = CreateAlbum.new(album_params)
+    creator = CreateAlbum.new(new_album_params)
     @album = creator.album
     @images = creator.images
     begin
@@ -77,7 +77,7 @@ class AlbumsController < ApplicationController
     begin
       ActiveRecord::Base.transaction do
 
-        @album.update_attributes(params[:album])
+        @album.update_attributes(album_params)
 
         params[:images].each do |id, image_params|
           image = @album.images.find_by_id(id) || @album.images.build(image_params)
@@ -117,15 +117,21 @@ class AlbumsController < ApplicationController
     render :show
   end
 
+
   private
 
   def album_params
-    image_params = params[:images] ? params[:images].values.keep_if { |i| i[:file].present? } : []
-    {
-      title: params[:album].try(:fetch, :title),
-      description: params[:album].try(:fetch, :description),
+    params.fetch(:album, {}).permit(:description, :title, :creator_id)
+  end
+
+  def image_params
+    params[:images] ? params[:images].values.keep_if { |i| i[:file].present? } : []
+  end
+
+  def new_album_params
+    album_params.merge(
       creator_id: current_user.try(:id),
       image_params: image_params
-    }
+    ).symbolize_keys # needed to work w/CreateAlbum keyword args
   end
 end

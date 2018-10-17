@@ -1,5 +1,4 @@
 class Album < ActiveRecord::Base
-  attr_accessible :description, :title, :creator_id
   validates :images, :presence => true
 
   belongs_to :creator,
@@ -28,7 +27,7 @@ class Album < ActiveRecord::Base
   end
 
   def comments_by_parent_id
-    comments = self.comments.all
+    comments = comments.all
     result = Hash.new { |hash, key| hash[key] = [] }
 
     comments.each do |c|
@@ -39,18 +38,18 @@ class Album < ActiveRecord::Base
   end
 
   def favorited_by?(user)
-    user && self.favoriting_user_ids.include?(user.id)
+    user && favoriting_user_ids.include?(user.id)
   end
 
   def downvoted_by?(user)
-    user && self.downvoter_ids.include?(user.id)
+    user && downvoter_ids.include?(user.id)
   end
 
   def points
-    self.upvote_count - self.downvote_count
+    upvote_count - downvote_count
   end
 
   def upvoted_by?(user)
-    user && self.upvoter_ids.include?(user.id)
+    user && upvoter_ids.include?(user.id)
   end
 end

@@ -2,7 +2,7 @@ class ImagesController < ApplicationController
   before_filter :require_logged_in, :only => [:edit, :update, :destroy]
 
   def create
-    @image = Image.new(params[:image])
+    @image = Image.new(image_params)
     @image.uploader_id = current_user ? current_user.id : nil
     if @image.save
       flash[:notices] ||= []
@@ -44,7 +44,7 @@ class ImagesController < ApplicationController
   end
 
   def update
-    @image = Image.find(params[:id])
+    @image = Image.find(image_params)
     if @image.update_attributes(params[:image])
       flash[:notices] ||= []
       flash[:notices] << "image updated successfully"
@@ -56,4 +56,10 @@ class ImagesController < ApplicationController
     end
   end
 
+
+  private
+
+  def image_params
+    params.fetch(:image, {}).permit(:description, :title, :uploader_id, :album_id, :file)
+  end
 end
