@@ -57,7 +57,7 @@ class AlbumsController < ApplicationController
   end
 
   def index
-    @albums = Album.fetch.all
+    @albums = Album.fetch.load
     render :index
   end
 

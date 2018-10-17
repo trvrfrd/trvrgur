@@ -67,21 +67,21 @@ class User < ActiveRecord::Base
 
   def album_reputation
     return 0 if albums.empty?
-    albums.all.map(&:points).inject(&:+)
+    albums.to_a.map(&:points).inject(&:+)
   end
 
   def comment_reputation
     return 0 if comments.empty?
-    comments.all.map(&:points).inject(&:+)
+    comments.to_a.map(&:points).inject(&:+)
+  end
+
+  def total_reputation
+    album_reputation + comment_reputation
   end
 
   def password=(password)
     @password = password # we don't want infinite recursion LOL
     self.password_digest = User.digest_password(password)
-  end
-
-  def total_reputation
-    album_reputation + comment_reputation
   end
 
   def verify_password(password)

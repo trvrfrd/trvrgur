@@ -27,7 +27,7 @@ class Album < ActiveRecord::Base
   end
 
   def comments_by_parent_id
-    comments = comments.all
+    comments = comments.to_a
     result = Hash.new { |hash, key| hash[key] = [] }
 
     comments.each do |c|
