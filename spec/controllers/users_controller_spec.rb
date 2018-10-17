@@ -97,7 +97,7 @@ RSpec.describe UsersController do
     end
   end
 
-  describe "PUT #update" do
+  describe "PATCH #update" do
     it "redirects to User show page when successful" do
       allow_any_instance_of(User).to receive(:update_attributes).and_return true
       log_in_as user

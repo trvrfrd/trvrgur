@@ -146,7 +146,7 @@ RSpec.describe AlbumsController do
     end
   end
 
-  describe "PUT #update" do
+  describe "PATCH #update" do
     let(:album) { user.albums.first }
     let(:image) { album.images.first }
 

@@ -92,7 +92,7 @@ RSpec.describe CommentsController do
     end
   end
 
-  pending "PUT #update" # controller method is empty
+  pending "PATCH #update" # controller method is empty
 
   describe "GET #upvote" do
     it "redirects to login page when not logged in" do

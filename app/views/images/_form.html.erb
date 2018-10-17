@@ -3,7 +3,7 @@
 
 <form action="<%= action %>" method="POST" enctype="multipart/form-data">
   <% if image.persisted? %>
-    <input type="hidden" name="_method" value="PUT">
+    <input type="hidden" name="_method" value="PATCH">
   <% end %>
 
   <input
