@@ -5,7 +5,7 @@ describe "uploading an image" do
 
   describe "success" do
     before(:each) do
-      stub_request(:put, Regexp.new("https://test.s3.us-east-2.amazonaws.com/images/files/"))
+      stub_request(:put, Regexp.new("https://test.s3.test.amazonaws.com/images/files/"))
         .to_return(status: 200)
     end
 

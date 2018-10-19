@@ -50,6 +50,6 @@ Rails.application.configure do
       :access_key_id => "test",
       :secret_access_key => "test"
     },
-    :s3_region => ENV["AWS_REGION"]
+    :s3_region => "test"
   }
 end
