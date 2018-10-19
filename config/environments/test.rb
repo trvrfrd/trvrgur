@@ -46,6 +46,7 @@ Rails.application.configure do
       :bucket => "test",
       :access_key_id => "test",
       :secret_access_key => "test"
-    }
+    },
+    :s3_region => ENV["AWS_REGION"]
   }
 end
