@@ -7,11 +7,5 @@ Rails.application.config.assets.version = '1.0'
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
 
-# add vendor assets (Bootstrap)
-Rails.application.config.assets.paths << "#{Rails.root}/vender/assets/*"
-Rails.application.config.assets.paths << "#{Rails.root}/vender/assets/fonts"
-Rails.application.config.assets.paths << "#{Rails.root}/vender/assets/javascripts"
-Rails.application.config.assets.paths << "#{Rails.root}/vender/assets/stylesheets"
-Rails.application.config.assets.precompile << Proc.new do |path|
-  true if path =~ /\.(eot|svg|ttf|woff|otf)\z/
-end
+# make sure Bootstrap vendor fonts get precompiled
+Rails.application.config.assets.precompile << /\.(?:svg|eot|woff|ttf)\z/
