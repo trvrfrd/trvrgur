@@ -18,18 +18,19 @@ describe "creating an album", js: true do
         expect(page).to have_content "album created successfully"
         find('a.album-link:last-child').click # lol this is dumb who am i
         expect(page).to have_content "created by: anonymous"
+        expect(page).to have_xpath("//img[contains(@src, #{file_path.split('/').last})]")
       end
 
       it "creates an album without title or description, with multiples images" do
-        attach_file "image_file", file_path
-        click_on "add another image"
-        attach_file "images[1][file]", file_path # what have i done
-        click_on "add another image"
-        attach_file "images[2][file]", file_path # oh no
+        3.times do |n|
+          click_on "add another image"
+          attach_file "images[#{n}][file]", file_path # what have i done
+        end
         click_on "create album"
         expect(page).to have_content "album created successfully"
         find('a.album-link:last-child').click
         expect(page).to have_content "created by: anonymous"
+        expect(page).to have_xpath("//img[contains(@src, #{file_path.split('/').last})]", count: 3)
       end
 
       it "creates an album with title and description, with one image" do
@@ -63,18 +64,19 @@ describe "creating an album", js: true do
         expect(page).to have_content "album created successfully"
         find('a.album-link:last-child').click
         expect(page).to have_content "created by: #{user.username}"
+        expect(page).to have_xpath("//img[contains(@src, #{file_path.split('/').last})]")
       end
 
       it "creates an album without title or description, with multiples images" do
-        attach_file "image_file", file_path
-        click_on "add another image"
-        attach_file "images[1][file]", file_path # what have i done
-        click_on "add another image"
-        attach_file "images[2][file]", file_path # oh no
+        3.times do |n|
+          click_on "add another image"
+          attach_file "images[#{n}][file]", file_path # what have i done
+        end
         click_on "create album"
         expect(page).to have_content "album created successfully"
         find('a.album-link:last-child').click
         expect(page).to have_content "created by: #{user.username}"
+        expect(page).to have_xpath("//img[contains(@src, #{file_path.split('/').last})]", count: 3)
       end
 
       it "creates an album with title and description, with one image" do
