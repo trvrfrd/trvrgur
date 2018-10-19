@@ -36,6 +36,7 @@ end
 
 group :test do
   gem 'capybara'
-  gem 'capybara-webkit'
+  # this feels risky but fixes a really obnoxious deprecation warning from Capybara
+  gem 'capybara-webkit', github: 'thoughtbot/capybara-webkit', branch: 'master'
   gem 'webmock'
 end
