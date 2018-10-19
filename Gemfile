@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.3.7'
 
-gem 'rails', '~> 4.1.16'
+gem 'rails', '~> 4.2.10'
 gem 'pg', '~> 0.11'
 gem 'activerecord-postgresql-adapter'
 gem 'pry-rails'
@@ -11,8 +11,8 @@ gem 'ejs'
 gem 'jquery-rails'
 gem 'bcrypt-ruby'
 gem 'figaro'
-gem 'paperclip'
-gem 'aws-sdk-v1'
+gem 'paperclip', '~> 5'
+gem 'aws-sdk', '~> 2'
 gem 'newrelic_rpm'
 
 group :assets do
