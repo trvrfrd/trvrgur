@@ -11,8 +11,8 @@ gem 'ejs'
 gem 'jquery-rails'
 gem 'bcrypt-ruby'
 gem 'figaro'
-gem 'paperclip', '~> 5'
-gem 'aws-sdk', '~> 2'
+gem 'paperclip'
+gem 'aws-sdk-s3'
 gem 'newrelic_rpm'
 
 group :assets do

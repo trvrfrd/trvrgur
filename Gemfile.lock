@@ -49,13 +49,20 @@ GEM
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
     arel (6.0.4)
-    aws-sdk (2.11.154)
-      aws-sdk-resources (= 2.11.154)
-    aws-sdk-core (2.11.154)
+    aws-eventstream (1.0.1)
+    aws-partitions (1.105.0)
+    aws-sdk-core (3.32.0)
+      aws-eventstream (~> 1.0)
+      aws-partitions (~> 1.0)
       aws-sigv4 (~> 1.0)
       jmespath (~> 1.0)
-    aws-sdk-resources (2.11.154)
-      aws-sdk-core (= 2.11.154)
+    aws-sdk-kms (1.9.0)
+      aws-sdk-core (~> 3, >= 3.26.0)
+      aws-sigv4 (~> 1.0)
+    aws-sdk-s3 (1.21.0)
+      aws-sdk-core (~> 3, >= 3.26.0)
+      aws-sdk-kms (~> 1)
+      aws-sigv4 (~> 1.0)
     aws-sigv4 (1.0.3)
     backbone-on-rails (1.2.0.0)
       eco
@@ -125,7 +132,7 @@ GEM
     newrelic_rpm (5.4.0.347)
     nokogiri (1.8.5)
       mini_portile2 (~> 2.3.0)
-    paperclip (5.3.0)
+    paperclip (6.1.0)
       activemodel (>= 4.2.0)
       activesupport (>= 4.2.0)
       mime-types
@@ -233,7 +240,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-postgresql-adapter
-  aws-sdk (~> 2)
+  aws-sdk-s3
   backbone-on-rails
   bcrypt-ruby
   capybara
@@ -243,7 +250,7 @@ DEPENDENCIES
   figaro
   jquery-rails
   newrelic_rpm
-  paperclip (~> 5)
+  paperclip
   pg (~> 0.11)
   pry-rails
   quiet_assets
