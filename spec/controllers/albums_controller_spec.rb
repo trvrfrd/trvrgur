@@ -151,7 +151,7 @@ RSpec.describe AlbumsController do
     let(:image) { album.images.first }
 
     it "redirects to login page when not logged in" do
-      put :update, id: album.id
+      patch :update, id: album.id
       expect(response).to redirect_to new_session_url
     end
 
@@ -162,7 +162,7 @@ RSpec.describe AlbumsController do
       allow(album).to receive(:update_attributes).and_return(true)
       allow_any_instance_of(Image).to receive(:valid?).and_return(true)
 
-      put :update, id: album.id, images: {}
+      patch :update, id: album.id, images: {}
       expect(response).to redirect_to root_url
     end
 
@@ -172,7 +172,7 @@ RSpec.describe AlbumsController do
       allow(album).to receive(:update_attributes).and_return(false)
       allow_any_instance_of(Image).to receive(:valid?).and_return(false)
 
-      put :update, id: album.id, images: {}
+      patch :update, id: album.id, images: {}
       expect(response).to render_template :edit
       expect(assigns(:album).id).to eq album.id
     end
@@ -188,7 +188,7 @@ RSpec.describe AlbumsController do
       image_params = { title: "new title" }
       expect(image).to receive(:update_attributes).with(image_params)
 
-      put :update, id: album.id, images: { image.id => image_params }
+      patch :update, id: album.id, images: { image.id => image_params }
       expect(response).to redirect_to root_url
     end
 

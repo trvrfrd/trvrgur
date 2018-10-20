@@ -101,7 +101,7 @@ RSpec.describe UsersController do
     it "redirects to User show page when successful" do
       allow_any_instance_of(User).to receive(:update_attributes).and_return true
       log_in_as user
-      put :update, id: user.id
+      patch :update, id: user.id
       expect(response).to redirect_to user_url(user)
       expect(assigns(:user).id).to eq user.id
     end
@@ -109,19 +109,19 @@ RSpec.describe UsersController do
     it "renders :edit form when unsuccessful" do
       allow_any_instance_of(User).to receive(:update_attributes).and_return false
       log_in_as user
-      put :update, id: user.id
+      patch :update, id: user.id
       expect(response).to render_template :edit
       expect(assigns(:user).id).to eq user.id
     end
 
     pending "doesn't update a user other than logged-in user" do
       log_in_as user
-      put :update, id: users(:other_normal_user).id
+      patch :update, id: users(:other_normal_user).id
       expect(response).to redirect_to root_url
     end
 
     it "redirects to login page when not logged in" do
-      put :update, id: user.id
+      patch :update, id: user.id
       expect(response).to redirect_to new_session_url
     end
   end
