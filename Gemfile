@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.4.5'
 
-gem 'rails', '~> 4.2.10'
+gem 'rails', '~> 5.0.7'
 gem 'pg', '~> 0.11'
 gem 'activerecord-postgresql-adapter'
 gem 'pry-rails'
@@ -25,7 +25,7 @@ group :development do
   # prevent rails console from blowing up?
   gem 'test-unit'
 
-  gem 'quiet_assets'
+  # gem 'quiet_assets'
   # gem 'better_errors'
   # gem 'binding_of_caller'
 end
@@ -39,4 +39,5 @@ group :test do
   # this feels risky but fixes a really obnoxious deprecation warning from Capybara
   gem 'capybara-webkit', github: 'thoughtbot/capybara-webkit', branch: 'master'
   gem 'webmock'
+  gem 'rails-controller-testing'
 end
