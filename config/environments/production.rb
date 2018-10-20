@@ -20,8 +20,8 @@ Rails.application.configure do
   # NGINX, varnish or squid.
   # config.action_dispatch.rack_cache = true
 
-  # have Rails serve static assets since we're not using a web server on Heroku
-  config.serve_static_assets = true
+  # have Rails serve static files since we're not using a web server on Heroku
+  config.serve_static_files = true
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
