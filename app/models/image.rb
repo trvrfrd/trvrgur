@@ -8,11 +8,12 @@ class Image < ApplicationRecord
   validates_attachment_presence :file
   validates_attachment_content_type :file, content_type: ["image/jpeg", "image/gif", "image/png"]
 
-  belongs_to :album
+  belongs_to :album, optional: true # should this actually be optional???
 
   belongs_to :uploader,
              :class_name => "User",
-             :foreign_key => :uploader_id
+             :foreign_key => :uploader_id,
+             optional: true
 
   before_create :associate_with_album_creator
 
