@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
-  before_filter :require_logged_in, :only => [:destroy]
-  before_filter :require_logged_out, :except => [:destroy]
+  before_action :require_logged_in, :only => [:destroy]
+  before_action :require_logged_out, :except => [:destroy]
 
   def create
     @user = User.check_credentials(params[:identity], params[:password])

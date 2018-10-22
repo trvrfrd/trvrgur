@@ -1,5 +1,5 @@
 class AlbumsController < ApplicationController
-  before_filter :require_logged_in, :except => [:create, :index, :new, :show]
+  before_action :require_logged_in, :except => [:create, :index, :new, :show]
 
   def create
     @album = Album.new(new_album_params)

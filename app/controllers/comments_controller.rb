@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_filter :require_logged_in, :except => [:show]
+  before_action :require_logged_in, :except => [:show]
 
   def create
     @comment = Comment.new(comment_params)
@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
     else
       flash[:alerts] ||= []
       flash[:alerts] += @comment.errors.full_messages
-      redirect_to :back
+      redirect_back(fallback_location: root_url)
     end
   end
 

@@ -10,7 +10,7 @@ RSpec.describe AlbumsController do
     it "redirects to home page when album saved successfully" do
       allow_any_instance_of(Album).to receive(:save).and_return(true)
 
-      post :create, album: album_params
+      post :create, params: { album: album_params }
       expect(response).to redirect_to root_url
     end
 
@@ -19,7 +19,7 @@ RSpec.describe AlbumsController do
     it "renders :new form when album not saved successfully" do
       allow_any_instance_of(Album).to receive(:save).and_return(false)
 
-      post :create, album: album_params
+      post :create, params: { album: album_params }
       expect(response).to render_template :new
       expect(assigns(:album)).to be_a_new_record
     end
@@ -29,7 +29,7 @@ RSpec.describe AlbumsController do
     let(:album) { user.albums.first }
 
     it "redirects to login page when not logged in" do
-      delete :destroy, id: album.id
+      delete :destroy, params: { id: album.id }
       expect(response).to redirect_to new_session_url
     end
 
@@ -38,7 +38,7 @@ RSpec.describe AlbumsController do
       allow(Album).to receive(:find).with(album.id.to_s).and_return(album)
       expect(album).to receive(:destroy).and_return(true)
 
-      delete :destroy, id: album.id
+      delete :destroy, params: { id: album.id }
 
       expect(response).to redirect_to root_url
     end
@@ -50,21 +50,21 @@ RSpec.describe AlbumsController do
     let(:album) { user.albums.first }
 
     it "redirects to login page when not logged in" do
-      xhr :get, :downvote, id: album.id
+      get :downvote, params: { id: album.id }, xhr: true
       expect(response).to redirect_to new_session_url
     end
 
     # this is testing too much but whatever the implementation is bad
     it "downvotes album and renders :show" do
       log_in_as user
-      expect { xhr :get, :downvote, id: album.id }.to change{ album.reload.downvote_count }.by(1)
+      expect { get :downvote, params: { id: album.id }, xhr: true }.to change{ album.reload.downvote_count }.by(1)
       expect(response).to render_template :show
     end
 
     it "undoes downvote if it already exists" do
       log_in_as user
-      xhr :get, :downvote, id: album.id
-      expect { xhr :get, :downvote, id: album.id }.to change{ album.reload.downvote_count }.by(-1)
+      get :downvote, params: { id: album.id }, xhr: true
+      expect { get :downvote, params: { id: album.id }, xhr: true }.to change{ album.reload.downvote_count }.by(-1)
       expect(response).to render_template :show
     end
   end
@@ -73,7 +73,7 @@ RSpec.describe AlbumsController do
     let(:album) { user.albums.first }
 
     it "redirects to login page when not logged in" do
-      get :edit, id: album.id
+      get :edit, params: { id: album.id }
       expect(response).to redirect_to new_session_url
     end
 
@@ -82,7 +82,7 @@ RSpec.describe AlbumsController do
       allow(Album).to receive(:includes).and_return(Album) # deeply bad
       allow(Album).to receive(:find).with(album.id.to_s).and_return(album)
 
-      get :edit, id: album.id
+      get :edit, params: { id: album.id }
 
       expect(response).to be_successful
       expect(response).to render_template :edit
@@ -96,22 +96,22 @@ RSpec.describe AlbumsController do
     let(:album) { user.albums.first }
 
     it "redirects to login page when not logged in" do
-      xhr :get, :favorite, id: album.id
+      get :favorite, params: { id: album.id }, xhr: true
       expect(response).to redirect_to new_session_url
     end
 
     it "favorites album and renders :show" do
       log_in_as user
       expect_any_instance_of(Album).to receive(:favoriting_user_ids=).with([user.id]) # o lord
-      xhr :get, :favorite, id: album.id
+      get :favorite, params: { id: album.id }, xhr: true
       expect(response).to render_template :show
     end
 
     it "undoes favorite if it already exists" do
       log_in_as user
-      xhr :get, :favorite, id: album.id
+      get :favorite, params: { id: album.id }, xhr: true
       expect_any_instance_of(Album).to receive(:favoriting_user_ids=).with([]) # o lord
-      xhr :get, :favorite, id: album.id
+      get :favorite, params: { id: album.id }, xhr: true
       expect(response).to render_template :show
     end
   end
@@ -140,7 +140,7 @@ RSpec.describe AlbumsController do
     it "renders :show with specified album (AJAX only I guess)" do
       allow(Album).to receive(:fetch).and_return(Album)
       expect(Album).to receive(:find).with(album.id.to_s).and_return(album)
-      xhr :get, :show, id: album.id
+      get :show, params: { id: album.id }, xhr: true
       expect(response).to be_successful
       expect(response).to render_template :show
       expect(assigns(:album).id).to eq album.id
@@ -152,7 +152,7 @@ RSpec.describe AlbumsController do
     let(:image) { album.images.first }
 
     it "redirects to login page when not logged in" do
-      patch :update, id: album.id, album: album_params
+      patch :update, params: { id: album.id, album: album_params }
       expect(response).to redirect_to new_session_url
     end
 
@@ -160,7 +160,7 @@ RSpec.describe AlbumsController do
       log_in_as user
       allow_any_instance_of(Album).to receive(:update_attributes).and_return(true)
 
-      patch :update, id: album.id, album: album_params
+      patch :update, params: { id: album.id, album: album_params }
       expect(response).to redirect_to root_url
     end
 
@@ -168,7 +168,7 @@ RSpec.describe AlbumsController do
       log_in_as user
       allow_any_instance_of(Album).to receive(:update_attributes).and_return(false)
 
-      patch :update, id: album.id, album: album_params
+      patch :update, params: { id: album.id, album: album_params }
       expect(response).to render_template :edit
       expect(assigns(:album).id).to eq album.id
     end
@@ -179,7 +179,7 @@ RSpec.describe AlbumsController do
 
       # here I go, testing all the way to the database, like a chump
       expect do
-        patch :update, id: album.id, album: { images_attributes: { "0" => image_params } }
+        patch :update, params: { id: album.id, album: { images_attributes: { "0" => image_params } } }
       end.to change { image.reload.title }.to("new title")
       expect(response).to redirect_to root_url
     end
@@ -193,21 +193,21 @@ RSpec.describe AlbumsController do
     let(:album) { user.albums.first }
 
     it "redirects to login page when not logged in" do
-      xhr :get, :upvote, id: album.id
+      get :upvote, params: { id: album.id }, xhr: true
       expect(response).to redirect_to new_session_url
     end
 
     # this is testing too much but whatever the implementation is bad
     it "upvotes album and renders :show" do
       log_in_as user
-      expect { xhr :get, :upvote, id: album.id }.to change{ album.reload.upvote_count }.by(1)
+      expect { get :upvote, params: { id: album.id }, xhr: true }.to change{ album.reload.upvote_count }.by(1)
       expect(response).to render_template :show
     end
 
     it "undoes upvote if it already exists" do
       log_in_as user
-      xhr :get, :upvote, id: album.id
-      expect { xhr :get, :upvote, id: album.id }.to change{ album.reload.upvote_count }.by(-1)
+      get :upvote, params: { id: album.id }, xhr: true
+      expect { get :upvote, params: { id: album.id }, xhr: true}.to change{ album.reload.upvote_count }.by(-1)
       expect(response).to render_template :show
     end
   end

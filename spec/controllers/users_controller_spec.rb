@@ -33,20 +33,20 @@ RSpec.describe UsersController do
       log_in_as user
       expect(User).to receive(:find).with(user.id.to_s).and_return(user)
       expect(user).to receive(:destroy)
-      delete :destroy, id: user.id
+      delete :destroy, params: { id: user.id }
       expect(response).to redirect_to new_user_url
     end
 
     pending "doesn't destroy user other than logged-in user" do
       log_in_as user
       expect(User).not_to receive(:find).with(users(:other_normal_user).id.to_s)
-      delete :destroy, id: users(:other_normal_user).id
+      delete :destroy, params: { id: users(:other_normal_user).id }
       expect(response).to redirect_to root_url
     end
 
     it "redirects to login page when not logged in" do
       expect(User).not_to receive(:find).with(user.id.to_s)
-      delete :destroy, id: user.id
+      delete :destroy, params: { id: user.id }
       expect(response).to redirect_to new_session_url
     end
   end
@@ -54,7 +54,7 @@ RSpec.describe UsersController do
   describe "GET #edit" do
     it "renders :edit form for logged in user" do
       log_in_as user
-      get :edit, id: user.id
+      get :edit, params: { id: user.id }
       expect(response).to be_successful
       expect(response).to render_template :edit
       expect(assigns(:user).id).to eq user.id
@@ -62,12 +62,12 @@ RSpec.describe UsersController do
 
     pending "doesn't render :edit form for a user other than logged-in user" do
       log_in_as user
-      get :edit, id: users(:other_normal_user).id
+      get :edit, params: { id: users(:other_normal_user).id }
       expect(response).to redirect_to root_url
     end
 
     it "redirects to login page when not logged in" do
-      get :edit, id: user.id
+      get :edit, params: { id: user.id }
       expect(response).to redirect_to new_session_url
     end
   end
@@ -90,7 +90,7 @@ RSpec.describe UsersController do
 
   describe "GET #show" do
     it "shows user successfully(?)" do
-      get :show, id: user.id
+      get :show, params: { id: user.id }
       expect(response).to be_successful
       expect(response).to render_template :show
       expect(assigns(:user).id).to eq user.id
@@ -101,7 +101,7 @@ RSpec.describe UsersController do
     it "redirects to User show page when successful" do
       allow_any_instance_of(User).to receive(:update_attributes).and_return true
       log_in_as user
-      patch :update, id: user.id
+      patch :update, params: { id: user.id }
       expect(response).to redirect_to user_url(user)
       expect(assigns(:user).id).to eq user.id
     end
@@ -109,19 +109,19 @@ RSpec.describe UsersController do
     it "renders :edit form when unsuccessful" do
       allow_any_instance_of(User).to receive(:update_attributes).and_return false
       log_in_as user
-      patch :update, id: user.id
+      patch :update, params: { id: user.id }
       expect(response).to render_template :edit
       expect(assigns(:user).id).to eq user.id
     end
 
     pending "doesn't update a user other than logged-in user" do
       log_in_as user
-      patch :update, id: users(:other_normal_user).id
+      patch :update, params: { id: users(:other_normal_user).id }
       expect(response).to redirect_to root_url
     end
 
     it "redirects to login page when not logged in" do
-      patch :update, id: user.id
+      patch :update, params: { id: user.id }
       expect(response).to redirect_to new_session_url
     end
   end

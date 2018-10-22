@@ -1,5 +1,5 @@
 class ImagesController < ApplicationController
-  before_filter :require_logged_in, :only => [:edit, :update, :destroy]
+  before_action :require_logged_in, :only => [:edit, :update, :destroy]
 
   def create
     @image = Image.new(image_params)
