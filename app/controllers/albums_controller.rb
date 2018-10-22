@@ -2,20 +2,17 @@ class AlbumsController < ApplicationController
   before_filter :require_logged_in, :except => [:create, :index, :new, :show]
 
   def create
-    creator = CreateAlbum.new(new_album_params)
-    @album = creator.album
-    @images = creator.images
-    begin
-      ActiveRecord::Base.transaction { creator.create! }
-    rescue
+    @album = Album.new(new_album_params)
+    @images = @album.images
+    if @album.save
+      flash[:notices] ||= []
+      flash[:notices] << "album created successfully"
+      redirect_to root_url
+    else
       flash.now[:alerts] ||= []
       flash.now[:alerts] += @album.errors.full_messages
       flash.now[:alerts] += @images.map { |i| i.errors.full_messages }
       render :new
-    else
-      flash[:notices] ||= []
-      flash[:notices] << "album created successfully"
-      redirect_to root_url
     end
   end
 
@@ -74,32 +71,14 @@ class AlbumsController < ApplicationController
 
   def update
     @album = Album.find(params[:id])
-    begin
-      ActiveRecord::Base.transaction do
-
-        @album.update_attributes(album_params)
-
-        params[:images].each do |id, image_params|
-          image = @album.images.find_by_id(id) || @album.images.build(image_params)
-          if image_params[:_destroy]
-            image.destroy
-          else
-            image.update_attributes(image_params)
-          end
-        end
-
-        raise "invalid" unless @album.valid? &&
-          @album.images.all? do |i|
-            i.valid? || i.destroyed?
-          end
-      end
-    rescue
+    @images = @album.images
+    if @album.update_attributes(album_params)
+      redirect_to root_url
+    else
       flash.now[:alerts] ||= []
       flash.now[:alerts] += @album.errors.full_messages
       flash.now[:alerts] += @album.images.map { |i| i.errors.full_messages }
       render :edit
-    else
-      redirect_to root_url
     end
 
   end
@@ -121,17 +100,13 @@ class AlbumsController < ApplicationController
   private
 
   def album_params
-    params.fetch(:album, {}).permit(:description, :title, :creator_id)
-  end
-
-  def image_params
-    params[:images] ? params[:images].values.keep_if { |i| i[:file].present? } : []
+    params
+      .require(:album)
+      .permit(:description, :title,
+        images_attributes: [:id, :description, :file, :title, :_destroy])
   end
 
   def new_album_params
-    album_params.merge(
-      creator_id: current_user.try(:id),
-      image_params: image_params
-    ).symbolize_keys # needed to work w/CreateAlbum keyword args
+    album_params.merge(creator_id: current_user.try(:id))
   end
 end

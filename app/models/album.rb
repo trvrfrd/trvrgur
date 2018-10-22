@@ -1,11 +1,11 @@
 class Album < ActiveRecord::Base
-  validates :images, :presence => true
-
   belongs_to :creator,
              :class_name => "User",
              :foreign_key => :creator_id
 
   has_many :images, :dependent => :destroy
+  accepts_nested_attributes_for :images, allow_destroy: true, reject_if: :all_blank
+
   has_many :comments, :dependent => :destroy
 
   has_many :user_album_upvotes, :dependent => :destroy
@@ -16,6 +16,8 @@ class Album < ActiveRecord::Base
 
   has_many :user_album_favorites, :dependent => :destroy
   has_many :favoriting_users, :through => :user_album_favorites, :source => :user
+
+  validates :images, :presence => true
 
   def self.fetch
     self.includes(:images,

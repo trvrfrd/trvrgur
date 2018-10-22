@@ -1,21 +1,20 @@
-<% id = image.id || i %>
-
 <% if image.persisted? %>
+  <input type="hidden" name="album[images_attributes[<%= i %>][id]]" %>
   <img src="<%= image.file.url(:small) %>">
   <input type="checkbox"
-    name="images[<%= id %>][_destroy]"
-    id ="image_destroy"
+    name="album[images_attributes[<%= i %>][_destroy]]"
+    id="image_destroy"
     value="true">
   <label for="image_destroy">delete image?</label>
   <br>
 <% else %>
-  <input type="file" name="images[<%= id %>][file]" id="image_file">
+  <input type="file" name="album[images_attributes[<%= i %>][file]]" id="image_file_<%= i %>">
   <br>
 <% end %>
 
 <input
   type="text"
-  name="images[<%= id %>][title]"
+  name="album[images_attributes[<%= i %>][title]]"
   id="image_title"
   value="<%= image.title %>">
 <label for="image_title">image title (optional)</label>
@@ -23,7 +22,7 @@
 <br>
 
 <textarea
-  name="images[<%= id %>][description]"
+  name="album[images_attributes[<%= i %>][description]]"
   id="image_description"
   rows="4"
   cols="40"><%= image.description %></textarea>

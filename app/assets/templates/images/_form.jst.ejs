@@ -1,16 +1,16 @@
-<input type="file" name="images[<%= i %>][file]" id="image_file">
+<input type="file" name="album[images_attributes[<%= i %>][file]]" id="image_file_<%= i %>">
 <br>
 
 <input
   type="text"
-  name="images[<%= i %>][title]"
+  name="album[images_attributes[<%= i %>][title]]"
   id="image_title">
 <label for="image_title">image title (optional)</label>
 
 <br>
 
 <textarea
-  name="images[<%= i %>][description]"
+  name="album[images_attributes[<%= i %>][description]]"
   id="image_description"
   rows="4"
   cols="40"></textarea>

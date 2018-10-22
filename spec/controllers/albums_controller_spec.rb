@@ -4,21 +4,22 @@ RSpec.describe AlbumsController do
   fixtures(:users, :albums, :images)
   let(:user) { users(:normal_user) }
   let(:file) { fixture_file_upload("/files/image.png") }
+  let(:album_params) { { empty: false } } # curse you strong params
 
   describe "POST #create" do
     it "redirects to home page when album saved successfully" do
-      allow_any_instance_of(CreateAlbum).to receive(:create!).and_return(true)
+      allow_any_instance_of(Album).to receive(:save).and_return(true)
 
-      post :create
+      post :create, album: album_params
       expect(response).to redirect_to root_url
     end
 
     pending "creates associated images"
 
     it "renders :new form when album not saved successfully" do
-      allow_any_instance_of(CreateAlbum).to receive(:create!).and_raise
+      allow_any_instance_of(Album).to receive(:save).and_return(false)
 
-      post :create
+      post :create, album: album_params
       expect(response).to render_template :new
       expect(assigns(:album)).to be_a_new_record
     end
@@ -151,44 +152,35 @@ RSpec.describe AlbumsController do
     let(:image) { album.images.first }
 
     it "redirects to login page when not logged in" do
-      patch :update, id: album.id
+      patch :update, id: album.id, album: album_params
       expect(response).to redirect_to new_session_url
     end
 
     it "redirects to home page when album updated successfully" do
       log_in_as user
-      # this is some more ugly shit for another ugly controller action
-      allow(Album).to receive(:find).with(album.id.to_s).and_return(album)
-      allow(album).to receive(:update_attributes).and_return(true)
-      allow_any_instance_of(Image).to receive(:valid?).and_return(true)
+      allow_any_instance_of(Album).to receive(:update_attributes).and_return(true)
 
-      patch :update, id: album.id, images: {}
+      patch :update, id: album.id, album: album_params
       expect(response).to redirect_to root_url
     end
 
     it "renders :edit when album not updated successfully" do
       log_in_as user
-      allow(Album).to receive(:find).with(album.id.to_s).and_return(album)
-      allow(album).to receive(:update_attributes).and_return(false)
-      allow_any_instance_of(Image).to receive(:valid?).and_return(false)
+      allow_any_instance_of(Album).to receive(:update_attributes).and_return(false)
 
-      patch :update, id: album.id, images: {}
+      patch :update, id: album.id, album: album_params
       expect(response).to render_template :edit
       expect(assigns(:album).id).to eq album.id
     end
 
     it "updates associated images" do
       log_in_as user
-      # how do things keep getting worse
-      allow(Album).to receive(:find).with(album.id.to_s).and_return(album)
-      allow(album).to receive(:update_attributes).and_return(true)
-      allow(album.images).to receive(:find_by_id).with(image.id).and_return(image)
-      allow_any_instance_of(Image).to receive(:valid?).and_return(true)
+      image_params = { id: image.id, title: "new title" }
 
-      image_params = { title: "new title" }
-      expect(image).to receive(:update_attributes).with(image_params)
-
-      patch :update, id: album.id, images: { image.id => image_params }
+      # here I go, testing all the way to the database, like a chump
+      expect do
+        patch :update, id: album.id, album: { images_attributes: { "0" => image_params } }
+      end.to change { image.reload.title }.to("new title")
       expect(response).to redirect_to root_url
     end
 

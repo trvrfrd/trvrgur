@@ -13,7 +13,7 @@ describe "creating an album", js: true do
 
     describe "when not logged in" do
       it "creates an album without title or description, with one image" do
-        attach_file "image_file", file_path
+        attach_file "image_file_0", file_path
         click_on "create album"
         expect(page).to have_content "album created successfully"
         find('a.album-link:last-child').click # lol this is dumb who am i
@@ -24,7 +24,7 @@ describe "creating an album", js: true do
       it "creates an album without title or description, with multiples images" do
         3.times do |n|
           click_on "add another image"
-          attach_file "images[#{n}][file]", file_path # what have i done
+          attach_file "image_file_#{n}", file_path
         end
         click_on "create album"
         expect(page).to have_content "album created successfully"
@@ -36,7 +36,7 @@ describe "creating an album", js: true do
       it "creates an album with title and description, with one image" do
         fill_in "album_title", with: "my good album"
         fill_in "album_description", with: "very good and nice"
-        attach_file "image_file", file_path
+        attach_file "image_file_0", file_path
         click_on "create album"
         expect(page).to have_content "album created successfully"
         find('a.album-link:last-child').click
@@ -59,7 +59,7 @@ describe "creating an album", js: true do
       end
 
       it "creates an album without title or description, with one image" do
-        attach_file "image_file", file_path
+        attach_file "image_file_0", file_path
         click_on "create album"
         expect(page).to have_content "album created successfully"
         find('a.album-link:last-child').click
@@ -70,7 +70,7 @@ describe "creating an album", js: true do
       it "creates an album without title or description, with multiples images" do
         3.times do |n|
           click_on "add another image"
-          attach_file "images[#{n}][file]", file_path # what have i done
+          attach_file "image_file_#{n}", file_path
         end
         click_on "create album"
         expect(page).to have_content "album created successfully"
@@ -82,7 +82,7 @@ describe "creating an album", js: true do
       it "creates an album with title and description, with one image" do
         fill_in "album_title", with: "my good album"
         fill_in "album_description", with: "very good and nice"
-        attach_file "image_file", file_path
+        attach_file "image_file_0", file_path
         click_on "create album"
         expect(page).to have_content "album created successfully"
         find('a.album-link:last-child').click

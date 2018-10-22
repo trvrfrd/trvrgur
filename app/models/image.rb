@@ -13,4 +13,13 @@ class Image < ActiveRecord::Base
   belongs_to :uploader,
              :class_name => "User",
              :foreign_key => :uploader_id
+
+  before_create :associate_with_album_creator
+
+
+  private
+
+  def associate_with_album_creator
+    self.uploader_id = album && album.creator_id
+  end
 end
