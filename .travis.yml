@@ -2,7 +2,8 @@
 language: ruby
 cache: bundler
 before_script:
-  - bundle exec rake db:setup
-  - bundle exec rake db:test:prepare
-script: xvfb-run bundle exec rspec
-
+  - bundle exec rails db:setup
+  - bundle exec rails db:test:prepare
+# xvfb-run is for getting capybara-webkit to work
+# something about X-windows in a headless environment or something
+script: xvfb-run bundle exec rails spec
