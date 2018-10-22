@@ -4,7 +4,6 @@ ruby '2.4.5'
 gem 'rails', '~> 5.0.7'
 gem 'pg', '~> 0.11'
 gem 'activerecord-postgresql-adapter'
-gem 'pry-rails'
 gem 'rabl'
 gem 'backbone-on-rails'
 gem 'ejs'
@@ -13,7 +12,6 @@ gem 'bcrypt-ruby'
 gem 'figaro'
 gem 'paperclip'
 gem 'aws-sdk-s3'
-gem 'newrelic_rpm'
 
 group :assets do
   gem 'sass-rails'
@@ -21,17 +19,9 @@ group :assets do
   gem 'uglifier'
 end
 
-group :development do
-  # prevent rails console from blowing up?
-  gem 'test-unit'
-
-  # gem 'quiet_assets'
-  # gem 'better_errors'
-  # gem 'binding_of_caller'
-end
-
 group :development, :test do
   gem 'rspec-rails'
+  gem 'pry-rails'
 end
 
 group :test do
