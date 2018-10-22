@@ -1,4 +1,4 @@
-class Comment < ActiveRecord::Base
+class Comment < ApplicationRecord
   validates :album_id, :author_id, :body, :presence => true
 
   belongs_to :album

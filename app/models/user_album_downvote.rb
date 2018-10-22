@@ -1,4 +1,4 @@
-class UserAlbumDownvote < ActiveRecord::Base
+class UserAlbumDownvote < ApplicationRecord
   validates :user_id, :uniqueness => { :scope => :album_id }
   validates :album_id, :uniqueness => { :scope => :user_id }
 

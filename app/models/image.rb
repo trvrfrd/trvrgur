@@ -1,4 +1,4 @@
-class Image < ActiveRecord::Base
+class Image < ApplicationRecord
   has_attached_file :file,
     :styles => {
       :small => "100x100#",

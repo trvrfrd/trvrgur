@@ -1,6 +1,6 @@
 require 'bcrypt'
 
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   attr_reader :password
 
   validates :username, :email, :session_token, :presence => true
