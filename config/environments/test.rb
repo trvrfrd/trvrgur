@@ -39,17 +39,4 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
-
-  # Paperclip defaults for AWS S3:
-  # these are obviously fake! but values are needed to init properly
-  # we will just be mocking things anyway
-  config.paperclip_defaults = {
-    :storage => :s3,
-    :s3_credentials => {
-      :bucket => "test",
-      :access_key_id => "test",
-      :secret_access_key => "test"
-    },
-    :s3_region => "test"
-  }
 end
