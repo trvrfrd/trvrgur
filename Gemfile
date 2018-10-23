@@ -12,6 +12,7 @@ gem 'bcrypt-ruby'
 gem 'figaro'
 gem 'paperclip'
 gem 'aws-sdk-s3'
+gem 'bootsnap'
 
 group :assets do
   gem 'sass-rails'
@@ -22,6 +23,7 @@ end
 group :development, :test do
   gem 'rspec-rails'
   gem 'pry-rails'
+  gem 'listen'
 end
 
 group :test do
