@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.4.5'
 
-gem 'rails', '~> 5.1.6'
+gem 'rails', '~> 5.2.1'
 gem 'pg', '~> 0.11'
 gem 'activerecord-postgresql-adapter'
 gem 'rabl'
