@@ -2,8 +2,6 @@ require "capybara/rspec"
 require "capybara-webkit"
 require "webmock/rspec"
 
-Capybara.server = :webrick
-
 Capybara.javascript_driver = :webkit
 
 Capybara::Webkit.configure do |config|

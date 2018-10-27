@@ -13,6 +13,7 @@ gem 'figaro'
 gem 'paperclip'
 gem 'aws-sdk-s3'
 gem 'bootsnap'
+gem 'puma'
 
 group :assets do
   gem 'sass-rails'
