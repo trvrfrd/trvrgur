@@ -101,7 +101,7 @@ describe "creating an album", js: true do
   end
 end
 
-describe "upvoting and downvoting", js: true do
+describe "upvoting and downvoting" do
   before(:each) do
     visit root_path
     find(".album-link:first-of-type").click
@@ -139,17 +139,16 @@ describe "upvoting and downvoting", js: true do
     pending "can't upvote and downvote the same album"
   end
 
-  it "does nothing when logged out" do
+  it "redirects to login page when not logged in" do
     expect(page).to have_content "points: 0"
     all(".upvote").first.click
     expect(page).not_to have_content "points: 1"
-    all(".downvote").first.click
-    expect(page).not_to have_content "points: -1"
+    expect(current_path).to eq new_session_path
   end
 end
 
 describe "commenting", js: true do
-  describe "when logged in" do
+  pending "when logged in" do
     fixtures(:users)
     let(:user) { users(:normal_user) }
 
@@ -199,7 +198,7 @@ describe "commenting", js: true do
     pending "can't upvote and downvote the same comment"
   end
 
-  describe "when not logged in" do
+  pending "when not logged in" do
     before(:each) do
       visit root_path
       find(".album-link:first-of-type").click

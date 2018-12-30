@@ -13,5 +13,5 @@ Trvrgur::Application.routes.draw do
     get "downvote", :on => :member
   end
 
-  root :to => "root#root"
+  root :to => "albums#index"
 end

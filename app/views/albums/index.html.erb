@@ -3,7 +3,10 @@
 <div style="max-width:600px">
   <!-- sort albums by points descending FOR NOW -->
   <% @albums.sort { |a, b| b.points <=> a.points }.each do |album| %>
-    <a href="<%= album_url(album) %>">
+    <a
+     href="<%= album_url(album) %>"
+     class="album-link"
+     >
       <img src="<%= album.images.first.file.url(:small) %>">
     </a>
   <% end %>
