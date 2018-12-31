@@ -1,22 +1,22 @@
 require "rails_helper"
 
 RSpec.describe CommentsController do
-  fixtures(:users, :comments)
+  fixtures(:users, :comments, :albums)
   let(:user) { users(:normal_user) }
   let(:comment) { comments(:normal_comment) }
 
   describe "POST #create" do
     it "redirects to login page when not logged in" do
-      post :create, xhr: true
+      post :create
       expect(response).to redirect_to new_session_url
     end
 
-    it "renders show page when successful" do
+    it "redirects to album show page when successful" do
       log_in_as user
       allow_any_instance_of(Comment).to receive(:save).and_return(true)
 
-      post :create, xhr: true
-      expect(response).to render_template :show
+      post :create, params: { comment: { album_id: comment.album.id } }
+      expect(response).to redirect_to album_url(comment.album)
     end
 
     it "redirects back when unsuccessful" do
@@ -25,7 +25,7 @@ RSpec.describe CommentsController do
       request.env["HTTP_REFERER"] = "fake url"
       allow_any_instance_of(Comment).to receive(:save).and_return(false)
 
-      post :create, xhr: true
+      post :create
       expect(response).to redirect_to "fake url"
     end
   end
@@ -47,25 +47,25 @@ RSpec.describe CommentsController do
     pending "doesn't destroy comment that doesn't belong to logged-in user"
   end
 
-  describe "GET #downvote" do
+  describe "POST #downvote" do
     it "redirects to login page when not logged in" do
-      get :downvote, params: { id: comment.id }, xhr: true
+      post :downvote, params: { id: comment.id }
       expect(response).to redirect_to new_session_url
     end
 
     it "downvotes comment and renders :show" do
       log_in_as user
 
-      expect { get :downvote, params: { id: comment.id }, xhr: true }.to change{ comment.reload.downvote_count }.by(1)
-      expect(response).to render_template :show
+      expect { post :downvote, params: { id: comment.id } }.to change{ comment.reload.downvote_count }.by(1)
+      expect(response).to redirect_to album_url(comment.album)
     end
 
     it "undoes downvote if it already exists" do
       log_in_as user
 
-      get :downvote, params: { id: comment.id }, xhr: true
-      expect { get :downvote, params: { id: comment.id }, xhr: true }.to change{ comment.reload.downvote_count }.by(-1)
-      expect(response).to render_template :show
+      post :downvote, params: { id: comment.id }
+      expect { post :downvote, params: { id: comment.id } }.to change{ comment.reload.downvote_count }.by(-1)
+      expect(response).to redirect_to album_url(comment.album)
     end
   end
 
@@ -94,25 +94,25 @@ RSpec.describe CommentsController do
 
   pending "PATCH #update" # controller method is empty
 
-  describe "GET #upvote" do
+  describe "POST #upvote" do
     it "redirects to login page when not logged in" do
-      get :upvote, params: { id: comment.id }, xhr: true
+      post :upvote, params: { id: comment.id }
       expect(response).to redirect_to new_session_url
     end
 
     it "upvotes comment and renders :show" do
       log_in_as user
 
-      expect { get :upvote, params: { id: comment.id }, xhr: true }.to change{ comment.reload.upvote_count }.by(1)
-      expect(response).to render_template :show
+      expect { post :upvote, params: { id: comment.id } }.to change{ comment.reload.upvote_count }.by(1)
+      expect(response).to redirect_to album_url(comment.album)
     end
 
     it "undoes upvote if it already exists" do
       log_in_as user
 
-      get :upvote, params: { id: comment.id }, xhr: true
-      expect { get :upvote, params: { id: comment.id }, xhr: true }.to change{ comment.reload.upvote_count }.by(-1)
-      expect(response).to render_template :show
+      post :upvote, params: { id: comment.id }
+      expect { post :upvote, params: { id: comment.id } }.to change{ comment.reload.upvote_count }.by(-1)
+      expect(response).to redirect_to album_url(comment.album)
     end
   end
 end

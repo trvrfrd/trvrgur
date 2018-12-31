@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     @comment.author_id = current_user.id
     if @comment.save
-      render :show
+      redirect_to album_url(@comment.album_id)
     else
       flash[:alerts] ||= []
       flash[:alerts] += @comment.errors.full_messages
@@ -18,7 +18,7 @@ class CommentsController < ApplicationController
     @comment.destroy
     flash[:notices] ||= []
     flash[:notices] << "comment deleted successfully"
-    redirect_to album_url(@comment.album)
+    redirect_to album_url(@comment.album_id)
   end
 
   def downvote
@@ -31,7 +31,7 @@ class CommentsController < ApplicationController
       @comment.downvote_count += 1
     end
     @comment.save
-    render :show
+    redirect_to album_url(@comment.album_id)
   end
 
   def edit
@@ -62,7 +62,7 @@ class CommentsController < ApplicationController
       @comment.upvote_count += 1
     end
     @comment.save
-    render :show
+    redirect_to album_url(@comment.album_id)
   end
 
 
