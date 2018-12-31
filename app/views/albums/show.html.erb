@@ -23,24 +23,15 @@
         <% end %>
       </p>
 
-      <%= button_to upvote_album_path(@album),
-        method: :get,
-        class: "upvote btn #{upvote_btn_class}" do
-      %>
+      <%= button_to upvote_album_path(@album), class: "upvote btn #{upvote_btn_class}" do %>
         <span class="glyphicon glyphicon-circle-arrow-up"></span>
       <% end %>
 
-      <%= button_to downvote_album_path(@album),
-        method: :get,
-        class: "downvote btn #{downvote_btn_class}" do
-      %>
+      <%= button_to downvote_album_path(@album), class: "downvote btn #{downvote_btn_class}" do %>
         <span class="glyphicon glyphicon-circle-arrow-down"></span>
       <% end %>
 
-      <%= button_to favorite_album_path(@album),
-        method: :get,
-        class: "favorite btn #{fav_btn_class}" do
-      %>
+      <%= button_to favorite_album_path(@album), class: "favorite btn #{fav_btn_class}" do %>
         <span class="glyphicon glyphicon-heart"></span>
       <% end %>
 

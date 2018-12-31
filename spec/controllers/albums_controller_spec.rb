@@ -46,25 +46,25 @@ RSpec.describe AlbumsController do
     pending "doesn't destroy album that doesn't belong to logged-in user"
   end
 
-  describe "GET #downvote" do
+  describe "POST #downvote" do
     let(:album) { user.albums.first }
 
     it "redirects to login page when not logged in" do
-      get :downvote, params: { id: album.id }, xhr: true
+      post :downvote, params: { id: album.id }
       expect(response).to redirect_to new_session_url
     end
 
     # this is testing too much but whatever the implementation is bad
     it "downvotes album and renders :show" do
       log_in_as user
-      expect { get :downvote, params: { id: album.id }, xhr: true }.to change{ album.reload.downvote_count }.by(1)
+      expect { post :downvote, params: { id: album.id } }.to change{ album.reload.downvote_count }.by(1)
       expect(response).to render_template :show
     end
 
     it "undoes downvote if it already exists" do
       log_in_as user
-      get :downvote, params: { id: album.id }, xhr: true
-      expect { get :downvote, params: { id: album.id }, xhr: true }.to change{ album.reload.downvote_count }.by(-1)
+      post :downvote, params: { id: album.id }
+      expect { post :downvote, params: { id: album.id } }.to change{ album.reload.downvote_count }.by(-1)
       expect(response).to render_template :show
     end
   end
@@ -92,26 +92,26 @@ RSpec.describe AlbumsController do
     pending "doesn't edit album that doesn't belong to logged-in user"
   end
 
-  describe "GET #favorite" do
+  describe "POST #favorite" do
     let(:album) { user.albums.first }
 
     it "redirects to login page when not logged in" do
-      get :favorite, params: { id: album.id }, xhr: true
+      post :favorite, params: { id: album.id }
       expect(response).to redirect_to new_session_url
     end
 
     it "favorites album and renders :show" do
       log_in_as user
       expect_any_instance_of(Album).to receive(:favoriting_user_ids=).with([user.id]) # o lord
-      get :favorite, params: { id: album.id }, xhr: true
+      post :favorite, params: { id: album.id }
       expect(response).to render_template :show
     end
 
     it "undoes favorite if it already exists" do
       log_in_as user
-      get :favorite, params: { id: album.id }, xhr: true
+      post :favorite, params: { id: album.id }
       expect_any_instance_of(Album).to receive(:favoriting_user_ids=).with([]) # o lord
-      get :favorite, params: { id: album.id }, xhr: true
+      post :favorite, params: { id: album.id }
       expect(response).to render_template :show
     end
   end
@@ -137,10 +137,10 @@ RSpec.describe AlbumsController do
   describe "GET #show" do
     let(:album) { albums(:with_one_image) }
 
-    it "renders :show with specified album (AJAX only I guess)" do
+    it "renders :show with specified album" do
       allow(Album).to receive(:fetch).and_return(Album)
       expect(Album).to receive(:find).with(album.id.to_s).and_return(album)
-      get :show, params: { id: album.id }, xhr: true
+      get :show, params: { id: album.id }
       expect(response).to be_successful
       expect(response).to render_template :show
       expect(assigns(:album).id).to eq album.id
@@ -189,25 +189,25 @@ RSpec.describe AlbumsController do
     pending "doesn't update album that doesn't belong to logged-in user"
   end
 
-  describe "GET #upvote" do
+  describe "POST #upvote" do
     let(:album) { user.albums.first }
 
     it "redirects to login page when not logged in" do
-      get :upvote, params: { id: album.id }, xhr: true
+      post :upvote, params: { id: album.id }
       expect(response).to redirect_to new_session_url
     end
 
     # this is testing too much but whatever the implementation is bad
     it "upvotes album and renders :show" do
       log_in_as user
-      expect { get :upvote, params: { id: album.id }, xhr: true }.to change{ album.reload.upvote_count }.by(1)
+      expect { post :upvote, params: { id: album.id } }.to change{ album.reload.upvote_count }.by(1)
       expect(response).to render_template :show
     end
 
     it "undoes upvote if it already exists" do
       log_in_as user
-      get :upvote, params: { id: album.id }, xhr: true
-      expect { get :upvote, params: { id: album.id }, xhr: true}.to change{ album.reload.upvote_count }.by(-1)
+      post :upvote, params: { id: album.id }
+      expect { post :upvote, params: { id: album.id } }.to change{ album.reload.upvote_count }.by(-1)
       expect(response).to render_template :show
     end
   end

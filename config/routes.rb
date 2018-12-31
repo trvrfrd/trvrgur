@@ -3,9 +3,9 @@ Trvrgur::Application.routes.draw do
   resources :users, :except => [:index]
   resources :images #get rid of some of these: things happen on album level
   resources :albums do
-    get "upvote", :on => :member
-    get "downvote", :on => :member
-    get "favorite", :on => :member
+    post "upvote", :on => :member
+    post "downvote", :on => :member
+    post "favorite", :on => :member
     resources :comments, :only => [:index]
   end
   resources :comments, :except => [:index, :new] do
