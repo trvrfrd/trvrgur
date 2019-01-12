@@ -6,9 +6,8 @@ Trvrgur::Application.routes.draw do
     post "upvote", :on => :member
     post "downvote", :on => :member
     post "favorite", :on => :member
-    resources :comments, :only => [:index]
   end
-  resources :comments, :except => [:index, :new] do
+  resources :comments, :except => [:index, :new, :show] do
     post "upvote", :on => :member
     post "downvote", :on => :member
   end
