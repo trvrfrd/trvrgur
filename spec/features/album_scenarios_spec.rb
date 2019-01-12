@@ -218,18 +218,20 @@ describe "commenting", js: true do
       expect(page).not_to have_content "logged out reply"
     end
 
-    it "can't upvote an existing comment" do
+    it "can't upvote an existing comment (redirects to login page)" do
       dom_id = "#" + all(".comment").first[:id]
       expect(find(dom_id)).to have_content "0 points"
       find(dom_id).find(".upvote").click
-      expect(find(dom_id)).not_to have_content "1 points"
+      expect(page).not_to have_content "1 points"
+      expect(current_path).to eq new_session_path
     end
 
-    it "can't downvote an existing comment" do
+    it "can't downvote an existing comment (redirects to login page)" do
       dom_id = "#" + all(".comment").first[:id]
       expect(find(dom_id)).to have_content "0 points"
       find(dom_id).find(".downvote").click
-      expect(find(dom_id)).not_to have_content "-1 points"
+      expect(page).not_to have_content "-1 points"
+      expect(current_path).to eq new_session_path
     end
   end
 end
