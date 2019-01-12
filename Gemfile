@@ -5,7 +5,6 @@ gem 'rails', '~> 5.2.1'
 
 gem 'activerecord-postgresql-adapter'
 gem 'aws-sdk-s3'
-gem 'backbone-on-rails'
 gem 'bcrypt-ruby'
 gem 'bootsnap'
 gem 'ejs'
