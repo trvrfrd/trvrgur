@@ -1,6 +1,22 @@
+dist: trusty
 # Travis will use version specified in .ruby-version
 language: ruby
 cache: bundler
+
+# below settings copied from:
+# https://github.com/thoughtbot/capybara-webkit/blob/master/.travis.yml
+# to get around DOM errors from capybara-webkit in certain feature specs
+env:
+  global:
+    - QMAKE=/usr/lib/x86_64-linux-gnu/qt5/bin/qmake
+addons:
+  apt:
+    sources:
+      - ubuntu-sdk-team
+    packages:
+      - libqt5webkit5-dev
+      - qtdeclarative5-dev
+
 before_script:
   - bundle exec rails db:setup
   - bundle exec rails db:test:prepare
