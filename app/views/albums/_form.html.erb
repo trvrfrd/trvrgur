@@ -47,11 +47,54 @@
   <input class="btn btn-primary" type="submit" value="<%= message %>">
 </form>
 
+<template id="image-partial-form">
+  <input type="file" id="image_file" name="tbd">
+  <br>
+
+  <input type="text" id="image_title" name="tbd">
+  <label for="image_title">image title (optional)</label>
+
+  <br>
+
+  <textarea
+    id="image_description"
+    name="tbd"
+    rows="4"
+    cols="40"></textarea>
+  <label for="image_description">image description (optional)</label>
+
+  <br>
+  <br>
+</template>
+
 <script type="text/javascript">
   var i = 1;
+
   $('form').on('click', '#append-image-form', function (event) {
     event.preventDefault();
-    $(this).before(JST['images/_form']({ i:i }));
+    $(this).before(makeImagePartialForm(i));
     i++;
   });
+
+  function makeImagePartialForm(i) {
+    var template = document.querySelector("#image-partial-form");
+    var clone = document.importNode(template.content, true);
+
+    // set up file input
+    clone.querySelector("#image_file").name = "album[images_attributes[" + i  + "][file]]";
+    clone.querySelector("#image_file").id = "image_file_" + i;
+
+    // set up text input
+    clone.querySelector("#image_title").name = "album[images_attributes[" + i  + "][title]]"
+    clone.querySelector("#image_title").id = "image_title_" + i;
+    clone.querySelector('label[for="image_title"]').setAttribute("for", "image_title_" + i);
+
+    // set up textarea
+    clone.querySelector("textarea").name = "album[images_attributes[" + i  + "][description]]"
+    clone.querySelector("#image_description").id = "image_description_" + i;
+    clone.querySelector('label[for="image_description"]').setAttribute("for", "image_description_" + i);
+
+    window.clone = clone;
+    return clone;
+  }
 </script>
