@@ -35,21 +35,9 @@ class CommentsController < ApplicationController
   end
 
   def edit
-
-  end
-
-  def index
-    @comments = Comment.fetch.where("album_id = ?", params[:album_id])
-    render :index
-  end
-
-  def show
-    @comment = Comment.fetch.find(params[:id])
-    render :show
   end
 
   def update
-
   end
 
   def upvote
