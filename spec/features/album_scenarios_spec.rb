@@ -24,6 +24,7 @@ describe "creating an album", js: true do
       it "creates an album without title or description, with multiples images" do
         3.times do |n|
           click_on "add another image"
+          find "#image_file_#{n}"
           attach_file "image_file_#{n}", file_path
         end
         click_on "create album"
@@ -70,6 +71,7 @@ describe "creating an album", js: true do
       it "creates an album without title or description, with multiples images" do
         3.times do |n|
           click_on "add another image"
+          find "#image_file_#{n}"
           attach_file "image_file_#{n}", file_path
         end
         click_on "create album"
