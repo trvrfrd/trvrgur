@@ -1,23 +1,10 @@
-sudo: required
-dist: trusty
 # Travis will use version specified in .ruby-version
 language: ruby
 cache: bundler
-# addons settings below copied from:
-# https://github.com/thoughtbot/capybara-webkit/blob/master/.travis.yml
-# to get around DOM errors from capybara-webkit in certain feature specs
+# required for ChromeDriver
 addons:
-  apt:
-    sources:
-      - ubuntu-sdk-team
-    packages:
-      - libqt5webkit5-dev
-      - qtdeclarative5-dev
-before_install:
-  - export QMAKE=/usr/lib/x86_64-linux-gnu/qt5/bin/qmake
+  chrome: stable
 before_script:
   - bundle exec rails db:setup
   - bundle exec rails db:test:prepare
-# xvfb-run is for getting capybara-webkit to work
-# something about X-windows in a headless environment or something
-script: xvfb-run bundle exec rails spec
+script: bundle exec rails spec

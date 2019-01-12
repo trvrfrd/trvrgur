@@ -24,8 +24,6 @@ describe "creating an album", js: true do
       it "creates an album without title or description, with multiples images" do
         3.times do |n|
           click_on "add another image"
-          puts "Messages: ", page.driver.console_messages
-          puts "Errors: ", page.driver.error_messages
           attach_file "image_file_#{n}", file_path
         end
         click_on "create album"
