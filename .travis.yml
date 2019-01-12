@@ -9,6 +9,8 @@ cache: bundler
 before_install:
   - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
   - sudo apt-get update -qq
+  # this line is modified from the capybara-webkit installation wiki
+  - sudo apt-get install -qq g++ qt5-default gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
   - sudo apt-get install -qq libqt5webkit5-dev qtdeclarative5-dev
   - export QMAKE=/usr/lib/x86_64-linux-gnu/qt5/bin/qmake
 
