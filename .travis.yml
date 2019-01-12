@@ -14,7 +14,11 @@ addons:
     sources:
       - ubuntu-sdk-team
     packages:
+      - g++
       - qt5-default
+      - gstreamer1.0-plugins-base
+      - gstreamer1.0-tools
+      - gstreamer1.0-x
       - libqt5webkit5-dev
       - qtdeclarative5-dev
 
