@@ -4,23 +4,13 @@ language: ruby
 cache: bundler
 
 # below settings copied from:
-# https://github.com/thoughtbot/capybara-webkit/blob/master/.travis.yml
+# http://www.philipbradley.net/capybara-react-qt5-and-travis-ci/
 # to get around DOM errors from capybara-webkit in certain feature specs
-env:
-  global:
-    - QMAKE=/usr/lib/x86_64-linux-gnu/qt5/bin/qmake
-addons:
-  apt:
-    sources:
-      - ubuntu-sdk-team
-    packages:
-      - g++
-      - qt5-default
-      - gstreamer1.0-plugins-base
-      - gstreamer1.0-tools
-      - gstreamer1.0-x
-      - libqt5webkit5-dev
-      - qtdeclarative5-dev
+before_install:
+  - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq libqt5webkit5-dev qtdeclarative5-dev
+  - export QMAKE=/usr/lib/x86_64-linux-gnu/qt5/bin/qmake
 
 before_script:
   - bundle exec rails db:setup
