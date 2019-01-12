@@ -99,7 +99,6 @@ GEM
       safe_yaml (~> 1.0.0)
     crass (1.0.4)
     diff-lcs (1.3)
-    ejs (1.1.1)
     erubi (1.7.1)
     execjs (2.7.0)
     ffi (1.9.25)
@@ -258,7 +257,6 @@ DEPENDENCIES
   capybara
   capybara-webkit!
   coffee-rails
-  ejs
   figaro
   jquery-rails
   listen
