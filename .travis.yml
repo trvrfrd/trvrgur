@@ -1,19 +1,20 @@
+sudo: required
 dist: trusty
 # Travis will use version specified in .ruby-version
 language: ruby
 cache: bundler
-
-# below settings copied from:
-# http://www.philipbradley.net/capybara-react-qt5-and-travis-ci/
+# addons settings below copied from:
+# https://github.com/thoughtbot/capybara-webkit/blob/master/.travis.yml
 # to get around DOM errors from capybara-webkit in certain feature specs
+addons:
+  apt:
+    sources:
+      - ubuntu-sdk-team
+    packages:
+      - libqt5webkit5-dev
+      - qtdeclarative5-dev
 before_install:
-  - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
-  - sudo apt-get update -qq
-  # this line is modified from the capybara-webkit installation wiki
-  - sudo apt-get install -qq g++ qt5-default gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
-  - sudo apt-get install -qq libqt5webkit5-dev qtdeclarative5-dev
   - export QMAKE=/usr/lib/x86_64-linux-gnu/qt5/bin/qmake
-
 before_script:
   - bundle exec rails db:setup
   - bundle exec rails db:test:prepare
