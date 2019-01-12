@@ -1,19 +1,41 @@
 <% comments.each do |comment| %>
-  <ul>
-    <li>
+  <% upvote_btn_class = comment.upvoted_by?(current_user) ? 'btn-success' : 'btn-default' %>
+  <% downvote_btn_class = comment.downvoted_by?(current_user) ? 'btn-success' : 'btn-default' %>
+  <% comment_modal_id = "comment-modal-#{comment.id}" %>
+
+  <%= render "comment_modal",
+    album: album,
+    comment: Comment.new,
+    parent_comment_id: comment.id,
+    comment_modal_id: comment_modal_id %>
+
+  <ul class="comments">
+    <li
+      id="<%= "comment_#{comment.id}" %>"
+      class="comment">
       <% author = comment.author %>
-      posted by
-        <a href="<%= user_url(author) %>">
-          <%= author.username %>
-        </a>
-      at <%= comment.created_at %>
-        <a href="<%= comment_url(comment) %>">|reply|</a>
-        <a href="<%= upvote_comment_url(comment) %>">|⇧|</a>
-        <a href="<%= downvote_comment_url(comment) %>">|⇩|</a>
-        <%= comment.points %>
+      posted by <%= link_to author.username, author %>
+      at <%= comment.created_at %> |
+      <%= comment.points %> points |
+      <button
+        type="button"
+        class="reply btn btn-sm btn-default"
+        data-toggle="modal"
+        data-target="#<%=comment_modal_id%>">
+        <span class="glyphicon glyphicon-comment"></span>
+      </button>
+
+      <%= button_to upvote_comment_path(comment), class: "upvote btn #{upvote_btn_class}" do %>
+        <span class="glyphicon glyphicon-circle-arrow-up"></span>
+      <% end %>
+
+      <%= button_to downvote_comment_path(comment), class: "downvote btn #{downvote_btn_class}" do %>
+        <span class="glyphicon glyphicon-circle-arrow-down"></span>
+      <% end %>
+
       <% if current_user &&
            (current_user.id == author.id ||
-            current_user.id == @album.creator_id) %>
+            current_user.id == album.creator_id) %>
         <%= button_to "delete", comment_url(comment), :method => :delete %>
       <% end %>
       <br>
@@ -23,7 +45,7 @@
     <br>
 
     <%= render "comments",
-        :album => @album,
-        :comments => @album.comments_by_parent_id[comment.id] %>
+        album: album,
+        :comments => album.comments_by_parent_id[comment.id] %>
   <% end %>
 </ul>

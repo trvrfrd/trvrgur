@@ -30,10 +30,9 @@ class Album < ApplicationRecord
   end
 
   def comments_by_parent_id
-    comments = comments.to_a
     result = Hash.new { |hash, key| hash[key] = [] }
 
-    comments.each do |c|
+    comments.to_a.each do |c|
       result[c.parent_comment_id] << c
     end
 

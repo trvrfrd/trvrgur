@@ -21,13 +21,13 @@
     name="comment[parent_comment_id]"
     value="<%= parent_comment_id %>">
 
-  <label for="comment_body">
+  <label for="comment-body">
     <%= (comment.persisted?) ? "edit comment" : "add a comment" %>
   </label>
   <br>
   <textarea
     name="comment[body]"
-    id="comment_body"
+    id="comment-body"
     rows="4"
     placeholder="comment..."
     cols="40"><%= comment.body %></textarea>

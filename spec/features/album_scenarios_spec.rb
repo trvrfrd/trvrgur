@@ -148,7 +148,7 @@ describe "upvoting and downvoting" do
 end
 
 describe "commenting", js: true do
-  pending "when logged in" do
+  describe "when logged in" do
     fixtures(:users)
     let(:user) { users(:normal_user) }
 
@@ -198,7 +198,7 @@ describe "commenting", js: true do
     pending "can't upvote and downvote the same comment"
   end
 
-  pending "when not logged in" do
+  describe "when not logged in" do
     before(:each) do
       visit root_path
       find(".album-link:first-of-type").click

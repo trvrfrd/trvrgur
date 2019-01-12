@@ -73,21 +73,21 @@ RSpec.describe CommentsController do
 
   describe "GET #index" do
     it "redirects to login page when not logged in" do # for some reason?
-      get :index, params: { album_id: comment.album_id }, xhr: true
+      get :index, params: { album_id: comment.album_id }
       expect(response).to redirect_to new_session_url
     end
 
     it "renders :index" do
       log_in_as user
 
-      get :index, params: { album_id: comment.album_id }, xhr: true
+      get :index, params: { album_id: comment.album_id }
       expect(response).to render_template :index
     end
   end
 
   describe "GET #show" do
     it "renders :show" do
-      get :show, params: { id: comment.id }, xhr: true
+      get :show, params: { id: comment.id }
       expect(response).to render_template :show
     end
   end

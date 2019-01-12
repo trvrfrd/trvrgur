@@ -9,8 +9,8 @@ Trvrgur::Application.routes.draw do
     resources :comments, :only => [:index]
   end
   resources :comments, :except => [:index, :new] do
-    get "upvote", :on => :member
-    get "downvote", :on => :member
+    post "upvote", :on => :member
+    post "downvote", :on => :member
   end
 
   root :to => "albums#index"

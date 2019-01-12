@@ -1,8 +1,13 @@
 <% upvote_btn_class = @album.upvoted_by?(current_user) ? 'btn-success' : 'btn-default' %>
 <% downvote_btn_class = @album.downvoted_by?(current_user) ? 'btn-success' : 'btn-default' %>
 <% fav_btn_class = @album.favorited_by?(current_user) ? 'btn-success' : 'btn-default' %>
-<%# commentModalId = 'comment-modal-' + (typeof(comment) === undefined) ? 'null' : comment.id %>
-<%# JST["albums/_comment_modal"]({ comment: undefined, commentModalId: commentModalId }) %>
+<% comment_modal_id = "comment-modal-#{defined? comment ? comment.id : nil}" %>
+
+<%= render "comment_modal",
+  album: @album,
+  comment: Comment.new,
+  parent_comment_id: nil,
+  comment_modal_id: comment_modal_id %>
 
 <div class="container">
   <div class="row">
@@ -58,16 +63,15 @@
         type="button"
         class="btn btn-default"
         data-toggle="modal"
-        data-target="#<%# commentModalId %>">add a comment</button>
+        data-target="#<%=comment_modal_id%>">
+        add a comment
+      </button>
 
       <h2>comments:</h2>
       <% if @album.comments.present? %>
-
-        <%# JST['albums/_comments']({
-              album: album,
-              comments: album.getCommentsByParentId()[null]
-            }) %>
-
+        <%= render "comments",
+          album: @album,
+          comments: @album.comments_by_parent_id[nil] %>
       <% else %>
         <h4>no comments yet :(</h4><br>
       <% end %>
