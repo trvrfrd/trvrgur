@@ -1,6 +1,6 @@
 <nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
   <div class="navbar-header">
-    <%= link_to "trvrgur", "/#", :id => "logo", :title => "home", :class => "navbar-brand" %>
+    <%= link_to "trvrgur", root_path, :id => "logo", :title => "home", :class => "navbar-brand" %>
   </div>
   <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav navbar-right">
@@ -30,8 +30,8 @@
       <% else %>
 
         <li>
-          <a href="#/users/<%= current_user.id %>">
-            <%= current_user.username %>    <span class="glyphicon glyphicon-user"></span>
+          <a href=<%= user_path current_user %>>
+            <%= current_user.username %> <span class="glyphicon glyphicon-user"></span>
           </a>
         </li>
         <li>
