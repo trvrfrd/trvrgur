@@ -2,24 +2,7 @@ require "capybara/rspec"
 require "selenium/webdriver"
 require "webmock/rspec"
 
-# ChromeDriver config copied from:
-# https://robots.thoughtbot.com/headless-feature-specs-with-chrome
-# https://github.com/flavorjones/chromedriver-helper
-Capybara.register_driver :selenium do |app|
-  Capybara::Selenium::Driver.new(app, browser: :chrome)
-end
-
-Capybara.register_driver :headless_chrome do |app|
-  capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
-    chromeOptions: { args: %w(headless disable-gpu) }
-  )
-
-  Capybara::Selenium::Driver.new app,
-    browser: :chrome,
-    desired_capabilities: capabilities
-end
-
-Capybara.javascript_driver = :headless_chrome
+Capybara.javascript_driver = :selenium_chrome_headless
 
 WebMock.disable_net_connect! allow_locahost: true, allow: '127.0.0.1'
 

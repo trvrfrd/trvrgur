@@ -28,8 +28,7 @@ end
 
 group :test do
   gem 'capybara'
-  gem 'chromedriver-helper'
+  gem 'webdrivers'
   gem 'rails-controller-testing'
-  gem 'selenium-webdriver'
   gem 'webmock'
 end
