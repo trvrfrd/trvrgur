@@ -1,6 +1,9 @@
 require "capybara/rspec"
+require "webdrivers"
 require "selenium/webdriver"
 require "webmock/rspec"
+
+Webdrivers::Chromedriver.update
 
 Capybara.javascript_driver = :selenium_chrome_headless
 
