@@ -4,6 +4,7 @@ cache: bundler
 # required for ChromeDriver
 addons:
   chrome: stable
+services: postgresql
 before_script:
   - bundle exec rails db:setup
   - bundle exec rails db:test:prepare
