@@ -10,7 +10,7 @@ gem 'bootsnap'
 gem 'figaro'
 gem 'jquery-rails'
 gem 'paperclip'
-gem 'pg', '~> 0.11'
+gem 'pg', '~> 1.1'
 gem 'puma'
 gem 'rabl'
 
