@@ -13,10 +13,10 @@ gem 'paperclip'
 gem 'pg', '~> 1.1'
 gem 'puma'
 gem 'rabl'
+gem 'sass-rails'
 
 group :assets do
   gem 'coffee-rails'
-  gem 'sass-rails'
   gem 'uglifier'
 end
 
