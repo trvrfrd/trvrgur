@@ -5,7 +5,7 @@ gem 'rails', '~> 5.2.4'
 
 gem 'activerecord-postgresql-adapter'
 gem 'aws-sdk-s3'
-gem 'bcrypt-ruby'
+gem 'bcrypt'
 gem 'bootsnap'
 gem 'figaro'
 gem 'jquery-rails'
