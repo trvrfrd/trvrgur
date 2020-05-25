@@ -14,4 +14,4 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
 
 # make sure Bootstrap fonts in vendor/assets get precompiled
-Rails.application.config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
+Rails.application.config.assets.precompile << ["*.svg", "*.eot", "*.woff", "*.ttf"]
