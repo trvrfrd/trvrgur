@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.6.6'
 
-gem 'rails', '~> 5.2.4'
+gem 'rails', '~> 6.1.1'
 
 gem 'activerecord-postgresql-adapter'
 gem 'aws-sdk-s3'
