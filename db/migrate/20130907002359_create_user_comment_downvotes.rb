@@ -1,4 +1,4 @@
-class CreateUserCommentDownvotes < ActiveRecord::Migration
+class CreateUserCommentDownvotes < ActiveRecord::Migration[4.2]
   def change
     create_table :user_comment_downvotes do |t|
       t.integer :user_id

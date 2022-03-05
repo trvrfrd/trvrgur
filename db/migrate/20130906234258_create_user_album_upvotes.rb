@@ -1,4 +1,4 @@
-class CreateUserAlbumUpvotes < ActiveRecord::Migration
+class CreateUserAlbumUpvotes < ActiveRecord::Migration[4.2]
   def change
     create_table :user_album_upvotes do |t|
       t.integer :user_id

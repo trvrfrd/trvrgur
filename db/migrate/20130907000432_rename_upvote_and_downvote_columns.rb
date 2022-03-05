@@ -1,4 +1,4 @@
-class RenameUpvoteAndDownvoteColumns < ActiveRecord::Migration
+class RenameUpvoteAndDownvoteColumns < ActiveRecord::Migration[4.2]
   def change
     rename_column :albums, :upvotes, :upvote_count
     rename_column :albums, :downvotes, :downvote_count

@@ -1,4 +1,4 @@
-class CreateUserAlbumFavorites < ActiveRecord::Migration
+class CreateUserAlbumFavorites < ActiveRecord::Migration[4.2]
   def change
     create_table :user_album_favorites do |t|
       t.integer :user_id
